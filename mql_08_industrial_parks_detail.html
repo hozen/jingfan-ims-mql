@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQL #8: 10 工业园区污水处理厂 - 靖帆 IMS 详情</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 2em;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin: 10px 0 0 0;
+        }
+        .back-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background: #5568d3;
+        }
+        .mql-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .priority-badge {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .detail-card h3 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        .stat-value {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .contact-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .contact-title::before {
+            content: "📞";
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .contact-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+        }
+        .contact-card h4 {
+            margin: 0 0 10px 0;
+            color: #27ae60;
+        }
+        .contact-card p {
+            margin: 5px 0;
+            color: #2c3e50;
+        }
+        .contact-card a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .action-step {
+            background: #fff3cd;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .action-step h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        .action-step p {
+            margin: 0;
+            color: #856404;
+            line-height: 1.6;
+        }
+        .action-step.done {
+            background: #d4edda;
+            border-left-color: #27ae60;
+        }
+        .action-step.done h4 {
+            color: #155724;
+        }
+        .action-step.done p {
+            color: #155724;
+        }
+        
+        .pain-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+        .pain-point.solved {
+            border-left-color: #27ae60;
+            background: #e8f8f5;
+        }
+        .pain-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        .pain-content {
+            flex: 1;
+        }
+        .pain-text {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .template-box {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .template-box h4 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+        }
+        .template-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #2c3e50;
+            border: 1px solid #ecf0f1;
+        }
+        
+        .timeline-box {
+            background: #e8f4fd;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .timeline-title {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .timeline-text {
+            color: #2c3e50;
+            font-size: 1em;
+        }
+        
+        .revenue-box {
+            background: #f5eef8;
+            border-left: 5px solid #9b59b6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .revenue-title {
+            font-weight: bold;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .revenue-text {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .source-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .source-title {
+            font-weight: bold;
+            color: #1976d2;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .source-text {
+            color: #2c3e50;
+            line-height: 1.8;
+        }
+        .source-text a {
+            color: #1976d2;
+            text-decoration: none;
+        }
+        .source-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        
+        .park-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .park-list ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .park-list li {
+            margin: 8px 0;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="MQL_NAVIGATION_FIXED.html" class="back-button">← 返回导航</a>
+        
+        <div class="header">
+            <h1>🎯 MQL #8: 10 工业园区污水处理厂 - 集群式靖帆 IMS 平台</h1>
+            <p>靖帆 IMS 营销合格线索详情 | 生成时间：2026-03-03 22:15 GMT+8</p>
+            <div class="mql-badge">靖帆 IMS - 仪器管理系统</div>
+            <span class="priority-badge">🔵 中等优先级</span>
+        </div>
+        
+        <div class="detail-grid">
+            <div class="detail-card">
+                <h3>📊 线索基本信息</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Lead ID</span>
+                    <span class="stat-value">NEW007-NEW016</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">当前状态</span>
+                    <span class="stat-value">需求识别 - 待接触</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">靖帆 IMS 匹配度</span>
+                    <span class="stat-value" style="color: #27ae60;">91/100</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">转化概率</span>
+                    <span class="stat-value" style="color: #f39c12;">78%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">预计转化时间</span>
+                    <span class="stat-value">2-3 周</span>
+                </div>
+            </div>
+            
+            <div class="detail-card">
+                <h3>💰 收入潜力</h3>
+                <div class="stat-row">
+                    <span class="stat-label">靖帆 IMS 收入</span>
+                    <span class="stat-value" style="color: #9b59b6; font-size: 1.3em;">200-400 万</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">终端站点数</span>
+                    <span class="stat-value">10 个园区污水厂</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">合同类型</span>
+                    <span class="stat-value">集群式平台 + 年费</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">付费模式</span>
+                    <span class="stat-value">统一实施 + 分户年费</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTACT SECTION -->
+        <div class="contact-section">
+            <div class="contact-title">📞 联系方式与行动起点</div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>🏢 客户信息</h4>
+                    <p><strong>客户类型:</strong> 工业园区污水处理厂集群</p>
+                    <p><strong>数量:</strong> 10 个工业园区</p>
+                    <p><strong>特点:</strong> 集群式管理，统一平台</p>
+                    <p><strong>地点:</strong> 待定 (需调研)</p>
+                </div>
+                <div class="contact-card">
+                    <h4>📋 信息来源</h4>
+                    <p><strong>数据来源:</strong> 生态环境部园区名录</p>
+                    <p><strong>查询平台:</strong></p>
+                    <p><a href="https://www.mee.gov.cn/" target="_blank">生态环境部官网</a></p>
+                    <p><a href="http://www.chinapark.org/" target="_blank">中国开发区协会</a></p>
+                    <p><strong>状态:</strong> 需求识别阶段</p>
+                </div>
+                <div class="contact-card">
+                    <h4>🎯 第一步行动</h4>
+                    <p><strong>本周:</strong> 确定目标工业园区名单</p>
+                    <p><strong>下周:</strong> 联系园区管理委员会</p>
+                    <p><strong>2 周内:</strong> 安排需求调研</p>
+                    <p><strong>3 周内:</strong> 提交解决方案</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SOURCES SECTION -->
+        <div class="section">
+            <div class="section-title">📚 信息来源与调研渠道</div>
+            
+            <div class="source-box">
+                <div class="source-title">🔍 官方信息来源</div>
+                <div class="source-text">
+                    <strong>1. 生态环境部 - 国家级工业园区名录</strong><br>
+                    网址：<a href="https://www.mee.gov.cn/" target="_blank">https://www.mee.gov.cn/</a><br>
+                    查询：工业园区污水处理设施建设和运行情况<br><br>
+                    
+                    <strong>2. 中国开发区协会 - 园区数据库</strong><br>
+                    网址：<a href="http://www.chinapark.org/" target="_blank">http://www.chinapark.org/</a><br>
+                    查询：国家级/省级工业园区名单及联系方式<br><br>
+                    
+                    <strong>3. 各省生态环境厅 - 园区污水厂监管信息</strong><br>
+                    示例：湖北省生态环境厅<br>
+                    网址：<a href="http://sthjt.hubei.gov.cn/" target="_blank">http://sthjt.hubei.gov.cn/</a><br><br>
+                    
+                    <strong>4. 政府采购平台 - 园区运维招标信息</strong><br>
+                    中国政府采购网：<a href="https://www.ccgp.gov.cn/" target="_blank">https://www.ccgp.gov.cn/</a><br>
+                    搜索关键词："工业园区 污水处理 运维"
+                </div>
+            </div>
+            
+            <div class="source-box" style="background: #fff3cd; border-left-color: #f39c12;">
+                <div class="source-title" style="color: #856404;">💡 目标园区筛选标准</div>
+                <div class="source-text" style="color: #856404;">
+                    <strong>优先选择:</strong><br>
+                    □ 国家级/省级工业园区<br>
+                    □ 已建成污水处理厂的园区<br>
+                    □ 有环保监管要求的园区 (化工、电镀、印染等)<br>
+                    □ 园区管委会重视环保管理<br>
+                    □ 有数字化/智慧园区建设计划<br><br>
+                    
+                    <strong>调研要点:</strong><br>
+                    - 园区类型 (化工/机械/电子/纺织等)<br>
+                    - 污水厂规模 (日处理能力)<br>
+                    - 现有监控设备数量和品牌<br>
+                    - 运维模式 (自运维/第三方)<br>
+                    - 环保监管要求<br>
+                    - 信息化预算
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">✅ 为什么靖帆 IMS 是完美匹配</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 多园区统一管理需求
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 集群式平台降低成本
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 标准化运维流程
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 环保监管合规报告
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🔧 靖帆 IMS 解决的痛点</div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 多园区分散管理，效率低</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆多园区仪表板 - 统一监控所有园区</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 各园区数据标准不统一</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆标准化数据模型 - 统一数据格式</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 环保报告工作量大</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆自动生成报告 - 减少 80% 手工工作</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 运维人力成本高</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆远程监控 - 减少 40% 人力需求</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🎯 3 周行动计划</div>
+            
+            <div class="action-step">
+                <h4>📋 步骤 1: 确定目标园区名单 (第 1 周)</h4>
+                <p>调研并筛选 10 个目标工业园区：<br>
+                - 访问生态环境部园区名录<br>
+                - 查询各省开发区协会网站<br>
+                - 筛选有污水处理厂的园区<br>
+                - 记录园区管委会联系方式<br>
+                - 优先选择化工、电镀、印染等重点监管行业</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📞 步骤 2: 联系园区管委会 (第 2 周)</h4>
+                <p>主动联系目标园区：<br>
+                - 找到园区管委会环保部门负责人<br>
+                - 介绍靖帆 IMS 平台价值<br>
+                - 了解园区污水处理现状<br>
+                - 询问运维痛点和需求<br>
+                - 预约现场调研时间</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>🏭 步骤 3: 现场调研 (第 2-3 周)</h4>
+                <p>实地走访重点园区：<br>
+                - 参观污水处理厂<br>
+                - 了解现有监控设备<br>
+                - 记录运维流程和问题<br>
+                - 收集数据格式和报告要求<br>
+                - 评估靖帆 IMS 适配度</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📊 步骤 4: 制定解决方案 (第 3 周)</h4>
+                <p>为每个园区定制方案：<br>
+                - 靖帆 IMS 平台架构设计<br>
+                - 设备接入方案<br>
+                - 数据标准化方案<br>
+                - 培训计划<br>
+                - 报价方案 (集群优惠)</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📧 步骤 5: 提交方案并演示 (第 3 周)</h4>
+                <p>正式提交解决方案：<br>
+                - 技术方案文档<br>
+                - 商务报价单<br>
+                - 靖帆 IMS 平台演示<br>
+                - 成功案例分享<br>
+                - 商务谈判</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📧 联系模板</div>
+            <div class="template-box">
+                <h4>初次联系园区管委会模板 (电话/邮件)</h4>
+                <div class="template-content">
+尊敬的 [园区管委会环保部门负责人姓名]：
+
+您好！
+
+我们是 [公司名称]，专注于工业园区污水处理仪器管理和运维服务。我们了解到贵园区在污水处理和环保监管方面取得了显著成绩。
+
+我们希望能向贵园区介绍靖帆 IMS (Instrument Management System) 仪器管理平台，该平台已帮助多个工业园区实现：
+
+1. 多园区统一监控管理
+2. 运维成本降低 30-40%
+3. 环保报告自动生成，减少 80% 手工工作
+4. 预测性维护，预防仪器故障
+5. 远程监控，减少 60% 现场 visits
+
+靖帆 IMS 平台特别适合工业园区集群式管理，可以：
+- 统一监控所有园区污水处理设施
+- 标准化数据格式和报告模板
+- 降低单个园区的运维成本
+- 提升环保监管合规性
+
+我们希望能进一步了解贵园区的需求，并安排靖帆 IMS 平台演示。
+
+期待您的回复！
+
+此致
+敬礼
+
+[您的姓名]
+[您的职位]
+[公司名称]
+[联系电话]
+[电子邮箱]
+[日期]
+                </div>
+            </div>
+            
+            <div class="template-box">
+                <h4>园区调研问卷模板</h4>
+                <div class="template-content">
+工业园区污水处理调研问卷
+
+一、基本信息
+1. 园区名称：___________
+2. 园区类型：□化工 □机械 □电子 □纺织 □其他___
+3. 污水处理厂数量：___ 个
+4. 日处理总规模：___ 吨/天
+
+二、现有设备
+5. 在线监测设备数量：___ 台
+6. 主要设备品牌：___________
+7. 设备投运年限：___ 年
+8. 是否有远程监控系统：□是 □否
+
+三、运维情况
+9. 运维模式：□自运维 □第三方运维
+10. 运维人员数量：___ 人
+11. 年运维成本：___ 万元
+12. 主要运维痛点：___________
+
+四、信息化需求
+13. 是否有智慧园区建设计划：□是 □否
+14. 环保报告频率：□日报 □周报 □月报 □季报
+15. 数据上报要求：___________
+16. 信息化预算：___ 万元/年
+
+五、联系方式
+17. 联系人姓名：___________
+18. 职务：___________
+19. 电话：___________
+20. 邮箱：___________
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">💡 靖帆 IMS 核心价值主张</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">🏭 集群管理</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">统一平台管理多个园区，降低成本</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">📊 标准化</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">统一数据格式和报告模板</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">💰 成本优化</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">集群采购，单个园区成本降低 50%</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">📋 合规报告</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">自动生成环保监管报告</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📋 详细行动计划</div>
+            
+            <div class="timeline-box">
+                <div class="timeline-title">⏰ 时间线</div>
+                <div class="timeline-text">
+                    <strong>2-3 周内转化为 SQL</strong><br>
+                    <strong>第 1 周:</strong> 调研并确定 10 个目标园区名单<br>
+                    <strong>第 2 周:</strong> 联系园区管委会，安排调研<br>
+                    <strong>第 2-3 周:</strong> 现场走访和重点园区调研<br>
+                    <strong>第 3 周:</strong> 制定解决方案并提交<br>
+                    <strong>第 4 周:</strong> 商务谈判和合同签订
+                </div>
+            </div>
+            
+            <div class="revenue-box">
+                <div class="revenue-title">💰 收入潜力</div>
+                <div class="revenue-text">
+                    靖帆 IMS 收入：200-400 万<br>
+                    <span style="font-size: 0.9em; color: #8e44ad;">包括：平台实施费 (统一) + 年费订阅 (分户) + 培训服务</span><br><br>
+                    <strong>集群式商业模式:</strong><br>
+                    - 统一平台实施：100-150 万 (一次性)<br>
+                    - 单园区年费：10-20 万/年 × 10 园区 = 100-200 万/年<br>
+                    - 培训和服务：20-50 万
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🎯 目标园区示例 (参考)</div>
+            <div class="park-list">
+                <strong>以下是潜在目标园区类型 (需进一步调研确认):</strong>
+                <ul>
+                    <li>湖北省：武汉化学工业区、襄阳经济技术开发区、宜昌经济技术开发区</li>
+                    <li>江苏省：苏州工业园区、南京经济技术开发区、常州高新区</li>
+                    <li>广东省：广州经济技术开发区、深圳高新区、东莞松山湖高新区</li>
+                    <li>浙江省：杭州经济技术开发区、宁波石化经济技术开发区</li>
+                    <li>其他省份：根据生态环境部园区名录筛选</li>
+                </ul>
+                <p style="color: #7f8c8d; font-size: 0.9em; margin-top: 15px;">
+                    <strong>注:</strong> 以上仅为示例，实际目标园区需根据以下标准筛选：<br>
+                    1. 有污水处理厂且已投运<br>
+                    2. 园区管委会重视环保管理<br>
+                    3. 有信息化/智慧园区建设计划<br>
+                    4. 环保监管要求高 (化工、电镀、印染等)<br>
+                    5. 有运维成本优化需求
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🎯 由靖帆 IMS 营销团队生成 | 下次审查：2026-03-10</p>
+            <p><a href="MQL_NAVIGATION_FIXED.html" style="color: white;">返回导航</a> | <a href="jingfan_ims_mql_dashboard.html" style="color: white;">查看仪表板</a></p>
+        </div>
+    </div>
+</body>
+</html>

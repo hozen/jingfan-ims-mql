@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQL #3: 环县自来水集团 - 靖帆 IMS 详情</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 2em;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin: 10px 0 0 0;
+        }
+        .back-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background: #5568d3;
+        }
+        .mql-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .priority-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .detail-card h3 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+        .stat-value {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .urgent-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            border: 3px solid #e74c3c;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .urgent-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .urgent-title::before {
+            content: "🚨";
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+        .urgent-content {
+            color: #c0392b;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .deadline-countdown {
+            background: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #27ae60;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .contact-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .contact-title::before {
+            content: "📞";
+            margin-right: 10px;
+            font-size: 1.3em;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .contact-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #27ae60;
+        }
+        .contact-card h4 {
+            margin: 0 0 10px 0;
+            color: #27ae60;
+        }
+        .contact-card p {
+            margin: 5px 0;
+            color: #2c3e50;
+        }
+        .contact-card a {
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .action-step {
+            background: #fff3cd;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .action-step h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        .action-step p {
+            margin: 0;
+            color: #856404;
+            line-height: 1.6;
+        }
+        .action-step.done {
+            background: #d4edda;
+            border-left-color: #27ae60;
+        }
+        .action-step.done h4 {
+            color: #155724;
+        }
+        .action-step.done p {
+            color: #155724;
+        }
+        
+        .pain-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #e74c3c;
+        }
+        .pain-point.solved {
+            border-left-color: #27ae60;
+            background: #e8f8f5;
+        }
+        .pain-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        .pain-content {
+            flex: 1;
+        }
+        .pain-text {
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .template-box {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .template-box h4 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+        }
+        .template-content {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #2c3e50;
+            border: 1px solid #ecf0f1;
+        }
+        
+        .timeline-box {
+            background: #e8f4fd;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .timeline-title {
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .timeline-text {
+            color: #2c3e50;
+            font-size: 1em;
+        }
+        
+        .revenue-box {
+            background: #f5eef8;
+            border-left: 5px solid #9b59b6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .revenue-title {
+            font-weight: bold;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .revenue-text {
+            color: #2c3e50;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="MQL_NAVIGATION_FIXED.html" class="back-button">← 返回导航</a>
+        
+        <div class="header">
+            <h1>🚨 MQL #3: 环县自来水集团 - 水质污染源自动监控第三方运维服务</h1>
+            <p>靖帆 IMS 营销合格线索详情 | 生成时间：2026-03-03 20:05 GMT+8</p>
+            <div class="mql-badge">靖帆 IMS - 仪器管理系统</div>
+            <span class="priority-badge">🚨 48 小时紧急回复</span>
+        </div>
+        
+        <!-- URGENT ALERT -->
+        <div class="urgent-box">
+            <div class="urgent-title">紧急行动要求</div>
+            <div class="urgent-content">
+                <strong>客户已发布询价公告，需要在 48 小时内回复！</strong><br>
+                这是第三方运维服务项目，客户正在寻找有能力的供应商。靖帆 IMS 可以帮助您展示技术实力和服务能力，提高中标率。
+            </div>
+            <div class="deadline-countdown">
+                ⏰ 剩余回复时间：48 小时
+            </div>
+        </div>
+        
+        <div class="detail-grid">
+            <div class="detail-card">
+                <h3>📊 线索基本信息</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Lead ID</span>
+                    <span class="stat-value">HUB002</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">当前状态</span>
+                    <span class="stat-value">询价中 - 待回复</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">靖帆 IMS 匹配度</span>
+                    <span class="stat-value" style="color: #27ae60;">96/100</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">转化概率</span>
+                    <span class="stat-value" style="color: #f39c12;">92%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">截止日期</span>
+                    <span class="stat-value" style="color: #e74c3c;">48 小时内</span>
+                </div>
+            </div>
+            
+            <div class="detail-card">
+                <h3>💰 收入潜力</h3>
+                <div class="stat-row">
+                    <span class="stat-label">靖帆 IMS 收入</span>
+                    <span class="stat-value" style="color: #9b59b6; font-size: 1.3em;">20-40 万</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">终端站点数</span>
+                    <span class="stat-value">多个污染源监控点</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">合同类型</span>
+                    <span class="stat-value">第三方运维服务</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">付费模式</span>
+                    <span class="stat-value">年费订阅 + 实施 + 培训</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTACT SECTION -->
+        <div class="contact-section">
+            <div class="contact-title">📞 联系方式与行动起点</div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h4>🏢 客户信息</h4>
+                    <p><strong>单位名称:</strong> 环县自来水集团有限公司</p>
+                    <p><strong>项目:</strong> 水质污染源自动监控系统第三方运维服务</p>
+                    <p><strong>地点:</strong> 甘肃省庆阳市环县</p>
+                </div>
+                <div class="contact-card">
+                    <h4>📋 采购公告来源</h4>
+                    <p><strong>发布平台:</strong> 环县人民政府网站</p>
+                    <p><strong>公告链接:</strong></p>
+                    <p><a href="https://www.huanxian.gov.cn/zls/cg/content_81516" target="_blank">https://www.huanxian.gov.cn/zls/cg/content_81516</a></p>
+                    <p><strong>状态:</strong> 询价中</p>
+                </div>
+                <div class="contact-card">
+                    <h4>🎯 第一步行动</h4>
+                    <p><strong>立即:</strong> 访问采购公告链接</p>
+                    <p><strong>今天:</strong> 准备回复文件</p>
+                    <p><strong>48 小时内:</strong> 提交正式回复</p>
+                    <p><strong>联系方式:</strong> 公告中会提供采购联系人信息</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">✅ 为什么靖帆 IMS 是完美匹配</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 第三方运维需要效率工具
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 多个污染源监控点
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 需要数据管理和报告
+                </div>
+                <div style="padding: 15px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <strong style="color: #27ae60;">✓</strong> 培训 + 平台组合需求
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🔧 靖帆 IMS 解决的痛点</div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 多客户站点管理复杂，效率低</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆多客户仪表板 - 统一管理所有监控点</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 报告工作量大，手工整理耗时</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆自动生成报告 - 减少 80% 手工工作</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 运维人力成本高</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆远程监控 - 减少 40% 人力需求</p>
+                </div>
+            </div>
+            
+            <div class="pain-point">
+                <div class="pain-icon">❌</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>痛点:</strong> 客户沟通效率低</p>
+                </div>
+            </div>
+            <div class="pain-point solved">
+                <div class="pain-icon">✅</div>
+                <div class="pain-content">
+                    <p class="pain-text"><strong>靖帆解决方案:</strong> 靖帆客户门户访问 - 提升客户满意度</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">🎯 48 小时回复行动计划</div>
+            
+            <div class="action-step done">
+                <h4>✅ 步骤 1: 查看采购公告 (立即完成)</h4>
+                <p>访问 <a href="https://www.huanxian.gov.cn/zls/cg/content_81516" style="color: #27ae60;">环县人民政府网站</a> 查看完整询价公告，记录以下信息：<br>
+                - 采购联系人姓名和电话<br>
+                - 技术要求细节<br>
+                - 回复格式要求<br>
+                - 提交方式和截止时间</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📝 步骤 2: 准备回复文件 (今天完成)</h4>
+                <p>准备以下材料：<br>
+                - 公司介绍和资质证明<br>
+                - 靖帆 IMS 平台介绍和技术参数<br>
+                - 第三方运维服务方案<br>
+                - 培训计划和售后服务<br>
+                - 报价单 (包含靖帆 IMS 许可费)</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📞 步骤 3: 联系采购方 (24 小时内)</h4>
+                <p>主动联系采购联系人：<br>
+                - 确认收到询价公告<br>
+                - 表达参与意向<br>
+                - 询问技术细节<br>
+                - 预约演示时间</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>📧 步骤 4: 提交正式回复 (48 小时内)</h4>
+                <p>按照公告要求提交完整回复文件：<br>
+                - 技术方案<br>
+                - 商务报价<br>
+                - 资质证明<br>
+                - 靖帆 IMS 演示视频或安排现场演示</p>
+            </div>
+            
+            <div class="action-step">
+                <h4>🎯 步骤 5: 跟进和演示 (提交后 1 周)</h4>
+                <p>提交后主动跟进：<br>
+                - 确认文件已收到<br>
+                - 安排靖帆 IMS 平台演示<br>
+                - 解答技术问题<br>
+                - 商务谈判</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📧 回复模板</div>
+            <div class="template-box">
+                <h4>初次联系采购方模板 (电话/邮件)</h4>
+                <div class="template-content">
+尊敬的 [采购联系人姓名]：
+
+您好！
+
+我们是 [公司名称]，专注于水质监测仪器管理和运维服务。我们已收到贵单位发布的"水质污染源自动监控系统第三方运维服务"询价公告。
+
+我们希望能参与此项目，并提供以下服务：
+1. 靖帆 IMS (Instrument Management System) 仪器管理平台
+2. 水质污染源自动监控系统运维服务
+3. 操作人员培训和售后服务
+
+靖帆 IMS 平台可以帮助贵单位：
+- 远程监控所有污染源监测点
+- 自动生成合规报告，减少 80% 手工工作
+- 预测性维护，预防仪器故障
+- 降低 40% 运维人力成本
+
+我们希望能进一步了解项目需求，并安排靖帆 IMS 平台演示。
+
+期待您的回复！
+
+此致
+敬礼
+
+[您的姓名]
+[您的职位]
+[公司名称]
+[联系电话]
+[电子邮箱]
+[日期]
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">💡 靖帆 IMS 核心价值主张</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">📊 多客户管理</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">单一平台管理多个运维客户站点</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">📑 自动报告</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">自动生成合规报告，减少 80% 工作</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">💰 成本降低</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">减少 40% 运维人力成本</p>
+                </div>
+                <div style="padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <strong style="color: #667eea;">👥 客户门户</strong>
+                    <p style="margin: 10px 0 0 0; color: #7f8c8d;">客户可实时查看数据，提升满意度</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📋 详细行动计划</div>
+            
+            <div class="timeline-box">
+                <div class="timeline-title">⏰ 时间线</div>
+                <div class="timeline-text">
+                    <strong>48 小时内转化为 SQL</strong><br>
+                    <strong>今天:</strong> 查看公告，准备回复文件<br>
+                    <strong>24 小时内:</strong> 联系采购方，表达意向<br>
+                    <strong>48 小时内:</strong> 提交正式回复<br>
+                    <strong>1 周内:</strong> 安排靖帆 IMS 演示<br>
+                    <strong>2-3 周内:</strong> 商务谈判和合同签订
+                </div>
+            </div>
+            
+            <div class="revenue-box">
+                <div class="revenue-title">💰 收入潜力</div>
+                <div class="revenue-text">
+                    靖帆 IMS 收入：20-40 万<br>
+                    <span style="font-size: 0.9em; color: #8e44ad;">包括：平台实施费 + 年费订阅 + 培训服务</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🚨 由靖帆 IMS 营销团队生成 | 下次审查：2026-03-10</p>
+            <p><a href="MQL_NAVIGATION_FIXED.html" style="color: white;">返回导航</a> | <a href="jingfan_ims_mql_dashboard.html" style="color: white;">查看仪表板</a></p>
+        </div>
+    </div>
+</body>
+</html>

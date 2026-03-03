@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靖帆 IMS MQL 验证状态追踪</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 2em;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin: 10px 0 0 0;
+        }
+        .status-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .status-card h2 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+        }
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .verify-card {
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #95a5a6;
+            background: #f8f9fa;
+        }
+        .verify-card.verified {
+            border-left-color: #27ae60;
+            background: #e8f8f5;
+        }
+        .verify-card.expired {
+            border-left-color: #e74c3c;
+            background: #ffebee;
+        }
+        .verify-card.pending {
+            border-left-color: #f39c12;
+            background: #fff3cd;
+        }
+        .verify-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            margin-left: 10px;
+        }
+        .badge-verified { background: #27ae60; }
+        .badge-expired { background: #e74c3c; }
+        .badge-pending { background: #f39c12; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+        .status-cell {
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        .status-verified { background: #e8f8f5; color: #27ae60; }
+        .status-expired { background: #ffebee; color: #e74c3c; }
+        .status-pending { background: #fff3cd; color: #f39c12; }
+        
+        .alert-box {
+            background: #ffebee;
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .alert-title {
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .alert-content {
+            color: #c0392b;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 5px;
+        }
+        .action-button:hover {
+            background: #5568d3;
+        }
+        .action-button.success {
+            background: #27ae60;
+        }
+        .action-button.success:hover {
+            background: #229954;
+        }
+        .action-button.danger {
+            background: #e74c3c;
+        }
+        .action-button.danger:hover {
+            background: #c0392b;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ 靖帆 IMS MQL 验证状态追踪</h1>
+            <p>所有 MQL 验证状态一览 | 更新时间：2026-03-03 21:40 GMT+8</p>
+        </div>
+        
+        <div class="alert-box">
+            <div class="alert-title">⚠️ 重要提示</div>
+            <div class="alert-content">
+                <strong>投标时间验证是关键!</strong> 在跟进任何商机之前，必须先验证投标截止日期是否有效。
+                已发现 MQL #3 (环县自来水集团) 投标已过期 (2025 年 12 月 30 日)，已从活跃 MQL 中移除。
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h2>📊 验证状态总览</h2>
+            <div class="verification-grid">
+                <div class="verify-card expired">
+                    <h3>❌ 已过期 <span class="status-badge badge-expired">1 个</span></h3>
+                    <p>MQL #3: 环县自来水集团</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">
+                        投标截止：2025-12-30<br>
+                        过期天数：63 天
+                    </p>
+                </div>
+                <div class="verify-card pending">
+                    <h3>⏳ 待验证 <span class="status-badge badge-pending">9 个</span></h3>
+                    <p>MQL #1, #2, #4-#10</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">
+                        需要立即验证投标状态<br>
+                        避免浪费时间在过期商机上
+                    </p>
+                </div>
+                <div class="verify-card verified">
+                    <h3>✅ 已验证 <span class="status-badge badge-verified">0 个</span></h3>
+                    <p>暂无已验证的活跃商机</p>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #7f8c8d;">
+                        验证通过后可加入活跃 MQL 管道<br>
+                        开始跟进和转化
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h2>📋 MQL 验证状态详细列表</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MQL #</th>
+                            <th>客户名称</th>
+                            <th>类型</th>
+                            <th>预估收入</th>
+                            <th>适配度</th>
+                            <th>验证状态</th>
+                            <th>投标截止日</th>
+                            <th>验证日期</th>
+                            <th>行动</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #ffebee;">
+                            <td><strong>#3</strong></td>
+                            <td>环县自来水集团</td>
+                            <td>第三方运维</td>
+                            <td>20-40 万</td>
+                            <td>96%</td>
+                            <td><span class="status-cell status-expired">❌ 已过期</span></td>
+                            <td>2025-12-30</td>
+                            <td>2026-03-03</td>
+                            <td>
+                                <span style="color: #e74c3c; font-weight: bold;">跳过</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#1</strong></td>
+                            <td>湖北省生态环境监测中心</td>
+                            <td>省级运维</td>
+                            <td>200-400 万</td>
+                            <td>98%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="https://www.ccgp.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#2</strong></td>
+                            <td>麻城市乡镇污水厂</td>
+                            <td>农村运维</td>
+                            <td>30-50 万</td>
+                            <td>95%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="http://www.ccgp-hubei.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#4</strong></td>
+                            <td>郑州侯寨渗滤液项目</td>
+                            <td>工业运维</td>
+                            <td>15-30 万</td>
+                            <td>90%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="https://www.ccgp.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#5</strong></td>
+                            <td>南京市水务局</td>
+                            <td>河流监测</td>
+                            <td>40-60 万</td>
+                            <td>92%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="http://shuiwu.nanjing.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#6</strong></td>
+                            <td>武汉市政府水务集团</td>
+                            <td>智慧城市</td>
+                            <td>300-500 万</td>
+                            <td>97%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="https://www.ccgp.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#7</strong></td>
+                            <td>湖北省 5 城市环保局</td>
+                            <td>多城市</td>
+                            <td>400-700 万</td>
+                            <td>94%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="http://www.ccgp-hubei.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#8</strong></td>
+                            <td>10 工业园区污水厂</td>
+                            <td>工业园区</td>
+                            <td>200-400 万</td>
+                            <td>91%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="https://www.ccgp.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#9</strong></td>
+                            <td>20 县自来水公司</td>
+                            <td>农村供水</td>
+                            <td>250-450 万</td>
+                            <td>89%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="https://www.ccgp.gov.cn/" target="_blank" class="action-button">验证</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#10</strong></td>
+                            <td>5 第三方运维公司</td>
+                            <td>合作伙伴</td>
+                            <td>150-300 万</td>
+                            <td>98%</td>
+                            <td><span class="status-cell status-pending">⏳ 待验证</span></td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a href="#partnership" class="action-button success">直接联系</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h2>🎯 下一步行动</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div style="padding: 20px; background: #e8f8f5; border-radius: 10px; border-left: 4px solid #27ae60;">
+                    <h3 style="color: #27ae60; margin-top: 0;">✅ 已验证 (0 个)</h3>
+                    <p style="color: #7f8c8d;">暂无已验证的活跃商机</p>
+                    <p style="margin-top: 15px;"><strong>行动:</strong> 开始验证其他 MQL</p>
+                </div>
+                <div style="padding: 20px; background: #fff3cd; border-radius: 10px; border-left: 4px solid #f39c12;">
+                    <h3 style="color: #f39c12; margin-top: 0;">⏳ 待验证 (9 个)</h3>
+                    <p style="color: #7f8c8d;">MQL #1, #2, #4-#10</p>
+                    <p style="margin-top: 15px;"><strong>行动:</strong> 使用验证清单逐一核实</p>
+                    <a href="mql_verification_checklist.md" class="action-button">打开验证清单</a>
+                </div>
+                <div style="padding: 20px; background: #ffebee; border-radius: 10px; border-left: 4px solid #e74c3c;">
+                    <h3 style="color: #e74c3c; margin-top: 0;">❌ 已过期 (1 个)</h3>
+                    <p style="color: #7f8c8d;">MQL #3: 环县自来水集团</p>
+                    <p style="margin-top: 15px;"><strong>行动:</strong> 已跳过，关注是否重新招标</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="status-card">
+            <h2>📋 验证流程</h2>
+            <div style="line-height: 2; color: #2c3e50;">
+                <p><strong>第 1 步:</strong> 点击表格中的"验证"按钮，打开采购平台</p>
+                <p><strong>第 2 步:</strong> 搜索项目名称，找到招标公告</p>
+                <p><strong>第 3 步:</strong> 检查投标截止日期和当前状态</p>
+                <p><strong>第 4 步:</strong> 填写验证清单 (mql_verification_checklist.md)</p>
+                <p><strong>第 5 步:</strong> 更新此追踪表的状态</p>
+                <p><strong>第 6 步:</strong> 如验证通过，创建详细 MQL 页面并开始跟进</p>
+            </div>
+            <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h4 style="margin-top: 0; color: #667eea;">📎 相关资源</h4>
+                <a href="mql_verification_checklist.md" class="action-button">验证清单</a>
+                <a href="jingfan_ims_mql_pipeline_20260303.md" class="action-button">完整策略文档</a>
+                <a href="MQL_NAVIGATION_FIXED.html" class="action-button">MQL 导航</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>✅ 由靖帆 IMS 营销团队生成 | 最后更新：2026-03-03 21:40 GMT+8</p>
+            <p>重要：投标时间验证是关键！避免浪费时间在过期商机上。</p>
+        </div>
+    </div>
+</body>
+</html>
