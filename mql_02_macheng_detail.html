@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQL #2: 麻城市乡镇污水处理厂 - 靖帆 IMS 详情</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 30px; }
+        .header h1 { margin: 0; color: #667eea; font-size: 1.8em; }
+        .header p { color: #7f8c8d; margin: 10px 0 0 0; }
+        .back-button { display: inline-block; background: #667eea; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-bottom: 20px; font-weight: bold; }
+        .mql-badge { display: inline-block; background: #667eea; color: white; padding: 8px 20px; border-radius: 25px; font-weight: bold; margin-top: 10px; }
+        .priority-badge { display: inline-block; background: #f39c12; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.9em; margin-left: 10px; }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .detail-card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+        .detail-card h3 { margin: 0 0 15px 0; color: #667eea; }
+        .stat-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ecf0f1; }
+        .stat-label { color: #7f8c8d; font-weight: bold; }
+        .stat-value { color: #2c3e50; font-weight: bold; }
+        .section { background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+        .section-title { font-size: 1.3em; font-weight: bold; color: #2c3e50; margin-bottom: 20px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .contact-section { background: #e8f5e9; border: 2px solid #27ae60; border-radius: 15px; padding: 25px; margin-bottom: 30px; }
+        .contact-title { font-size: 1.3em; font-weight: bold; color: #27ae60; margin-bottom: 15px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .contact-card { background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #27ae60; }
+        .contact-card h4 { margin: 0 0 8px 0; color: #27ae60; font-size: 1em; }
+        .contact-card p { margin: 4px 0; color: #2c3e50; font-size: 0.9em; }
+        .contact-card a { color: #27ae60; text-decoration: none; }
+        .action-step { background: #fff3cd; border-left: 5px solid #f39c12; padding: 15px; border-radius: 10px; margin-bottom: 12px; }
+        .action-step h4 { margin: 0 0 8px 0; color: #856404; font-size: 1em; }
+        .action-step p { margin: 0; color: #856404; font-size: 0.9em; line-height: 1.5; }
+        .pain-point { display: flex; align-items: flex-start; margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #e74c3c; }
+        .pain-point.solved { border-left-color: #27ae60; background: #e8f8f5; }
+        .pain-icon { font-size: 1.2em; margin-right: 10px; }
+        .pain-text { margin: 0; color: #2c3e50; font-size: 0.9em; }
+        .template-box { background: #f8f9fa; border: 2px solid #667eea; border-radius: 10px; padding: 15px; margin-top: 15px; }
+        .template-box h4 { margin: 0 0 10px 0; color: #667eea; font-size: 1em; }
+        .template-content { background: white; padding: 12px; border-radius: 8px; font-size: 0.85em; line-height: 1.5; color: #2c3e50; }
+        .source-box { background: #e3f2fd; border-left: 5px solid #2196f3; padding: 15px; border-radius: 10px; margin-top: 15px; }
+        .source-title { font-weight: bold; color: #1976d2; margin-bottom: 8px; font-size: 1em; }
+        .source-text { color: #2c3e50; font-size: 0.9em; line-height: 1.6; }
+        .source-text a { color: #1976d2; }
+        .timeline-box { background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; border-radius: 10px; margin-top: 15px; }
+        .revenue-box { background: #f5eef8; border-left: 5px solid #9b59b6; padding: 15px; border-radius: 10px; margin-top: 15px; }
+        .revenue-text { color: #2c3e50; font-size: 1.1em; font-weight: bold; }
+        .footer { text-align: center; color: white; margin-top: 30px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="MQL_NAVIGATION_FIXED.html" class="back-button">← 返回导航</a>
+        <div class="header">
+            <h1>🏞️ MQL #2: 麻城市乡镇污水处理厂 - 农村污水处理运维</h1>
+            <p>靖帆 IMS 营销合格线索详情 | 生成时间：2026-03-03 22:50 GMT+8</p>
+            <div class="mql-badge">靖帆 IMS - 仪器管理系统</div>
+            <span class="priority-badge">🟠 高优先级</span>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-card">
+                <h3>📊 基本信息</h3>
+                <div class="stat-row"><span class="stat-label">Lead ID</span><span class="stat-value">MC001</span></div>
+                <div class="stat="stat-label">-row"><span class靖帆 IMS 匹配度</span><span class="stat-value" style="color:#27ae60;">95/100</span></div>
+                <div class="stat-row"><span class="stat-label">转化概率</span><span class="stat-value" style="color:#f39c12;">88%</span></div>
+                <div class="stat-row"><span class="stat-label">预计转化</span><span class="stat-value">1-2 周</span></div>
+            </div>
+            <div class="detail-card">
+                <h3>💰 收入潜力</h3>
+                <div class="stat-row"><span class="stat-label">靖帆 IMS 收入</span><span class="stat-value" style="color:#9b59b6;font-size:1.2em;">30-50 万</span></div>
+                <div class="stat-row"><span class="stat-label">终端站点</span><span class="stat-value">10-20 个乡镇污水厂</span></div>
+                <div class="stat-row"><span class="stat-label">合同类型</span><span class="stat-value">运维托管 + 年费</span></div>
+            </div>
+        </div>
+        <div class="contact-section">
+            <div class="contact-title">📞 联系方式与行动起点</div>
+            <div class="contact-grid">
+                <div class="contact-card"><h4>🏢 客户信息</h4><p><strong>客户:</strong> 麻城市住房和城乡建设局</p><p><strong>类型:</strong> 政府部门</p><p><strong>地点:</strong> 湖北省黄冈市麻城市</p></div>
+                <div class="contact-card"><h4>📋 信息来源</h4><p><a href="http://www.ccgp-hubei.gov.cn/" target="_blank">湖北政府采购网</a></p><p><a href="http://www.macheng.gov.cn/" target="_blank">麻城市政府</a></p><p>搜索: 乡镇污水 运维</p></div>
+                <div class="contact-card"><h4>🎯 第一步</h4><p><strong>本周:</strong> 联系住建局</p><p><strong>下周:</strong> 现场调研</p><p><strong>2周内:</strong> 提交方案</p></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">📚 信息来源</div>
+            <div class="source-box"><div class="source-title">🔍 调研渠道</div><div class="source-text"><strong>1. 湖北政府采购网</strong> - <a href="http://www.ccgp-hubei.gov.cn/" target="_blank">ccgp-hubei.gov.cn</a><br><strong>2. 麻城市政府</strong> - <a href="http://www.macheng.gov.cn/" target="_blank">macheng.gov.cn</a><br><strong>3. 黄冈市住建局</strong> - 乡镇污水运维项目</div></div>
+        </div>
+        <div class="section">
+            <div class="section-title">✅ 靖帆 IMS 解决痛点</div>
+            <div class="pain-point"><div class="pain-icon">❌</div><div class="pain-text"><strong>痛点:</strong> 乡镇污水厂分散，运维成本高</div></div>
+            <div class="pain-point solved"><div class="pain-icon">✅</div><div class="pain-text"><strong>靖帆方案:</strong> 统一平台远程监控，降低 40% 运维成本</div></div>
+            <div class="pain-point"><div class="pain-icon">❌</div><div class="pain-text"><strong>痛点:</strong> 专业人员缺乏，管理困难</div></div>
+            <div class="pain-point solved"><div class="pain-icon">✅</div><div class="pain-text"><strong>靖帆方案:</strong> 简化操作，智能化管理</div></div>
+        </div>
+        <div class="section">
+            <div class="section-title">🎯 2 周行动计划</div>
+            <div class="action-step"><h4>📋 第1周: 联系与调研</h4><p>联系麻城市住建局，了解乡镇污水项目情况，现场调研现有设施</p></div>
+            <div class="action-step"><h4>📞 第2周: 方案与签约</h4><p>制定运维方案，提交报价，商务谈判，签约合作</p></div>
+        </div>
+        <div class="section">
+            <div class="section-title">📧 联系模板</div>
+            <div class="template-box"><h4>初次联系模板</h4><div class="template-content">尊敬的 [住建局负责人]：<br><br>我们是 [公司名称]，专注于乡镇污水处理设施运维管理。<br><br>靖帆 IMS 可帮助麻城市：<br>• 统一监控 10-20 个乡镇污水厂<br>• 降低运维成本 40%<br>• 减少专业人员依赖<br><br>期待与您探讨合作机会。<br><br>[您的姓名] | [电话] | [邮箱]</div></div>
+        </div>
+        <div class="timeline-box"><strong>⏰ 时间线:</strong> 1-2 周转化为 SQL | <strong>💰 收入:</strong> 30-50 万</div>
+        <div class="footer"><p>由靖帆 IMS 营销团队生成 | <a href="MQL_NAVIGATION_FIXED.html" style="color:white;">返回导航</a></p></div>
+    </div>
+</body>
+</html>
