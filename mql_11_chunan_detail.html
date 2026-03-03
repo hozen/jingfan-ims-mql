@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQL #11: 淳安县渗滤液处理区在线监测维护 - 靖帆 IMS</title>
+    <style>
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); min-height: 100vh; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 25px; }
+        .header h1 { margin: 0; color: #27ae60; font-size: 1.6em; }
+        .header p { color: #7f8c8d; margin: 8px 0 0 0; }
+        .back-button { display: inline-block; background: #27ae60; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; margin-bottom: 15px; font-weight: bold; font-size: 0.9em; }
+        .mql-badge { display: inline-block; background: #27ae60; color: white; padding: 6px 15px; border-radius: 20px; font-weight: bold; margin-top: 8px; font-size: 0.85em; }
+        .priority-badge { display: inline-block; background: #e74c3c; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.8em; margin-left: 8px; }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .detail-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .detail-card h3 { margin: 0 0 12px 0; color: #27ae60; font-size: 1.1em; }
+        .stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ecf0f1; font-size: 0.9em; }
+        .stat-label { color: #7f8c8d; font-weight: bold; }
+        .stat-value { color: #2c3e50; font-weight: bold; }
+        .section { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .section-title { font-size: 1.2em; font-weight: bold; color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #27ae60; padding-bottom: 8px; }
+        .contact-section { background: #e8f8f5; border: 2px solid #27ae60; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .contact-title { font-size: 1.2em; font-weight: bold; color: #27ae60; margin-bottom: 12px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .contact-card { background: white; padding: 12px; border-radius: 8px; border-left: 3px solid #27ae60; }
+        .contact-card h4 { margin: 0 0 6px 0; color: #27ae60; font-size: 0.95em; }
+        .contact-card p { margin: 3px 0; color: #2c3e50; font-size: 0.85em; }
+        .contact-card a { color: #27ae60; text-decoration: none; }
+        .action-step { background: #e8f8f5; border-left: 4px solid #27ae60; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        .action-step h4 { margin: 0 0 6px 0; color: #27ae60; font-size: 0.95em; }
+        .action-step p { margin: 0; color: #2c3e50; font-size: 0.85em; }
+        .source-box { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 12px; border-radius: 8px; margin-top: 12px; }
+        .source-title { font-weight: bold; color: #1976d2; margin-bottom: 6px; font-size: 0.95em; }
+        .source-text { color: #2c3e50; font-size: 0.85em; }
+        .source-text a { color: #1976d2; }
+        .timeline-box { background: #f5eef8; border-left: 4px solid #9b59b6; padding: 12px; border-radius: 8px; margin-top: 12px; font-size: 0.9em; }
+        .footer { text-align: center; color: white; margin-top: 20px; font-size: 0.85em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="MQL_NAVIGATION_FIXED.html" class="back-button">← 返回导航</a>
+        <div class="header">
+            <h1>🗑️ MQL #11: 淳安县渗滤液处理区在线监测维护</h1>
+            <p>靖帆 IMS 营销合格线索 | 2026-03-03</p>
+            <div class="mql-badge">靖帆 IMS</div>
+            <span class="priority-badge">🔥 紧急</span>
+        </div>
+        <div class="detail-grid">
+            <div class="detail-card">
+                <h3>📊 基本信息</h3>
+                <div class="stat-row"><span class="stat-label">Lead ID</span><span class="stat-value">NEW011</span></div>
+                <div class="stat-row"><span class="stat-label">靖帆匹配度</span><span class="stat-value" style="color:#27ae60;">95/100</span></div>
+                <div class="stat-row"><span class="stat-label">转化概率</span><span class="stat-value" style="color:#f39c12;">88%</span></div>
+                <div class="stat-row"><span class="stat-label">预计转化</span><span class="stat-value">1-2周</span></div>
+            </div>
+            <div class="detail-card">
+                <h3>💰 收入</h3>
+                <div class="stat-row"><span class="stat-label">预算</span><span class="stat-value" style="color:#27ae60;font-size:1.1em;">26 万</span></div>
+                <div class="stat-row"><span class="stat-label">IMS收入</span><span class="stat-value">15-20 万</span></div>
+                <div class="stat-row"><span class="stat-label">周期</span><span class="stat-value">1 年</span></div>
+                <div class="stat-row"><span class="stat-label">类型</span><span class="stat-value">公开招标</span></div>
+            </div>
+        </div>
+        <div class="contact-section">
+            <div class="contact-title">📞 联系方式</div>
+            <div class="contact-grid">
+                <div class="contact-card"><h4>🏢 采购单位</h4><p>淳安县市容环境卫生保障中心</p><p>浙江杭州淳安县</p></div>
+                <div class="contact-card"><h4>📋 招标信息</h4><p>项目编号: ZF2025056</p><p>预算: 26万元</p></p></div>
+                <div class="contact-card"><h4>🔗 来源</h4><p><a href="https://www.qdh.gov.cn/art/2025/5/29/art_1229357028_59050775.html" target="_blank">淳安县政府</a></p></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">📚 项目详情</div>
+            <div class="source-box">
+                <div class="source-title">🔍 项目信息</div>
+                <div class="source-text">
+                    <strong>项目名称:</strong> 淳安县渗滤液处理区在线监测维护项目采购<br>
+                    <strong>采购方式:</strong> 公开招标（限额以下）<br>
+                    <strong>预算:</strong> 26万元<br>
+                    <strong>服务内容:</strong> 渗滤液处理区在线监测设备运行维护<br>
+                    <strong>投标截止:</strong> 需查看最新公告
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-title">✅ 靖帆 IMS 优势</div>
+            <div class="action-step"><h4>💡 解决痛点</h4><p>渗滤液监测要求高，靖帆 IMS 实现 24/7 监控预警</p></div>
+            <div class="action-step"><h4>📊 效率提升</h4><p>自动生成环保报告，减少 80% 人工工作</p></div>
+        </div>
+        <div class="timeline-box"><strong>⏰ 建议:</strong> 立即联系采购单位，确认投标截止时间 | <strong>💰 收入:</strong> 15-20万</div>
+        <div class="footer"><p>由靖帆 IMS 营销团队生成 | <a href="MQL_NAVIGATION_FIXED.html" style="color:white;">返回导航</a></p></div>
+    </div>
+</body>
+</html>
