@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 10 竞品动态分析 - 完整市场细分版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.7; color: #333; background: #f5f7fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 45px 30px; text-align: center; border-radius: 12px; margin-bottom: 25px; }
+        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header p { opacity: 0.95; }
+        .section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h2 { color: #1e3c72; border-bottom: 3px solid #2a5298; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.6em; }
+        h3 { color: #2a5298; margin: 25px 0 15px; font-size: 1.3em; }
+        h4 { color: #444; margin: 12px 0 8px; }
+        
+        .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; margin: 20px 0; }
+        .market-card { padding: 18px; border-radius: 10px; border-left: 4px solid; }
+        .market-card.muni { background: #e3f2fd; border-color: #2196f3; }
+        .market-card.ind { background: #e8f5e9; border-color: #4caf50; }
+        .market-card.other { background: #fff3e0; border-color: #ff9800; }
+        
+        .competitor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin: 20px 0; }
+        .competitor-card { border: 2px solid #ddd; border-radius: 10px; padding: 18px; }
+        .competitor-card h4 { margin-bottom: 8px; }
+        
+        .impact-badge { display: inline-block; padding: 3px 10px; border-radius: 10px; font-size: 0.8em; font-weight: 600; }
+        .impact-high { background: #ffebee; color: #c62828; }
+        .impact-medium { background: #fff3e0; color: #e65100; }
+        .impact-low { background: #e8f5e9; color: #2e7d32; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.9em; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; font-weight: 600; color: #1e3c72; }
+        
+        .strategy-box { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid #2a5298; }
+        .strategy-box h4 { margin-bottom: 12px; color: #1e3c72; }
+        .strategy-box ul { margin-left: 20px; }
+        .strategy-box li { margin: 6px 0; }
+        
+        .action-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px; background: white; border-radius: 8px; margin: 8px 0; }
+        .action-priority { font-weight: bold; padding: 2px 8px; border-radius: 4px; font-size: 0.8em; }
+        .priority-high { background: #ffebee; color: #c62828; }
+        .priority-medium { background: #fff3e0; color: #e65100; }
+        
+        .sources { background: #f5f5f5; padding: 20px; border-radius: 10px; margin-top: 25px; font-size: 0.85em; color: #666; }
+        .sources h4 { margin-bottom: 10px; }
+        
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75em; margin: 2px; background: #e0e0e0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Top 10 竞品动态分析 - 完整市场细分版</h1>
+            <p>竞争对手新产品 → 市场影响 → 可执行防御策略</p>
+            <p style="margin-top:10px; font-size:0.9em;">分析日期：2026年3月</p>
+        </header>
+
+        <div class="section">
+            <h2>📊 Hach 市场细分 (完整版)</h2>
+            
+            <h3>🏛️ 市政 Muni</h3>
+            <div class="market-grid">
+                <div class="market-card muni">
+                    <h4>市政供水 (DWTP)</h4>
+                    <p>饮用水处理、供水管网</p>
+                </div>
+                <div class="market-card muni">
+                    <h4>市政污水 (WWTP)</h4>
+                    <p>污水处理厂、排水管网</p>
+                </div>
+            </div>
+            
+            <h3>🏭 工业 IND</h3>
+            <div class="market-grid">
+                <div class="market-card ind"><h4>电力 Power</h4><p>火电、核电、水电、储能</p></div>
+                <div class="market-card ind"><h4>化工 Chemical</h4><p>石油化工、精细化工</p></div>
+                <div class="market-card ind"><h4>生物制药 Biopharma</h4><p>制药用水、疫苗</p></div>
+                <div class="market-card ind"><h4>半导体 Semiconductor</h4><p>超纯水、晶圆制造</p></div>
+                <div class="market-card ind"><h4>钢铁冶金 Steel</h4><p>循环水、废水处理</p></div>
+                <div class="market-card ind"><h4>矿业 Mining</h4><p>选矿水、废水</p></div>
+            </div>
+            
+            <h3>🏭 其他工业 Other Industries</h3>
+            <div class="market-grid">
+                <div class="market-card other"><h4>食品饮料 Food&Beverage</h4><p>生产用水、成品检测</p></div>
+                <div class="market-card other"><h4>石油燃气 Oil&Gas</h4><p>油田注水、炼化</p></div>
+                <div class="market-card other"><h4>造纸 Pulp&Paper</h4><p>制浆用水、废水</p></div>
+                <div class="market-card other"><h4>农业 Agriculture</h4><p>灌溉水、养殖水</p></div>
+                <div class="market-card other"><h4>冷却水 Cooling</h4><p>工业循环水系统</p></div>
+                <div class="market-card other"><h4>游泳池 Pool</h4><p>娱乐用水、温泉</p></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏢 Top 10 竞争对手新产品动态</h2>
+            
+            <div class="competitor-grid">
+                <div class="competitor-card">
+                    <h4>1. ABB (瑞士)</h4>
+                    <p><strong>新产品:</strong> AeroStar ULTRA, UviTec, ChloroStar</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-high">高</span></p>
+                    <div style="margin-top:8px;"><span class="tag">电力</span><span class="tag">市政</span><span class="tag">化工</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>2. E+H (瑞士)</h4>
+                    <p><strong>新产品:</strong> Liquiline, CA80, CodeWrights</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-high">高</span></p>
+                    <div style="margin-top:8px;"><span class="tag">电力</span><span class="tag">化工</span><span class="tag">市政</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>3. Thermo Fisher (美国)</h4>
+                    <p><strong>新产品:</strong> Orion 8000, Orion Chlorine XP</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-medium">中</span></p>
+                    <div style="margin-top:8px;"><span class="tag">制药</span><span class="tag">实验室</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>4. Xylem (美国)</h4>
+                    <p><strong>新产品:</strong> Rivo I, 新一代分析仪</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-medium">中</span></p>
+                    <div style="margin-top:8px;"><span class="tag">市政</span><span class="tag">环保</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>5. SWAN (瑞士)</h4>
+                    <p><strong>新产品:</strong> AMI-II系列</p>
+                    <p><strong>时间:</strong> 2024</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-medium">中</span></p>
+                    <div style="margin-top:8px;"><span class="tag">市政</span><span class="tag">电力</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>6. Mettler Toledo (瑞士)</h4>
+                    <p><strong>新产品:</strong> SevenExcellence, 在线分析</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-medium">中</span></p>
+                    <div style="margin-top:8px;"><span class="tag">制药</span><span class="tag">食品</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>7. WTW (德国)</h4>
+                    <p><strong>新产品:</strong> 多参数监测系列</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-low">低</span></p>
+                    <div style="margin-top:8px;"><span class="tag">实验室</span><span class="tag">环境</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>8. HORIBA (日本)</h4>
+                    <p><strong>新产品:</strong> LAQUA-TB220便携浊度仪</p>
+                    <p><strong>时间:</strong> 2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-low">低</span></p>
+                    <div style="margin-top:8px;"><span class="tag">实验室</span><span class="tag">便携</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>9. 威立雅 Veolia</h4>
+                    <p><strong>新动向:</strong> 水务运营+设备集成</p>
+                    <p><strong>时间:</strong> 2024-2025</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-medium">中</span></p>
+                    <div style="margin-top:8px;"><span class="tag">市政</span><span class="tag">工业</span></div>
+                </div>
+                
+                <div class="competitor-card">
+                    <h4>10. 国产替代</h4>
+                    <p><strong>代表:</strong> 连华、博取、碧兴物联</p>
+                    <p><strong>特点:</strong> 价格低30-50%</p>
+                    <p><strong>威胁:</strong> <span class="impact-badge impact-high">高</span></p>
+                    <div style="margin-top:8px;"><span class="tag">市政</span><span class="tag">工业</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 各市场细分竞争对手影响及防御策略</h2>
+            
+            <h3>🏛️ 市政供水 (DWTP)</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: ABB (ChloroStar), 国产低价</h4>
+                <ul>
+                    <li><strong>CL17系列</strong> — 保持拳头产品地位，持续迭代</li>
+                    <li><strong>TCO论证</strong> — 开发总拥有成本工具，证明低价不等于省钱</li>
+                    <li><strong>试剂+服务</strong> — 强调试剂供应和本地服务网络优势</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>更新CL17 vs ABB ChloroStar对比材料</span>
+                </div>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>开发TCO计算器工具给销售团队</span>
+                </div>
+            </div>
+            
+            <h3>🏛️ 市政污水 (WWTP)</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 国产低价, ABB (UviTec)</h4>
+                <ul>
+                    <li><strong>AGS/AOA新技术</strong> — 开发符合新工艺的监测方案</li>
+                    <li><strong>智慧水务</strong> — 打包IMS+监测+服务整体方案</li>
+                    <li><strong>案例收集</strong> — 记录与国产竞争获胜的案例</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>开发AGS/AOA工艺配套监测方案</span>
+                </div>
+            </div>
+            
+            <h3>🏭 电力</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: E+H (完整过程仪表), ABB (AeroStar)</h4>
+                <ul>
+                    <li><strong>差异化定位</strong> — Hach专注水务，E+H/ABB是"全能选手"</li>
+                    <li><strong>IMS软件</strong> — 强调水务管理数字化优势</li>
+                    <li><strong>电力行业案例</strong> — 收集电力行业成功案例vs E+H</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>制作"Hach vs E+H 电力行业对比"培训材料</span>
+                </div>
+                <div class="action-item">
+                    <span class="action-priority priority-medium">短期</span>
+                    <span>建立电力行业专项销售团队</span>
+                </div>
+            </div>
+            
+            <h3>🏭 化工</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: E+H (客户关系深), ABB (过程控制)</h4>
+                <ul>
+                    <li><strong>IMS差异化</strong> — 软件能力是核心护城河</li>
+                    <li><strong>工艺针对性</strong> — 针对化工特定工艺(炼油、乙烯等)的监测方案</li>
+                    <li><strong>安全合规</strong> — 强调安全生产、合规监测的重要性</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>开发化工行业IMS应用案例库</span>
+                </div>
+                <div class="action-item">
+                    <span class="action-priority priority-medium">短期</span>
+                    <span>与化工设计院建立合作关系</span>
+                </div>
+            </div>
+            
+            <h3>🏭 生物制药</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: Thermo Fisher, Mettler Toledo</h4>
+                <ul>
+                    <li><strong>超纯水技术</strong> — 保持技术领先地位</li>
+                    <li><strong>GMP合规</strong> — 强调符合GMP/FDA要求</li>
+                    <li><strong>验证服务</strong> — 提供IQ/OQ/PQ验证支持</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-high">立即</span>
+                    <span>强化制药行业GMP合规宣传材料</span>
+                </div>
+            </div>
+            
+            <h3>🏭 半导体</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 较小 (Hach技术领先)</h4>
+                <ul>
+                    <li><strong>保持领先</strong> — 超纯水监测技术持续创新</li>
+                    <li><strong>国产替代</strong> — 关注国产半导体项目机会</li>
+                </ul>
+                <div class="action-item">
+                    <span class="action-priority priority-medium">短期</span>
+                    <span>跟踪国产半导体项目，扩大市场份额</span>
+                </div>
+            </div>
+            
+            <h3>🏭 钢铁冶金</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: E+H, ABB</h4>
+                <ul>
+                    <li><strong>循环水监测</strong> — 强化循环水系统监测方案</li>
+                    <li><strong>废水处理</strong> — 钢铁废水处理监测</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 矿业</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 国产低价</h4>
+                <ul>
+                    <li><strong>极端工况</strong> — 强调在复杂工况下的可靠性</li>
+                    <li><strong>定制方案</strong> — 针对矿业特定工艺的定制化方案</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 食品饮料</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: Mettler Toledo</h4>
+                <ul>
+                    <li><strong>生产用水</strong> — 食品加工用水监测</li>
+                    <li><strong>成品检测</strong> — 饮料成品质量检测</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 石油燃气</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: E+H (传统强势)</h4>
+                <ul>
+                    <li><strong>油田注水</strong> — 油田回注水监测</li>
+                    <li><strong>炼化废水</strong> — 炼油化工废水监测</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 造纸</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 国产</h4>
+                <ul>
+                    <li><strong>高污染工况</strong> — 强调在高污染环境下的稳定性</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 农业</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 国产低价</h4>
+                <ul>
+                    <li><strong>灌溉水</strong> — 节水灌溉水质监测</li>
+                    <li><strong>养殖水</strong> — 水产养殖水质监测</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 冷却水</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: E+H, ABB</h4>
+                <ul>
+                    <li><strong>循环水系统</strong> — 工业循环冷却水监测</li>
+                    <li><strong>腐蚀监测</strong> — 配合缓蚀剂监测</li>
+                </ul>
+            </div>
+            
+            <h3>🏭 游泳池</h3>
+            <div class="strategy-box">
+                <h4>主要威胁: 国产</h4>
+                <ul>
+                    <li><strong>消毒监测</strong> — 余氯/pH控制</li>
+                    <li><strong>自动控制</strong> — 与加药系统集成</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 立即行动项 (Next 30 Days)</h2>
+            <table>
+                <tr><th>优先级</th><th>行动项</th><th>负责</th><th>时间</th></tr>
+                <tr><td class="impact-high">高</td><td>更新CL17 vs ABB ChloroStar对比材料</td><td>市场部</td><td>1周</td></tr>
+                <tr><td class="impact-high">高</td><td>开发TCO计算器工具</td><td>产品经理</td><td>2周</td></tr>
+                <tr><td class="impact-high">高</td><td>制作"Hach vs E+H 电力行业对比"培训</td><td>培训部</td><td>2周</td></tr>
+                <tr><td class="impact-medium">中</td><td>开发AGS/AOA工艺配套监测方案</td><td>技术部</td><td>3周</td></tr>
+                <tr><td class="impact-medium">中</td><td>强化制药行业GMP合规宣传</td><td>市场部</td><td>3周</td></tr>
+                <tr><td class="impact-medium">中</td><td>开发化工行业IMS案例库</td><td>产品经理</td><td>4周</td></tr>
+            </table>
+        </div>
+
+        <div class="sources">
+            <h4>📚 参考来源</h4>
+            <ul>
+                <li>[1] ABB产品发布 - PROCESS流程工业</li>
+                <li>[2] E+H收购CodeWrights - Automation.com</li>
+                <li>[3] Thermo Fisher Orion产品 - SelectScience</li>
+                <li>[4] Xylem Rivo I - WaterOnline</li>
+                <li>[5] SWAN AMI-II - Swan Instruments</li>
+                <li>[6] Hach官网 - 行业应用</li>
+            </ul>
+        </div>
+        
+        <div style="text-align:center; padding:20px; color:#666; font-size:0.9em;">
+            <p>Created: 2026-03-05 | Framework: 竞品 → 市场 → 防御策略 → 立即行动</p>
+        </div>
+    </div>
+</body>
+</html>
