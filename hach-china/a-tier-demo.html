@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hach China | A-Tier Customer Intelligence</title>
+<style>
+  :root {
+    --hach-blue: #0057A8;
+    --hach-light: #E8F1FB;
+    --hach-dark: #003D7A;
+    --green: #16A34A;
+    --yellow: #CA8A04;
+    --red: #DC2626;
+    --gray: #6B7280;
+    --bg: #F8FAFC;
+    --card: #FFFFFF;
+    --border: #E2E8F0;
+    --text: #1E293B;
+    --text-light: #64748B;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--hach-dark);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 20px 16px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .sidebar-logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+
+  .sidebar-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar-section {
+    padding: 12px 16px 6px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+
+  .account-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 8px 12px;
+  }
+
+  .account-item {
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.15s;
+    margin-bottom: 2px;
+  }
+
+  .account-item:hover { background: rgba(255,255,255,0.08); }
+  .account-item.active { background: rgba(255,255,255,0.14); }
+
+  .account-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-green { background: #22C55E; }
+  .dot-yellow { background: #EAB308; }
+  .dot-red { background: #EF4444; }
+
+  .account-name {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .account-tag {
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.6);
+    white-space: nowrap;
+  }
+
+  /* ── Main ── */
+  .main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .topbar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .topbar-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .topbar-meta {
+    font-size: 12px;
+    color: var(--text-light);
+  }
+
+  .tab-row {
+    display: flex;
+    gap: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+
+  .tab {
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .tab:hover { color: var(--hach-blue); }
+  .tab.active { color: var(--hach-blue); border-bottom-color: var(--hach-blue); }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 24px;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* ── Status badge ── */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .status-green { background: #DCFCE7; color: var(--green); }
+  .status-yellow { background: #FEF9C3; color: var(--yellow); }
+  .status-red { background: #FEE2E2; color: var(--red); }
+
+  /* ── KPI row ── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .kpi {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+
+  .kpi-label {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ── Table ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-light);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #F8FAFC; }
+
+  /* ── Signal item ── */
+  .signal-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .signal-item:last-child { border-bottom: none; }
+
+  .signal-urgency {
+    width: 56px;
+    min-width: 56px;
+    text-align: center;
+    padding: 3px 0;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .urg-high { background: #FEE2E2; color: var(--red); }
+  .urg-medium { background: #FEF9C3; color: var(--yellow); }
+  .urg-low { background: #F0FDF4; color: var(--green); }
+
+  .signal-content { flex: 1; }
+  .signal-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .signal-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+  .signal-action {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--hach-blue);
+    font-weight: 500;
+  }
+  .signal-date { font-size: 11px; color: var(--text-light); white-space: nowrap; }
+
+  /* ── Progress bar ── */
+  .progress-wrap { display: flex; align-items: center; gap: 10px; }
+  .progress-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+  .fill-blue { background: var(--hach-blue); }
+  .fill-green { background: var(--green); }
+  .fill-yellow { background: #EAB308; }
+  .progress-label { font-size: 12px; font-weight: 600; width: 32px; text-align: right; }
+
+  /* ── Tags ── */
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    margin: 2px 2px 2px 0;
+  }
+  .tag-blue { background: var(--hach-light); color: var(--hach-blue); }
+  .tag-gray { background: #F1F5F9; color: var(--gray); }
+  .tag-green { background: #DCFCE7; color: var(--green); }
+  .tag-orange { background: #FFF7ED; color: #EA580C; }
+
+  /* ── Brief box ── */
+  .brief-section {
+    background: var(--hach-light);
+    border-left: 3px solid var(--hach-blue);
+    padding: 12px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 12px;
+  }
+
+  .brief-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--hach-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .brief-section p, .brief-section li {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .brief-section ul { padding-left: 16px; }
+
+  /* ── Button ── */
+  .btn {
+    padding: 7px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-primary { background: var(--hach-blue); color: #fff; }
+  .btn-outline { background: #fff; color: var(--hach-blue); border: 1px solid var(--hach-blue); }
+
+  .btn-row { display: flex; gap: 8px; margin-top: 14px; }
+
+  /* ── Prompt box ── */
+  .prompt-box {
+    background: #1E293B;
+    color: #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-top: 10px;
+    white-space: pre-wrap;
+    position: relative;
+  }
+
+  .prompt-label {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    font-size: 10px;
+    color: #64748B;
+    font-family: sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Workflow diagram ── */
+  .workflow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding: 10px 0 16px;
+  }
+
+  .wf-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px;
+    cursor: pointer;
+  }
+
+  .wf-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--hach-light);
+    border: 2px solid var(--hach-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.2s;
+  }
+
+  .wf-step:hover .wf-circle,
+  .wf-step.active .wf-circle {
+    background: var(--hach-blue);
+  }
+
+  .wf-step-label {
+    font-size: 11px;
+    text-align: center;
+    color: var(--text-light);
+    margin-top: 8px;
+    line-height: 1.3;
+    max-width: 90px;
+  }
+
+  .wf-arrow {
+    font-size: 18px;
+    color: var(--border);
+    margin: 0 4px;
+    padding-bottom: 28px;
+  }
+
+  /* ── Persona card ── */
+  .persona {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .persona:last-child { border-bottom: none; }
+  .persona-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--hach-blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .persona-name { font-size: 13px; font-weight: 600; }
+  .persona-title { font-size: 12px; color: var(--text-light); margin-bottom: 4px; }
+  .persona-concern { font-size: 12px; color: var(--text); }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+
+  /* panel visibility */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Workflow step detail */
+  .wf-detail {
+    margin-top: 16px;
+    display: none;
+    animation: fadeIn 0.2s ease;
+  }
+  .wf-detail.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">HACH</div>
+    <div class="sidebar-subtitle">A-Tier Intelligence · China Opco</div>
+    <div style="margin-top:10px;">
+      <a href="https://hozen.github.io/jingfan-ims-mql/" target="_blank"
+         style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,0.7);text-decoration:none;padding:4px 8px;background:rgba(255,255,255,0.1);border-radius:5px;transition:background 0.15s;"
+         onmouseover="this.style.background='rgba(255,255,255,0.2)'"
+         onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        🔗 Jingfan IMS MQL →
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-section">A-Tier Accounts (50)</div>
+  <div class="account-list" id="accountList">
+    <!-- Municipal -->
+    <div class="account-item active" onclick="selectAccount(this,'beijing')" data-id="beijing">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">北京自来水集团</div>
+      <div class="account-tag">市政</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'shanghai')" data-id="shanghai">
+      <div class="account-dot dot-yellow"></div>
+      <div class="account-name">上海城投水务</div>
+      <div class="account-tag">市政</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'guangzhou')" data-id="guangzhou">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">广州自来水公司</div>
+      <div class="account-tag">市政</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'chengdu')" data-id="chengdu">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">成都兴蓉环境</div>
+      <div class="account-tag">市政</div>
+    </div>
+    <!-- Industrial -->
+    <div class="account-item" onclick="selectAccount(this,'sinopec')" data-id="sinopec">
+      <div class="account-dot dot-red"></div>
+      <div class="account-name">中石化炼油事业部</div>
+      <div class="account-tag">石化</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'huaneng')" data-id="huaneng">
+      <div class="account-dot dot-yellow"></div>
+      <div class="account-name">华能国际电力</div>
+      <div class="account-tag">电力</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'sinopharm')" data-id="sinopharm">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">国药控股医药</div>
+      <div class="account-tag">制药</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'semiconductor')" data-id="semiconductor">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">中芯国际集成电路</div>
+      <div class="account-tag">半导体</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'steel')" data-id="steel">
+      <div class="account-dot dot-yellow"></div>
+      <div class="account-name">宝武钢铁集团</div>
+      <div class="account-tag">钢铁</div>
+    </div>
+    <div class="account-item" onclick="selectAccount(this,'food')" data-id="food">
+      <div class="account-dot dot-green"></div>
+      <div class="account-name">伊利集团</div>
+      <div class="account-tag">食品</div>
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="accountTitle">北京自来水集团</div>
+      <div class="topbar-meta" id="accountMeta">市政水务 · 北京 · 更新于 2026-03-06</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span id="accountStatus" class="status-badge status-green">● 健康</span>
+      <button class="btn btn-outline" onclick="showTab('brief')">📋 生成拜访简报</button>
+      <button class="btn btn-primary">⚡ 刷新监控</button>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-row">
+    <div class="tab active" onclick="showTab('overview')">总览</div>
+    <div class="tab" onclick="showTab('profile')">客户档案</div>
+    <div class="tab" onclick="showTab('signals')">信号监控</div>
+    <div class="tab" onclick="showTab('brief')">拜访简报</div>
+    <div class="tab" onclick="showTab('workflow')">SW 流程</div>
+    <div class="tab" onclick="showTab('prompts')">AI Prompts</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- ═══ OVERVIEW ═══ -->
+    <div class="tab-panel active" id="panel-overview">
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">年度营收贡献</div>
+          <div class="kpi-value" id="kpi-revenue">¥420万</div>
+          <div class="kpi-sub" id="kpi-revenue-note">↑ 12% vs 去年</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">上次拜访</div>
+          <div class="kpi-value" id="kpi-visit" style="font-size:16px;padding-top:3px;">18天前</div>
+          <div class="kpi-sub" id="kpi-visit-note">2026-02-16 · 王磊</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">在售机会</div>
+          <div class="kpi-value" id="kpi-opps">3</div>
+          <div class="kpi-sub" id="kpi-opps-note">潜在价值 ¥85万</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">竞争风险</div>
+          <div class="kpi-value" id="kpi-risk" style="color:var(--yellow);">中</div>
+          <div class="kpi-sub" id="kpi-risk-note">YSI 近期活跃</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📡 最新信号 (本周)</div>
+          <div id="signals-list"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 在售机会追踪</div>
+          <table id="opps-table"></table>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📦 Hach 产品覆盖</div>
+          <table id="products-table"></table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚔️ 竞争态势</div>
+          <table id="comp-table"></table>
+          <div style="margin-top:12px;font-size:12px;color:var(--text-light);" id="comp-note"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PROFILE ═══ -->
+    <div class="tab-panel" id="panel-profile">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🏢 公司概况</div>
+          <table>
+            <tbody>
+              <tr><td style="color:var(--text-light);width:110px;">全称</td><td>北京市自来水集团有限责任公司</td></tr>
+              <tr><td style="color:var(--text-light);">性质</td><td>国有企业（北京市国资委直属）</td></tr>
+              <tr><td style="color:var(--text-light);">主营</td><td>自来水生产、供应及水务工程</td></tr>
+              <tr><td style="color:var(--text-light);">供水规模</td><td>日供水能力 300 万吨，覆盖 1400 万人口</td></tr>
+              <tr><td style="color:var(--text-light);">水厂数量</td><td>12 座主力水厂</td></tr>
+              <tr><td style="color:var(--text-light);">年收入</td><td>约 ¥80 亿 (估)</td></tr>
+              <tr><td style="color:var(--text-light);">采购方式</td><td>政府采购 + 框架协议 + 直接采购</td></tr>
+              <tr><td style="color:var(--text-light);">财年</td><td>1月-12月，Q4 预算集中释放</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 合规驱动因素</div>
+          <div style="margin-bottom:10px;">
+            <div style="font-size:12px;color:var(--text-light);margin-bottom:6px;">适用标准</div>
+            <span class="tag tag-blue">GB 5749-2022 生活饮用水</span>
+            <span class="tag tag-blue">GB 3838 地表水</span>
+            <span class="tag tag-blue">HJ/T 91 水污染物排放</span>
+            <span class="tag tag-blue">北京地方排放标准</span>
+          </div>
+          <div style="margin-top:12px;font-size:12px;color:var(--text-light);margin-bottom:6px;">近期合规压力</div>
+          <div class="signal-item" style="padding:8px 0;">
+            <div class="signal-urgency urg-high" style="font-size:10px;">新</div>
+            <div class="signal-content">
+              <div class="signal-title" style="font-size:12px;">饮用水新国标新增13项指标</div>
+              <div class="signal-desc">包括 TOC、农药残留，2027年执行，提前升级改造窗口已开启</div>
+            </div>
+          </div>
+          <div class="signal-item" style="padding:8px 0;">
+            <div class="signal-urgency urg-medium" style="font-size:10px;">持续</div>
+            <div class="signal-content">
+              <div class="signal-title" style="font-size:12px;">在线监控数据联网要求</div>
+              <div class="signal-desc">北京市要求主力水厂在线数据实时上传至市监管平台</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">👥 关键决策人图谱</div>
+        <div class="persona">
+          <div class="persona-avatar">张</div>
+          <div>
+            <div class="persona-name">张明华 <span class="tag tag-blue" style="font-size:10px;">决策者</span></div>
+            <div class="persona-title">集团环保与水务管理总监 (新任)</div>
+            <div class="persona-concern">关注点：合规达标、数字化转型、与监管部门关系 ｜ 入口：合规政策解读、行业会议</div>
+          </div>
+        </div>
+        <div class="persona">
+          <div class="persona-avatar" style="background:#059669;">李</div>
+          <div>
+            <div class="persona-name">李建国 <span class="tag tag-green" style="font-size:10px;">技术影响者</span></div>
+            <div class="persona-title">水质监测中心主任</div>
+            <div class="persona-concern">关注点：仪器稳定性、数据准确性、维护成本 ｜ 入口：技术交流、FAT/现场测试</div>
+          </div>
+        </div>
+        <div class="persona">
+          <div class="persona-avatar" style="background:#7C3AED;">王</div>
+          <div>
+            <div class="persona-name">王秀梅 <span class="tag tag-gray" style="font-size:10px;">采购把关</span></div>
+            <div class="persona-title">集团采购部经理</div>
+            <div class="persona-concern">关注点：价格合理性、交货期、入围名录 ｜ 入口：框架合同、供应商评审</div>
+          </div>
+        </div>
+        <div class="persona">
+          <div class="persona-avatar" style="background:#EA580C;">陈</div>
+          <div>
+            <div class="persona-name">陈伟 <span class="tag tag-gray" style="font-size:10px;">最终用户</span></div>
+            <div class="persona-title">第四水厂 仪表班长</div>
+            <div class="persona-concern">关注点：操作简便、故障率低、试剂供应稳定 ｜ 入口：培训、现场服务</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SIGNALS ═══ -->
+    <div class="tab-panel" id="panel-signals">
+      <div class="card">
+        <div class="card-title">📡 本周信号监控 — 北京自来水集团
+          <span class="status-badge status-yellow" style="margin-left:auto;">🟡 需关注</span>
+        </div>
+        <div class="signal-item">
+          <div class="signal-urgency urg-high">HIGH</div>
+          <div class="signal-content">
+            <div class="signal-title">【招标】在线水质综合监测系统采购项目</div>
+            <div class="signal-desc">来源：中国政府采购网。预算 ¥180万，要求覆盖 COD、氨氮、浊度、余氯、TOC 等参数，需与市监管平台数据对接。截止日期：2026-03-25。</div>
+            <div class="signal-action">→ 立即行动：协调销售准备投标文件；TOC 参数是 Hach 差异化优势，重点包装</div>
+          </div>
+          <div class="signal-date">2026-03-04</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-urgency urg-high">HIGH</div>
+          <div class="signal-content">
+            <div class="signal-title">【人事】集团新任环保总监张明华上任</div>
+            <div class="signal-desc">来源：企查查。张明华前任职于住建部水务司，具有强监管背景，预计将推动集团水质监测数字化升级。</div>
+            <div class="signal-action">→ 立即行动：准备新官拜访方案，侧重数字化合规主题，安排在3月内</div>
+          </div>
+          <div class="signal-date">2026-03-02</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-urgency urg-medium">MED</div>
+          <div class="signal-content">
+            <div class="signal-title">【竞品】YSI 在集团下属水厂发起比价</div>
+            <div class="signal-desc">来源：销售反馈 + LinkedIn。YSI 销售代表近期拜访集团第六、八、十水厂，主推低价在线监测产品，强调国产化替代概念。</div>
+            <div class="signal-action">→ 建议：准备全生命周期成本对比分析，突出 Hach 数据稳定性和服务响应优势</div>
+          </div>
+          <div class="signal-date">2026-03-01</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-urgency urg-medium">MED</div>
+          <div class="signal-content">
+            <div class="signal-title">【政策】北京市发布新版水厂在线监测数据上报规范</div>
+            <div class="signal-desc">来源：北京市生态环境局官网。要求所有规模以上水厂在线数据实时传输至市级平台，新增数据格式和接口标准。2026年底前完成改造。</div>
+            <div class="signal-action">→ 机会：Hach 数字化平台方案具备符合性，可主动推介系统升级方案</div>
+          </div>
+          <div class="signal-date">2026-02-28</div>
+        </div>
+        <div class="signal-item">
+          <div class="signal-urgency urg-low">LOW</div>
+          <div class="signal-content">
+            <div class="signal-title">【行业】中国水网报道：饮用水 TOC 检测需求快速增长</div>
+            <div class="signal-desc">来源：中国水网。新国标执行准备期内，各地水务集团加速 TOC 分析仪采购，预计2026年市场规模增长40%。</div>
+            <div class="signal-action">→ 参考：整理 Hach TOC 产品在同类水厂的案例，纳入客户资料包</div>
+          </div>
+          <div class="signal-date">2026-02-25</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BRIEF ═══ -->
+    <div class="tab-panel" id="panel-brief">
+      <div class="card" style="border-left:4px solid var(--hach-blue);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+          <div>
+            <div style="font-size:16px;font-weight:700;">拜访简报</div>
+            <div style="font-size:12px;color:var(--text-light);margin-top:2px;">北京自来水集团 · 张明华（环保总监）· 2026-03-10 预约</div>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-outline">📤 发送给销售</button>
+            <button class="btn btn-primary">🖨 打印</button>
+          </div>
+        </div>
+
+        <div class="brief-section">
+          <div class="brief-section-title">👤 联系人概况</div>
+          <ul>
+            <li><strong>张明华</strong>，集团环保与水务管理总监（新任，2026年2月上任）</li>
+            <li>来自住建部水务司，监管背景强，关注合规与数字化</li>
+            <li>⚠️ 首次拜访，尚未与其建立直接关系，需以专业姿态建立信任</li>
+          </ul>
+        </div>
+
+        <div class="brief-section">
+          <div class="brief-section-title">🔔 拜访前最重要的3件事</div>
+          <ul>
+            <li>集团刚发布在线水质监测系统招标（¥180万），截止 3月25日——这是核心话题</li>
+            <li>北京新版在线数据上报规范要求2026年底完成改造——合规压力真实存在</li>
+            <li>YSI 正在下属水厂活动——需提前备好竞品应对方案，但不要主动挑起</li>
+          </ul>
+        </div>
+
+        <div class="brief-section">
+          <div class="brief-section-title">📋 建议拜访议程（45分钟）</div>
+          <ul>
+            <li><strong>0-10min</strong> · 开场：了解新总监的工作重点和对水质监测的看法</li>
+            <li><strong>10-25min</strong> · 业务：结合新国标和北京数据上报要求，展示 Hach 解决方案如何帮助集团提前达标</li>
+            <li><strong>25-35min</strong> · 焦点：TOC 分析能力 + 数据平台对接方案（直接对应招标需求）</li>
+            <li><strong>35-45min</strong> · 确认：下一步合作形式——技术演示？提供投标支持？框架合同续签？</li>
+          </ul>
+        </div>
+
+        <div class="brief-section">
+          <div class="brief-section-title">💬 核心话术</div>
+          <ul>
+            <li>"新国标执行窗口期，现在是集团提前布局 TOC 监测能力的最佳时机"</li>
+            <li>"Hach 在北京已有12座水厂的在线监测部署，数据接口完全兼容市级上报平台"</li>
+            <li>"我们可以为这次招标提供全套技术方案支持，帮助集团降低评标风险"</li>
+          </ul>
+        </div>
+
+        <div class="brief-section" style="border-left-color:var(--red);">
+          <div class="brief-section-title" style="color:var(--red);">⛔ 注意事项</div>
+          <ul>
+            <li>不要主动提价格，等对方问；新官通常先看方案和能力，再谈价格</li>
+            <li>不要批评 YSI，如被问及竞品，用数据说话</li>
+            <li>避免过多历史介绍——他刚上任，更关注未来规划，而不是过去</li>
+          </ul>
+        </div>
+
+        <div class="brief-section" style="border-left-color:var(--green);">
+          <div class="brief-section-title" style="color:var(--green);">✅ 本次拜访理想结果</div>
+          <p>确认参与在线监测招标投标；获得一次技术演示机会；建立与新总监的初步信任关系</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ WORKFLOW ═══ -->
+    <div class="tab-panel" id="panel-workflow">
+      <div class="card">
+        <div class="card-title">🔄 A类客户管理 — AI 增强标准作业流程</div>
+        <div class="workflow" id="workflowDiagram">
+          <div class="wf-step active" onclick="selectWfStep(this,0)">
+            <div class="wf-circle">🗂️</div>
+            <div class="wf-step-label">一次性建档<br><span style="color:var(--hach-blue);font-weight:600;">Step 1</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,1)">
+            <div class="wf-circle">📡</div>
+            <div class="wf-step-label">每周信号<br>监控<br><span style="color:var(--hach-blue);font-weight:600;">Step 2</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,2)">
+            <div class="wf-circle">📊</div>
+            <div class="wf-step-label">月度账户<br>脉冲报告<br><span style="color:var(--hach-blue);font-weight:600;">Step 3</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,3)">
+            <div class="wf-circle">📋</div>
+            <div class="wf-step-label">拜访前<br>简报生成<br><span style="color:var(--hach-blue);font-weight:600;">Step 4</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,4)">
+            <div class="wf-circle">💼</div>
+            <div class="wf-step-label">拜访执行<br>(销售)<br><span style="color:var(--hach-blue);font-weight:600;">Step 5</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,5)">
+            <div class="wf-circle">🔁</div>
+            <div class="wf-step-label">拜访后<br>情报录入<br><span style="color:var(--hach-blue);font-weight:600;">Step 6</span></div>
+          </div>
+          <div class="wf-arrow">→</div>
+          <div class="wf-step" onclick="selectWfStep(this,6)">
+            <div class="wf-circle">🎯</div>
+            <div class="wf-step-label">季度深度<br>复盘<br><span style="color:var(--hach-blue);font-weight:600;">Step 7</span></div>
+          </div>
+        </div>
+
+        <!-- Step details -->
+        <div class="wf-detail active" id="wf-detail-0">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 1 — 一次性建档（每个A类客户）</div>
+            <ul>
+              <li><strong>执行者：</strong>市场团队（AI完成80%，销售验证20%）</li>
+              <li><strong>输出：</strong>账户情报卡（公司概况 + 决策人图谱 + 合规驱动 + 产品空白 + 竞争态势）</li>
+              <li><strong>AI工作量：</strong>企查查 + 政府采购网 + 行业媒体 → 自动生成结构化档案</li>
+              <li><strong>人工工作量：</strong>销售代表审阅、补充关系层面信息（约1小时/客户）</li>
+              <li><strong>频率：</strong>建立后持续更新，非重复动作</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-1">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 2 — 每周信号监控（全自动）</div>
+            <ul>
+              <li><strong>执行者：</strong>AI全自动，仅高优信号触达人工</li>
+              <li><strong>监控范围：</strong>招标公告 / 人事变动 / 竞品动态 / 政策更新 / 企业新闻</li>
+              <li><strong>输出：</strong>每周信号摘要推送至企业微信，红色信号24小时内推送</li>
+              <li><strong>人工工作量：</strong>每周 &lt;30分钟（仅查看推送，无需主动搜索）</li>
+              <li><strong>工具：</strong>企查查API + 政府采购网RSS + 行业媒体 + AI摘要</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-2">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 3 — 月度账户脉冲报告</div>
+            <ul>
+              <li><strong>执行者：</strong>AI生成草稿，市场经理快速审核</li>
+              <li><strong>输出：</strong>账户健康状态（绿/黄/红）+ 本月关键变化 + 建议动作</li>
+              <li><strong>覆盖：</strong>全部50个A类账户，集中在每月1日生成</li>
+              <li><strong>人工工作量：</strong>每月1-2小时（审核标红账户，其余快速浏览）</li>
+              <li><strong>分发：</strong>相关销售代表 + 市场主管 + 销售经理</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-3">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 4 — 拜访前简报（自动触发）</div>
+            <ul>
+              <li><strong>触发：</strong>销售在CRM中创建/确认拜访记录时自动生成</li>
+              <li><strong>输出：</strong>一页中文简报（联系人画像 + 账户现状 + 建议议程 + 话术 + 注意事项）</li>
+              <li><strong>交付：</strong>拜访前24小时推送至销售代表企业微信</li>
+              <li><strong>人工工作量：</strong>销售代表阅读 5-10 分钟，零额外准备</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-4">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 5 — 拜访执行（销售负责）</div>
+            <ul>
+              <li><strong>执行者：</strong>销售代表（市场提供素材支持）</li>
+              <li><strong>工具：</strong>简报 + 产品资料包 + 竞品对比卡（市场预制）</li>
+              <li><strong>要求：</strong>拜访后24小时内完成情报录入（见Step 6）</li>
+              <li><strong>AI支持：</strong>若拜访过程有录音，可自动转录并提取关键信息</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-5">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 6 — 拜访后情报录入（AI辅助）</div>
+            <ul>
+              <li><strong>执行者：</strong>销售代表录入笔记，AI提取结构化情报</li>
+              <li><strong>AI工作：</strong>从原始笔记中提取竞品线索 / 采购信号 / 关系健康度 / CRM更新建议</li>
+              <li><strong>输出：</strong>结构化情报 → 自动更新账户卡 + 反馈至策略团队</li>
+              <li><strong>人工工作量：</strong>销售代表5分钟填写表单，AI完成其余处理</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wf-detail" id="wf-detail-6">
+          <div class="brief-section">
+            <div class="brief-section-title">Step 7 — 季度深度复盘</div>
+            <ul>
+              <li><strong>执行者：</strong>销售经理 + 市场经理共同主导，AI提供数据底稿</li>
+              <li><strong>输出：</strong>季度账户SWOT + 下季机会优先级 + 下季拜访计划 + 市场支持需求</li>
+              <li><strong>覆盖：</strong>全部50个A类账户，每季度一次</li>
+              <li><strong>人工工作量：</strong>每账户30分钟（AI完成数据汇总，人工做判断）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PROMPTS ═══ -->
+    <div class="tab-panel" id="panel-prompts">
+      <div class="card">
+        <div class="card-title">🤖 AI Prompt 库</div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="showPrompt('p1')">建档 · 账户情报卡</button>
+          <button class="btn btn-outline" onclick="showPrompt('p2')">建档 · 决策人图谱</button>
+          <button class="btn btn-outline" onclick="showPrompt('p3')">监控 · 每周信号摘要</button>
+          <button class="btn btn-outline" onclick="showPrompt('p4')">月报 · 账户脉冲</button>
+          <button class="btn btn-outline" onclick="showPrompt('p5')">拜访 · 前置简报</button>
+          <button class="btn btn-outline" onclick="showPrompt('p6')">拜访 · 后置情报提取</button>
+        </div>
+
+        <div id="prompt-p1" class="prompt-panel">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 1.1 — 账户情报卡生成器</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：一次性建档阶段。输入公司名称，输出结构化账户档案。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>你是一位专注于中国水质分析仪器行业的B2B市场情报分析师。
+请为哈希（Hach）中国的重点客户生成一份结构化账户情报卡。
+
+客户名称：[COMPANY_NAME]
+行业类型：[市政水务 / 工业 - 请指定细分行业]
+已知Hach产品：[已部署产品列表，或填"未知"]
+
+请填写以下字段：
+
+1. 组织概况
+   - 业务范围与规模
+   - 所有制性质（国企/民企/外资）
+   - 主要运营地点
+   - 年收入估算（如公开）
+   - 母集团/相关子公司
+
+2. 决策机制
+   - 参与仪器采购的关键部门
+   - 典型采购流程（直采/招标/框架协议）
+   - 决策周期估算
+
+3. 合规与监管驱动
+   - 适用的国家/地方标准（GB标准、排放标准、行业规范）
+   - 近期合规压力或监管变化
+   - 环保督察历史（如有重大事件）
+
+4. Hach产品覆盖估算
+   - 基于行业规范，该客户可能已在使用的产品/类别
+   - 产品空白：该客户可能需要但尚未采购的类别
+
+5. 竞争格局
+   - 该客户或该行业活跃的竞争对手（YSI、E+H、国产品牌等）
+   - 该类客户的采购评估标准
+
+6. 机会信号
+   - 近期扩张计划、新建设施或基础设施项目
+   - 招标公告或政府采购通知
+   - 预算周期与财年时间节点
+
+7. 建议接触策略
+   - 对Hach最相关的核心价值主张
+   - 建议的开场话题
+   - 推荐的关系切入点
+
+输出格式：结构化JSON + 150字中文执行摘要（适合发给销售经理）</div>
+        </div>
+
+        <div id="prompt-p2" class="prompt-panel" style="display:none">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 1.2 — 决策人图谱</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：建档阶段。生成典型决策人角色地图。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>请为以下公司生成水质仪器采购的关键决策人图谱：
+公司：[COMPANY_NAME]
+行业类型：[市政自来水 / 工业设施 - 细分类型]
+规模：[大型/超大型]
+
+对每个利益相关者角色，请提供：
+- 职位名称（中文 + 英文）
+- 采购中的核心关切/评估标准
+- 采购影响力（决策者/影响者/使用者/把关者）
+- 最佳接触渠道（技术研讨、政策解读、同行推荐等）
+- Hach产品能解决的关键痛点
+
+请聚焦中国企业的组织结构规范，涵盖：
+- 总经理/副总经理层（战略层）
+- 环保/水务技术负责人（技术层）
+- 采购/招标办（采购层）
+- 一线仪表操作人员（使用层）</div>
+        </div>
+
+        <div id="prompt-p3" class="prompt-panel" style="display:none">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 2.1 — 每周信号监控摘要</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：每周自动化监控。扫描多来源，输出优先级排序的信号摘要。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>你是哈希中国重点客户监控智能体。
+请搜索过去7天内关于 [COMPANY_NAME] 的以下类型信号：
+
+信号类型（按优先级排序）：
+🔴 高优：招标/采购公告（水质仪器相关）
+🔴 高优：影响该公司的监管执法或处罚
+🟡 中优：公司扩张公告（新设施、产能提升）
+🟡 中优：VP级以上管理层变动
+🟡 中优：竞品在该账户的新动作
+🟢 低优：相关行业垂直新闻
+🟢 低优：影响合规义务的政策/标准更新
+🟢 低优：关键联系人的公开动态
+
+重点扫描来源：
+- 中国政府采购网（ccgp.gov.cn）
+- 全国招投标公共服务平台
+- 企查查/天眼查 企业动态
+- 行业媒体：中国水网、仪器信息网、环保在线
+- [COMPANY_NAME] + 水质/环保/仪器 关键词新闻搜索
+
+输出格式（JSON）：
+{
+  "account": "[COMPANY_NAME]",
+  "week": "[YYYY-WW]",
+  "signals": [
+    {
+      "urgency": "HIGH/MEDIUM/LOW",
+      "type": "[信号类别]",
+      "summary": "[2-3句摘要]",
+      "source": "[来源URL或名称]",
+      "recommended_action": "[销售/市场应采取的行动]"
+    }
+  ],
+  "overall_status": "GREEN/YELLOW/RED",
+  "digest_summary": "[3句中文摘要，适合发给销售代表]"
+}</div>
+        </div>
+
+        <div id="prompt-p4" class="prompt-panel" style="display:none">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 3.1 — 月度账户脉冲报告</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：每月1日自动生成，覆盖全部50个A类账户。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>请为哈希中国A类客户 [COMPANY_NAME] 生成月度脉冲报告
+
+输入数据：
+- 账户情报卡：[粘贴最新版本]
+- 过去4周信号摘要：[粘贴周报]
+- CRM数据：上次拜访[日期]，上次市场触达[日期]，在售机会[列表]
+- 销售备注：[粘贴备注]
+
+请生成：
+
+1. 账户状态：绿/黄/红 + 一句话理由
+
+2. 本月摘要（3个要点）：
+   - 本月发生了什么变化
+   - 关系健康度指标
+   - 关键机会进展
+
+3. 本月Top 3信号（按重要性排序）
+
+4. 关系缺口：
+   - 距上次有意义触点的天数
+   - 利益相关者覆盖盲区（谁没联系到？）
+   - 竞品风险等级：低/中/高
+
+5. 未来30天建议行动（最多3条）：
+   - 行动 | 负责人（销售/市场）| 截止时间 | 预期效果
+
+6. 执行摘要（中文100字，适合发给销售经理）</div>
+        </div>
+
+        <div id="prompt-p5" class="prompt-panel" style="display:none">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 4.1 — 拜访前简报生成器</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：销售在CRM确认拜访后自动触发。输出一页中文简报。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>请为哈希中国销售代表生成一份拜访前简报。
+
+拜访信息：
+- 客户：[COMPANY_NAME]
+- 联系人：[姓名，职位]
+- 拜访日期：[日期]
+- 拜访目的：[说明，或填"常规关系维护"]
+- 销售代表：[姓名]
+
+背景信息（系统自动拉取）：
+- 账户情报卡：[最新版]
+- 上次拜访记录：[日期 + 备注]
+- 在售机会：[列表]
+- 近30天信号：[信号摘要]
+
+请生成：
+
+1. 联系人简介（[联系人姓名]）
+   - 职位与影响力级别
+   - 已知优先关切和痛点
+   - 上次互动摘要
+   - CRM中的个人备注
+
+2. 账户当前状态快照
+   - 当前该账户最重要的3件事
+
+3. 建议拜访议程（45-60分钟）
+   - 开场（关系/了解近况）
+   - 业务讨论要点
+   - 要介绍的产品/方案（基于空白分析）
+   - 离开前需确认的下一步行动
+
+4. 核心话术（3-5个要点）
+   - 每条对应一个已知痛点或近期信号
+
+5. 注意事项与敏感点
+
+6. 本次拜访的理想结果
+
+全部用中文输出，控制在一页A4纸内。</div>
+        </div>
+
+        <div id="prompt-p6" class="prompt-panel" style="display:none">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Prompt 5.1 — 拜访后情报提取器</div>
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:8px;">用于：拜访后销售代表粘贴原始笔记，AI自动提取结构化情报。</div>
+          <div class="prompt-box">
+<span class="prompt-label">PROMPT</span>哈希中国销售代表刚完成一次客户拜访，请从以下原始笔记中提取结构化情报。
+
+原始拜访笔记：[粘贴笔记或语音转录文本]
+
+提取内容：
+
+1. 竞品动态：
+   - 提及的竞争对手名称
+   - 对方产品或方案
+   - 价格信号（如有）
+   - 客户对竞品的态度
+
+2. 客户采购信号：
+   - 是否有预算？金额信息？
+   - 决策时间线？
+   - 是否预计有招标？
+
+3. 痛点与关切（新发现或已确认的）
+
+4. 关系信号：
+   - 客户对Hach的态度
+   - 关键联系人的个人诉求
+   - 任何关系风险
+
+5. 建议后续行动（最多3条，注明负责人和截止时间）
+
+6. 账户卡更新建议：
+   - 哪些字段需要更新？
+   - 有需要升级反馈给策略团队的信号吗？
+
+输出：结构化JSON + 50字CRM录入摘要</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── Full account dataset ──────────────────────────────────────────────────
+const accounts = {
+  beijing: {
+    name: '北京自来水集团', meta: '市政水务 · 北京 · 更新于 2026-03-06',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥420万', revenueNote: '↑ 12% vs 去年', lastVisit: '18天前', lastVisitNote: '2026-02-16 · 王磊', opps: '3', oppsNote: '潜在价值 ¥85万', risk: '中', riskNote: 'YSI 近期活跃' },
+    signals: [
+      { urgency:'HIGH', title:'新招标公告：在线水质监测系统', desc:'北京市政府采购网发布招标，预算约 ¥180万，截止 2026-03-25', action:'建议销售立即跟进，准备投标方案', date:'3月4日' },
+      { urgency:'MED',  title:'集团新任环保总监上任',         desc:'张明华接任集团环保与水务管理总监，来自住建部背景',        action:'准备新官拜访材料，侧重合规解决方案',  date:'3月2日' },
+      { urgency:'LOW',  title:'《生活饮用水卫生标准》修订意见稿发布', desc:'新增 TOC、农药残留等 13 项指标，预计2027年执行',    action:'准备合规差距分析，展示 Hach 方案覆盖',  date:'2月28日' },
+    ],
+    opps: [
+      { name:'在线水质监测系统（招标）', amount:'¥180万', stage:'投标准备', stageClass:'tag-blue',  prob:65 },
+      { name:'便携式水质检测仪 ×20台',  amount:'¥28万',  stage:'报价阶段', stageClass:'tag-green', prob:80 },
+      { name:'试剂年度框架合同续签',    amount:'¥42万',  stage:'谈判中',   stageClass:'tag-orange',prob:90 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'12台，2023年安装' },
+      { name:'便携式检测仪',    status:'已部署', cls:'tag-green',  note:'35台，分布各水厂' },
+      { name:'试剂耗材',        status:'已部署', cls:'tag-green',  note:'年度框架合同' },
+      { name:'TOC 分析仪',      status:'空白',   cls:'tag-orange', note:'新标准驱动需求↑' },
+      { name:'实验室水质分析系统', status:'空白', cls:'tag-orange', note:'当前竞品占位' },
+      { name:'数字化运维平台',  status:'评估中', cls:'tag-gray',   note:'2026 H2 计划' },
+    ],
+    competitors: [
+      { name:'YSI (Xylem)', share:35, threat:'中', threatCls:'tag-orange' },
+      { name:'Endress+Hauser', share:20, threat:'低', threatCls:'tag-gray' },
+      { name:'力合科技 (国产)', share:15, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '⚠️ YSI 近期参与了集团下属 3 个水厂的比价，存在价格竞争压力。建议强调数据联动与全生命周期成本优势。',
+  },
+  shanghai: {
+    name: '上海城投水务', meta: '市政水务 · 上海 · 更新于 2026-03-05',
+    status: 'yellow', statusText: '需关注',
+    kpi: { revenue: '¥380万', revenueNote: '↓ 5% vs 去年', lastVisit: '42天前', lastVisitNote: '2026-01-23 · 陈静', opps: '2', oppsNote: '潜在价值 ¥60万', risk: '高', riskNote: 'E+H 主动报价中' },
+    signals: [
+      { urgency:'HIGH', title:'竞品动作：E+H 向城投提交整体方案', desc:'据销售反馈，E+H 已向上海城投水务提交覆盖全流程的在线监测整体解决方案，含数字化平台',  action:'立即安排技术对标演示，准备 Hach 一体化方案', date:'3月3日' },
+      { urgency:'MED',  title:'上海超低排放改造推进', desc:'上海市发布新一轮污水处理提质增效计划，要求主要水厂2026年完成超低排放改造', action:'准备超低排放监测解决方案资料包', date:'3月1日' },
+      { urgency:'LOW',  title:'试剂合同到期提醒',    desc:'与城投水务的试剂年度框架合同将于2026-04-30到期，需启动续签谈判',                                  action:'联系采购部门启动续签流程',    date:'2月26日' },
+    ],
+    opps: [
+      { name:'在线监测整体方案（应对E+H）', amount:'¥220万', stage:'紧急跟进', stageClass:'tag-orange', prob:45 },
+      { name:'试剂框架合同续签',           amount:'¥55万',  stage:'谈判中',   stageClass:'tag-orange', prob:85 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'8台，2021年安装' },
+      { name:'试剂耗材',        status:'已部署', cls:'tag-green',  note:'年度框架合同，到期4月' },
+      { name:'便携式检测仪',    status:'空白',   cls:'tag-orange', note:'当前使用竞品' },
+      { name:'TOC 分析仪',      status:'空白',   cls:'tag-orange', note:'E+H 方案含此项' },
+      { name:'数字化运维平台',  status:'空白',   cls:'tag-orange', note:'E+H 主打此差异化' },
+    ],
+    competitors: [
+      { name:'Endress+Hauser', share:40, threat:'高', threatCls:'tag-orange' },
+      { name:'YSI (Xylem)',    share:20, threat:'中', threatCls:'tag-gray' },
+    ],
+    compNote: '🔴 E+H 正在主动推整体解决方案，数字化平台是其主要差异化点。需尽快展示 Hach 数字化能力，防止账户被整体切换。',
+  },
+  guangzhou: {
+    name: '广州自来水公司', meta: '市政水务 · 广州 · 更新于 2026-03-04',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥290万', revenueNote: '↑ 8% vs 去年', lastVisit: '12天前', lastVisitNote: '2026-02-22 · 李明', opps: '2', oppsNote: '潜在价值 ¥45万', risk: '低', riskNote: '竞品动态平稳' },
+    signals: [
+      { urgency:'MED', title:'广州市水质数字化平台立项',  desc:'广州市水务局发布数字水务平台采购意向，预算 ¥300万，含水质数据集成要求', action:'联系技术负责人了解需求，提前介入方案设计', date:'3月2日' },
+      { urgency:'LOW', title:'广东省地下水监测标准更新',   desc:'新增10项检测指标，影响广州地下水水源地监测配置',                          action:'准备新标准合规方案资料',              date:'2月27日' },
+    ],
+    opps: [
+      { name:'数字水务平台配套仪器', amount:'¥35万', stage:'需求了解', stageClass:'tag-blue', prob:55 },
+      { name:'地下水监测升级',       amount:'¥28万', stage:'方案准备', stageClass:'tag-blue', prob:70 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'15台，运行良好' },
+      { name:'便携式检测仪',    status:'已部署', cls:'tag-green',  note:'22台' },
+      { name:'试剂耗材',        status:'已部署', cls:'tag-green',  note:'框架合同2026年有效' },
+      { name:'数字化运维平台',  status:'空白',   cls:'tag-orange', note:'数字水务项目机会' },
+    ],
+    competitors: [
+      { name:'力合科技 (国产)', share:25, threat:'中', threatCls:'tag-orange' },
+      { name:'YSI (Xylem)',    share:15, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '整体关系良好，主要关注国产化替代压力（政策驱动）。建议主动建立技术合作关系，参与标准制定以加强壁垒。',
+  },
+  chengdu: {
+    name: '成都兴蓉环境', meta: '市政水务 · 成都 · 更新于 2026-03-03',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥180万', revenueNote: '↑ 20% vs 去年', lastVisit: '7天前', lastVisitNote: '2026-02-28 · 赵强', opps: '3', oppsNote: '潜在价值 ¥95万', risk: '低', riskNote: '关系稳固' },
+    signals: [
+      { urgency:'HIGH', title:'成都兴蓉新建第五污水处理厂立项', desc:'兴蓉环境在成都东部新区投资建设日处理量10万吨污水厂，2027年投运，仪器配套采购预计2026 Q4启动', action:'提前建立技术合作，争取新厂仪器配套', date:'3月1日' },
+      { urgency:'LOW',  title:'四川省碳排放核算标准纳入水务', desc:'碳排放监测对水处理企业的适用范围扩大，含碳指标检测需求增加',                                          action:'准备碳排放相关检测方案',            date:'2月25日' },
+    ],
+    opps: [
+      { name:'第五污水厂仪器配套（预)',  amount:'¥60万', stage:'早期接触', stageClass:'tag-blue', prob:40 },
+      { name:'现有水厂在线仪器升级',    amount:'¥25万', stage:'报价阶段', stageClass:'tag-green', prob:75 },
+      { name:'碳排放监测新需求',        amount:'¥18万', stage:'需求了解', stageClass:'tag-blue',  prob:50 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'8台，部分老旧待升级' },
+      { name:'便携式检测仪',    status:'已部署', cls:'tag-green',  note:'12台' },
+      { name:'碳排放检测仪',    status:'空白',   cls:'tag-orange', note:'新政策驱动需求' },
+      { name:'智能运维系统',    status:'空白',   cls:'tag-orange', note:'新厂可一步到位' },
+    ],
+    competitors: [
+      { name:'力合科技 (国产)', share:20, threat:'低', threatCls:'tag-gray' },
+      { name:'岛津 (Shimadzu)', share:15, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '关系发展良好，赵强与技术总监关系密切。新污水厂项目是2026年最大机会，需提前布局技术合作。',
+  },
+  sinopec: {
+    name: '中石化炼油事业部', meta: '工业 · 石化 · 更新于 2026-03-06',
+    status: 'red', statusText: '风险',
+    kpi: { revenue: '¥510万', revenueNote: '↓ 18% vs 去年', lastVisit: '65天前', lastVisitNote: '2026-01-01 · 张伟', opps: '1', oppsNote: '潜在价值 ¥30万', risk: '高', riskNote: '采购被暂停审批' },
+    signals: [
+      { urgency:'HIGH', title:'集团采购政策调整：境外品牌需额外审批', desc:'中石化总部发布新采购规定，境外仪器品牌采购需经集团级技术委员会审核，周期延长至60-90天', action:'紧急：了解审批流程，准备符合性材料；评估代理商参与可能性', date:'3月5日' },
+      { urgency:'HIGH', title:'关键联系人张总调任',  desc:'长期合作的仪表所所长张文斌调任总部，接任者尚未明确关系',                                                         action:'尽快拜访新接任者建立关系，同时维护张总总部关系',        date:'3月3日' },
+      { urgency:'MED',  title:'石化排污许可证年度核查',    desc:'多家炼油厂面临环保年检，在线监测设备运行状态将被核查',                                                       action:'主动提供年检技术支持，加强服务存在感',                   date:'2月28日' },
+    ],
+    opps: [
+      { name:'炼化废水在线监测维保合同', amount:'¥30万', stage:'暂停中', stageClass:'tag-orange', prob:35 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'20台，运维中' },
+      { name:'便携式检测仪',    status:'已部署', cls:'tag-green',  note:'15台' },
+      { name:'试剂耗材',        status:'风险',   cls:'tag-orange', note:'采购审批流程延误' },
+      { name:'新增监测点位',    status:'暂停',   cls:'tag-gray',   note:'政策调整影响' },
+    ],
+    competitors: [
+      { name:'力合科技 (国产)', share:30, threat:'高', threatCls:'tag-orange' },
+      { name:'聚光科技 (国产)', share:25, threat:'高', threatCls:'tag-orange' },
+    ],
+    compNote: '🔴 高风险账户：采购政策变化 + 关键联系人调任同时发生。国产替代压力极大。需要高层介入，评估是否通过国内合资品牌策略应对。',
+  },
+  huaneng: {
+    name: '华能国际电力', meta: '工业 · 电力 · 更新于 2026-03-05',
+    status: 'yellow', statusText: '需关注',
+    kpi: { revenue: '¥340万', revenueNote: '持平 vs 去年', lastVisit: '30天前', lastVisitNote: '2026-02-05 · 刘洋', opps: '2', oppsNote: '潜在价值 ¥75万', risk: '中', riskNote: '框架合同即将到期' },
+    signals: [
+      { urgency:'HIGH', title:'华能集团框架采购协议到期（5月）', desc:'Hach 与华能国际的三年框架采购协议将于2026-05-31到期，续签谈判应立即启动', action:'立即启动续签谈判，争取3年续约并扩大产品覆盖范围', date:'3月4日' },
+      { urgency:'MED',  title:'华能碳中和目标推动循环水改造', desc:'华能2030碳中和路径中，火电厂循环水系统优化是重点，相关水质监测需求将增加',     action:'准备循环水监测专项方案，与碳中和战略挂钩',          date:'3月1日' },
+    ],
+    opps: [
+      { name:'框架协议续签（3年）',  amount:'¥50万/年', stage:'谈判准备', stageClass:'tag-blue',   prob:70 },
+      { name:'循环水监测升级项目',   amount:'¥45万',    stage:'方案准备', stageClass:'tag-blue',   prob:55 },
+    ],
+    products: [
+      { name:'在线水质分析仪',  status:'已部署', cls:'tag-green',  note:'18台，运行稳定' },
+      { name:'便携式检测仪',    status:'已部署', cls:'tag-green',  note:'25台' },
+      { name:'试剂耗材',        status:'已部署', cls:'tag-green',  note:'框架协议覆盖' },
+      { name:'循环水专用监测仪', status:'空白',  cls:'tag-orange', note:'碳中和项目机会' },
+      { name:'烟气脱硫废水监测', status:'空白',  cls:'tag-orange', note:'超低排放要求' },
+    ],
+    competitors: [
+      { name:'Endress+Hauser', share:25, threat:'中', threatCls:'tag-orange' },
+      { name:'岛津 (Shimadzu)', share:20, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '关系稳定但框架合同到期是风险点。E+H 在工业仪器有一定渗透，续签谈判期间需重点防御。建议绑定碳中和项目扩大合作范围。',
+  },
+  sinopharm: {
+    name: '国药控股医药', meta: '工业 · 制药 · 更新于 2026-03-04',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥260万', revenueNote: '↑ 15% vs 去年', lastVisit: '20天前', lastVisitNote: '2026-02-14 · 周敏', opps: '2', oppsNote: '潜在价值 ¥55万', risk: '低', riskNote: 'GMP合规驱动稳定' },
+    signals: [
+      { urgency:'MED',  title:'新版 GMP 附录更新：纯化水监测要求提高', desc:'国家药监局新版GMP附录要求制药用水在线监测覆盖率提升，原有部分设施不达标', action:'提供GMP合规差距分析，推动监测点位升级', date:'3月2日' },
+      { urgency:'LOW',  title:'国药集团新建生物制药基地',             desc:'国药集团在苏州工业园区新建生物制药基地，2027年投产，纯水系统采购预计2026下半年启动', action:'提前与苏州基地筹建团队建立联系',        date:'2月24日' },
+    ],
+    opps: [
+      { name:'制药用水在线监测升级（GMP）', amount:'¥38万', stage:'报价阶段', stageClass:'tag-green', prob:75 },
+      { name:'苏州新厂纯水系统仪器（预)',   amount:'¥42万', stage:'早期接触', stageClass:'tag-blue',  prob:45 },
+    ],
+    products: [
+      { name:'纯化水在线监测系统', status:'已部署', cls:'tag-green',  note:'核心产品，GMP认证' },
+      { name:'便携式检测仪',       status:'已部署', cls:'tag-green',  note:'10台' },
+      { name:'试剂耗材',           status:'已部署', cls:'tag-green',  note:'年度合同' },
+      { name:'TOC 在线分析仪',     status:'部分',   cls:'tag-orange', note:'新GMP要求扩大覆盖' },
+    ],
+    competitors: [
+      { name:'默克 Milli-Q',     share:20, threat:'低', threatCls:'tag-gray' },
+      { name:'Endress+Hauser',   share:15, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: 'GMP合规要求是持续的需求驱动力，关系稳定。苏州新厂是中期重要机会，需提前渗透筹建团队。',
+  },
+  semiconductor: {
+    name: '中芯国际集成电路', meta: '工业 · 半导体 · 更新于 2026-03-06',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥480万', revenueNote: '↑ 22% vs 去年', lastVisit: '10天前', lastVisitNote: '2026-02-24 · 林杰', opps: '3', oppsNote: '潜在价值 ¥120万', risk: '低', riskNote: '战略客户，关系深厚' },
+    signals: [
+      { urgency:'HIGH', title:'中芯国际天津12英寸新厂开工', desc:'中芯国际天津新厂2026年Q3开工，超纯水系统仪器需求约¥80万，招标预计Q2启动', action:'立即对接天津厂筹建团队，确保进入供应商名录', date:'3月5日' },
+      { urgency:'MED',  title:'芯片制造用水排放标准趋严',  desc:'工信部新规要求半导体工厂废水中特定重金属指标实时在线监测，已有设施需升级',    action:'提供重金属在线监测升级方案',               date:'3月1日' },
+    ],
+    opps: [
+      { name:'天津新厂超纯水仪器配套',  amount:'¥80万', stage:'早期接触', stageClass:'tag-blue',   prob:60 },
+      { name:'重金属在线监测升级',      amount:'¥25万', stage:'方案准备', stageClass:'tag-blue',   prob:65 },
+      { name:'试剂年度框架合同扩容',    amount:'¥35万', stage:'谈判中',   stageClass:'tag-green',  prob:90 },
+    ],
+    products: [
+      { name:'超纯水在线监测系统', status:'已部署', cls:'tag-green',  note:'核心业务，深度合作' },
+      { name:'便携式检测仪',       status:'已部署', cls:'tag-green',  note:'30台' },
+      { name:'试剂耗材',           status:'已部署', cls:'tag-green',  note:'大额框架合同' },
+      { name:'重金属在线分析仪',   status:'空白',   cls:'tag-orange', note:'新标准触发需求' },
+    ],
+    competitors: [
+      { name:'默克 (Merck)',     share:20, threat:'低', threatCls:'tag-gray' },
+      { name:'哈希竞品',         share:10, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '战略账户，关系非常稳固。天津新厂是2026年最大单体机会，务必第一时间进入。林杰与客户技术总监私交良好，是关键优势。',
+  },
+  steel: {
+    name: '宝武钢铁集团', meta: '工业 · 钢铁 · 更新于 2026-03-05',
+    status: 'yellow', statusText: '需关注',
+    kpi: { revenue: '¥220万', revenueNote: '↓ 10% vs 去年', lastVisit: '50天前', lastVisitNote: '2026-01-16 · 吴刚', opps: '1', oppsNote: '潜在价值 ¥40万', risk: '中', riskNote: '预算紧缩中' },
+    signals: [
+      { urgency:'MED',  title:'宝武集团开展降本增效专项',   desc:'宝武总部2026年要求各子公司压缩非生产性开支20%，仪器维保预算受影响',             action:'主动推出维保优化方案，体现价值而非成本',         date:'3月3日' },
+      { urgency:'MED',  title:'湛江钢铁基地扩产',           desc:'宝武湛江基地二期扩产计划获批，新增高炉冷却水循环系统，配套仪器需求约¥40万',  action:'联系湛江基地采购部门，争取扩产配套仪器',         date:'2月28日' },
+      { urgency:'LOW',  title:'超低排放改造最后验收期',      desc:'宝钢股份旗下工厂超低排放改造须于2026年6月完成最终验收，在线监测设备需稳定运行', action:'主动提供验收准备技术支持，加强现场服务',          date:'2月22日' },
+    ],
+    opps: [
+      { name:'湛江基地扩产配套仪器',  amount:'¥40万', stage:'接触中', stageClass:'tag-blue', prob:50 },
+    ],
+    products: [
+      { name:'冷却水在线监测仪', status:'已部署', cls:'tag-green',  note:'12台，部分老化' },
+      { name:'便携式检测仪',     status:'已部署', cls:'tag-green',  note:'18台' },
+      { name:'烟气废水监测仪',   status:'已部署', cls:'tag-green',  note:'超低排放改造配套' },
+      { name:'智能运维平台',     status:'空白',   cls:'tag-orange', note:'降本增效场景' },
+    ],
+    competitors: [
+      { name:'力合科技 (国产)', share:30, threat:'中', threatCls:'tag-orange' },
+      { name:'聚光科技 (国产)', share:20, threat:'中', threatCls:'tag-orange' },
+    ],
+    compNote: '预算压力使国产替代风险上升。建议通过智能运维平台包装降本价值，转变采购视角从成本中心到价值中心。',
+  },
+  food: {
+    name: '伊利集团', meta: '工业 · 食品饮料 · 更新于 2026-03-04',
+    status: 'green', statusText: '健康',
+    kpi: { revenue: '¥195万', revenueNote: '↑ 18% vs 去年', lastVisit: '15天前', lastVisitNote: '2026-02-19 · 王芳', opps: '2', oppsNote: '潜在价值 ¥65万', risk: '低', riskNote: '食品安全高要求稳固' },
+    signals: [
+      { urgency:'MED',  title:'伊利呼和浩特新建高端乳品工厂',  desc:'伊利新建智慧工厂2026年Q4投产，水质监测系统采购预计Q3招标，预算约¥50万', action:'对接新厂筹建项目组，参与方案设计阶段', date:'3月2日' },
+      { urgency:'LOW',  title:'乳品行业用水新标准征求意见',    desc:'国家标准委食品行业用水检测新标准征求意见，新增大肠菌群、硝酸盐等指标的在线监测要求', action:'准备合规分析报告提供给客户', date:'2月26日' },
+    ],
+    opps: [
+      { name:'新建智慧工厂水质仪器配套', amount:'¥50万', stage:'早期接触', stageClass:'tag-blue',  prob:55 },
+      { name:'现有工厂在线监测合规升级', amount:'¥28万', stage:'报价阶段', stageClass:'tag-green', prob:75 },
+    ],
+    products: [
+      { name:'工艺水在线监测系统', status:'已部署', cls:'tag-green',  note:'食品级，核心产品' },
+      { name:'便携式检测仪',       status:'已部署', cls:'tag-green',  note:'20台' },
+      { name:'试剂耗材',           status:'已部署', cls:'tag-green',  note:'季度补货合同' },
+      { name:'微生物快检系统',     status:'空白',   cls:'tag-orange', note:'新标准驱动' },
+    ],
+    competitors: [
+      { name:'哈希竞品 A',      share:15, threat:'低', threatCls:'tag-gray' },
+      { name:'岛津 (Shimadzu)', share:10, threat:'低', threatCls:'tag-gray' },
+    ],
+    compNote: '食品安全高标准是持续的需求保障，竞争压力小。新建工厂是增长机会，王芳与客户质量总监关系密切，优势明显。',
+  },
+};
+
+// ── Render helpers ────────────────────────────────────────────────────────
+function urgencyClass(u) {
+  return u === 'HIGH' ? 'urg-high' : u === 'MED' ? 'urg-medium' : 'urg-low';
+}
+function urgencyLabel(u) {
+  return u === 'HIGH' ? 'HIGH' : u === 'MED' ? 'MED' : 'LOW';
+}
+function probColor(p) {
+  return p >= 75 ? 'fill-green' : p >= 50 ? 'fill-blue' : 'fill-yellow';
+}
+
+function renderOverview(acc) {
+  const d = acc;
+  // KPIs
+  document.getElementById('kpi-revenue').textContent = d.kpi.revenue;
+  document.getElementById('kpi-revenue-note').textContent = d.kpi.revenueNote;
+  document.getElementById('kpi-visit').textContent = d.kpi.lastVisit;
+  document.getElementById('kpi-visit-note').textContent = d.kpi.lastVisitNote;
+  document.getElementById('kpi-opps').textContent = d.kpi.opps;
+  document.getElementById('kpi-opps-note').textContent = d.kpi.oppsNote;
+  document.getElementById('kpi-risk').textContent = d.kpi.risk;
+  document.getElementById('kpi-risk').style.color = d.kpi.risk === '高' ? 'var(--red)' : d.kpi.risk === '中' ? 'var(--yellow)' : 'var(--green)';
+  document.getElementById('kpi-risk-note').textContent = d.kpi.riskNote;
+
+  // Signals
+  document.getElementById('signals-list').innerHTML = d.signals.map(s => `
+    <div class="signal-item">
+      <div class="signal-urgency ${urgencyClass(s.urgency)}">${urgencyLabel(s.urgency)}</div>
+      <div class="signal-content">
+        <div class="signal-title">${s.title}</div>
+        <div class="signal-desc">${s.desc}</div>
+        <div class="signal-action">→ ${s.action}</div>
+      </div>
+      <div class="signal-date">${s.date}</div>
+    </div>`).join('');
+
+  // Opportunities
+  document.getElementById('opps-table').innerHTML = `
+    <thead><tr><th>机会</th><th>金额</th><th>阶段</th><th>概率</th></tr></thead>
+    <tbody>${d.opps.map(o => `
+      <tr>
+        <td>${o.name}</td>
+        <td>${o.amount}</td>
+        <td><span class="tag ${o.stageClass}">${o.stage}</span></td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill ${probColor(o.prob)}" style="width:${o.prob}%"></div></div><div class="progress-label">${o.prob}%</div></div></td>
+      </tr>`).join('')}
+    </tbody>`;
+
+  // Products
+  document.getElementById('products-table').innerHTML = `
+    <thead><tr><th>产品线</th><th>状态</th><th>备注</th></tr></thead>
+    <tbody>${d.products.map(p => `
+      <tr><td>${p.name}</td><td><span class="tag ${p.cls}">${p.status}</span></td><td>${p.note}</td></tr>`).join('')}
+    </tbody>`;
+
+  // Competitors
+  document.getElementById('comp-table').innerHTML = `
+    <thead><tr><th>竞争对手</th><th>渗透度</th><th>威胁等级</th></tr></thead>
+    <tbody>${d.competitors.map(c => `
+      <tr>
+        <td>${c.name}</td>
+        <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill fill-yellow" style="width:${c.share}%"></div></div><div class="progress-label">${c.share}%</div></div></td>
+        <td><span class="tag ${c.threatCls}">${c.threat}</span></td>
+      </tr>`).join('')}
+    </tbody>`;
+  document.getElementById('comp-note').textContent = d.compNote;
+}
+
+// ── Select account ────────────────────────────────────────────────────────
+function selectAccount(el, id) {
+  document.querySelectorAll('.account-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  const acc = accounts[id];
+  document.getElementById('accountTitle').textContent = acc.name;
+  document.getElementById('accountMeta').textContent = acc.meta;
+  const badge = document.getElementById('accountStatus');
+  badge.className = 'status-badge status-' + acc.status;
+  badge.textContent = '● ' + acc.statusText;
+  renderOverview(acc);
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function showTab(name) {
+  const tabs = ['overview','profile','signals','brief','workflow','prompts'];
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i] === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// ── Workflow steps ────────────────────────────────────────────────────────
+function selectWfStep(el, idx) {
+  document.querySelectorAll('.wf-step').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.wf-detail').forEach(d => d.classList.remove('active'));
+  document.getElementById('wf-detail-' + idx).classList.add('active');
+}
+
+// ── Prompts ───────────────────────────────────────────────────────────────
+function showPrompt(id) {
+  document.querySelectorAll('.prompt-panel').forEach(p => p.style.display = 'none');
+  document.getElementById('prompt-' + id).style.display = 'block';
+  document.querySelectorAll('#panel-prompts .btn').forEach(b => b.className = 'btn btn-outline');
+  event.target.className = 'btn btn-primary';
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+renderOverview(accounts.beijing);
+</script>
+</body>
+</html>
