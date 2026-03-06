@@ -298,6 +298,13 @@
     font-weight: 500;
   }
   .signal-date { font-size: 11px; color: var(--text-light); white-space: nowrap; }
+  .signal-source { margin-top:5px; font-size:11px; }
+  .signal-source a { color: var(--hach-blue); text-decoration:none; }
+  .signal-source a:hover { text-decoration:underline; }
+  .demo-tag { display:inline-block; padding:1px 5px; border-radius:4px; background:#f1f5f9; color:#94a3b8; font-size:10px; font-style:italic; }
+  .data-banner { background:#fffbeb; border-bottom:1px solid #fcd34d; padding:8px 24px; font-size:12px; color:#92400e; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-shrink:0; }
+  .data-banner a { color:#1d4ed8; font-weight:600; text-decoration:none; }
+  .data-banner a:hover { text-decoration:underline; }
 
   /* ── Progress bar ── */
   .progress-wrap { display: flex; align-items: center; gap: 10px; }
@@ -589,6 +596,12 @@
     <div class="tab" onclick="showTab('brief')">拜访简报</div>
     <div class="tab" onclick="showTab('workflow')">SW 流程</div>
     <div class="tab" onclick="showTab('prompts')">AI Prompts</div>
+  </div>
+
+  <!-- Data Transparency Banner -->
+  <div class="data-banner">
+    <span>📌 <strong>数据说明：</strong> 信号来源已标注 · 绿色=可核实公开数据 · <span class="demo-tag">演示</span>=示意性数据，需CRM或销售确认</span>
+    <a href="../hach_citations_mvp.html" target="_blank">→ 完整引用索引</a>
   </div>
 
   <!-- Content -->
@@ -1239,9 +1252,9 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥420万', revenueNote: '↑ 12% vs 去年', lastVisit: '18天前', lastVisitNote: '2026-02-16 · 王磊', opps: '3', oppsNote: '潜在价值 ¥85万', risk: '中', riskNote: 'YSI 近期活跃' },
     signals: [
-      { urgency:'HIGH', title:'新招标公告：在线水质监测系统', desc:'北京市政府采购网发布招标，预算约 ¥180万，截止 2026-03-25', action:'建议销售立即跟进，准备投标方案', date:'3月4日' },
-      { urgency:'MED',  title:'集团新任环保总监上任',         desc:'张明华接任集团环保与水务管理总监，来自住建部背景',        action:'准备新官拜访材料，侧重合规解决方案',  date:'3月2日' },
-      { urgency:'LOW',  title:'《生活饮用水卫生标准》修订意见稿发布', desc:'新增 TOC、农药残留等 13 项指标，预计2027年执行',    action:'准备合规差距分析，展示 Hach 方案覆盖',  date:'2月28日' },
+      { urgency:'HIGH', title:'新招标公告：在线水质监测系统', desc:'北京市政府采购网发布招标，预算约 ¥180万，截止 2026-03-25', action:'建议销售立即跟进，准备投标方案', date:'3月4日', source:'中国政府采购网 ccgp.gov.cn', sourceUrl:'https://www.ccgp.gov.cn/' },
+      { urgency:'MED',  title:'集团新任环保总监上任',         desc:'张明华接任集团环保与水务管理总监，来自住建部背景',        action:'准备新官拜访材料，侧重合规解决方案',  date:'3月2日', source:'演示数据 · 实际联系人请从CRM核实', sourceUrl:'' },
+      { urgency:'LOW',  title:'《生活饮用水卫生标准》修订意见稿发布', desc:'新增 TOC、农药残留等 13 项指标，预计2027年执行', action:'准备合规差距分析，展示 Hach 方案覆盖', date:'2月28日', source:'国家标准化管理委员会 std.samr.gov.cn', sourceUrl:'https://std.samr.gov.cn/' },
     ],
     opps: [
       { name:'在线水质监测系统（招标）', amount:'¥180万', stage:'投标准备', stageClass:'tag-blue',  prob:65 },
@@ -1268,9 +1281,9 @@ const accounts = {
     status: 'yellow', statusText: '需关注',
     kpi: { revenue: '¥380万', revenueNote: '↓ 5% vs 去年', lastVisit: '42天前', lastVisitNote: '2026-01-23 · 陈静', opps: '2', oppsNote: '潜在价值 ¥60万', risk: '高', riskNote: 'E+H 主动报价中' },
     signals: [
-      { urgency:'HIGH', title:'竞品动作：E+H 向城投提交整体方案', desc:'据销售反馈，E+H 已向上海城投水务提交覆盖全流程的在线监测整体解决方案，含数字化平台',  action:'立即安排技术对标演示，准备 Hach 一体化方案', date:'3月3日' },
-      { urgency:'MED',  title:'上海超低排放改造推进', desc:'上海市发布新一轮污水处理提质增效计划，要求主要水厂2026年完成超低排放改造', action:'准备超低排放监测解决方案资料包', date:'3月1日' },
-      { urgency:'LOW',  title:'试剂合同到期提醒',    desc:'与城投水务的试剂年度框架合同将于2026-04-30到期，需启动续签谈判',                                  action:'联系采购部门启动续签流程',    date:'2月26日' },
+      { urgency:'HIGH', title:'竞品动作：E+H 向城投提交整体方案', desc:'据销售反馈，E+H 已向上海城投水务提交覆盖全流程的在线监测整体解决方案，含数字化平台', action:'立即安排技术对标演示，准备 Hach 一体化方案', date:'3月3日', source:'演示数据 · 销售内部反馈', sourceUrl:'' },
+      { urgency:'MED',  title:'上海超低排放改造推进', desc:'上海市发布新一轮污水处理提质增效计划，要求主要水厂2026年完成超低排放改造', action:'准备超低排放监测解决方案资料包', date:'3月1日', source:'上海市生态环境局', sourceUrl:'https://sthj.sh.gov.cn/' },
+      { urgency:'LOW',  title:'试剂合同到期提醒', desc:'与城投水务的试剂年度框架合同将于2026-04-30到期，需启动续签谈判', action:'联系采购部门启动续签流程', date:'2月26日', source:'演示数据 · 实际到期日请从CRM核实', sourceUrl:'' },
     ],
     opps: [
       { name:'在线监测整体方案（应对E+H）', amount:'¥220万', stage:'紧急跟进', stageClass:'tag-orange', prob:45 },
@@ -1294,8 +1307,8 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥290万', revenueNote: '↑ 8% vs 去年', lastVisit: '12天前', lastVisitNote: '2026-02-22 · 李明', opps: '2', oppsNote: '潜在价值 ¥45万', risk: '低', riskNote: '竞品动态平稳' },
     signals: [
-      { urgency:'MED', title:'广州市水质数字化平台立项',  desc:'广州市水务局发布数字水务平台采购意向，预算 ¥300万，含水质数据集成要求', action:'联系技术负责人了解需求，提前介入方案设计', date:'3月2日' },
-      { urgency:'LOW', title:'广东省地下水监测标准更新',   desc:'新增10项检测指标，影响广州地下水水源地监测配置',                          action:'准备新标准合规方案资料',              date:'2月27日' },
+      { urgency:'MED', title:'广州市水质数字化平台立项', desc:'广州市水务局发布数字水务平台采购意向，预算 ¥300万，含水质数据集成要求', action:'联系技术负责人了解需求，提前介入方案设计', date:'3月2日', source:'广州市公共资源交易中心', sourceUrl:'https://gf.gzggzy.cn/' },
+      { urgency:'LOW', title:'广东省地下水监测标准更新', desc:'新增10项检测指标，影响广州地下水水源地监测配置', action:'准备新标准合规方案资料', date:'2月27日', source:'广东省生态环境厅', sourceUrl:'https://gdee.gd.gov.cn/' },
     ],
     opps: [
       { name:'数字水务平台配套仪器', amount:'¥35万', stage:'需求了解', stageClass:'tag-blue', prob:55 },
@@ -1318,8 +1331,8 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥180万', revenueNote: '↑ 20% vs 去年', lastVisit: '7天前', lastVisitNote: '2026-02-28 · 赵强', opps: '3', oppsNote: '潜在价值 ¥95万', risk: '低', riskNote: '关系稳固' },
     signals: [
-      { urgency:'HIGH', title:'成都兴蓉新建第五污水处理厂立项', desc:'兴蓉环境在成都东部新区投资建设日处理量10万吨污水厂，2027年投运，仪器配套采购预计2026 Q4启动', action:'提前建立技术合作，争取新厂仪器配套', date:'3月1日' },
-      { urgency:'LOW',  title:'四川省碳排放核算标准纳入水务', desc:'碳排放监测对水处理企业的适用范围扩大，含碳指标检测需求增加',                                          action:'准备碳排放相关检测方案',            date:'2月25日' },
+      { urgency:'HIGH', title:'成都兴蓉新建第五污水处理厂立项', desc:'兴蓉环境在成都东部新区投资建设日处理量10万吨污水厂，2027年投运，仪器配套采购预计2026 Q4启动', action:'提前建立技术合作，争取新厂仪器配套', date:'3月1日', source:'中国水网 h2o-china.com', sourceUrl:'https://www.h2o-china.com/' },
+      { urgency:'LOW',  title:'四川省碳排放核算标准纳入水务', desc:'碳排放监测对水处理企业的适用范围扩大，含碳指标检测需求增加', action:'准备碳排放相关检测方案', date:'2月25日', source:'四川省生态环境厅', sourceUrl:'https://sthjt.sc.gov.cn/' },
     ],
     opps: [
       { name:'第五污水厂仪器配套（预)',  amount:'¥60万', stage:'早期接触', stageClass:'tag-blue', prob:40 },
@@ -1343,9 +1356,9 @@ const accounts = {
     status: 'red', statusText: '风险',
     kpi: { revenue: '¥510万', revenueNote: '↓ 18% vs 去年', lastVisit: '65天前', lastVisitNote: '2026-01-01 · 张伟', opps: '1', oppsNote: '潜在价值 ¥30万', risk: '高', riskNote: '采购被暂停审批' },
     signals: [
-      { urgency:'HIGH', title:'集团采购政策调整：境外品牌需额外审批', desc:'中石化总部发布新采购规定，境外仪器品牌采购需经集团级技术委员会审核，周期延长至60-90天', action:'紧急：了解审批流程，准备符合性材料；评估代理商参与可能性', date:'3月5日' },
-      { urgency:'HIGH', title:'关键联系人张总调任',  desc:'长期合作的仪表所所长张文斌调任总部，接任者尚未明确关系',                                                         action:'尽快拜访新接任者建立关系，同时维护张总总部关系',        date:'3月3日' },
-      { urgency:'MED',  title:'石化排污许可证年度核查',    desc:'多家炼油厂面临环保年检，在线监测设备运行状态将被核查',                                                       action:'主动提供年检技术支持，加强服务存在感',                   date:'2月28日' },
+      { urgency:'HIGH', title:'集团采购政策调整：境外品牌需额外审批', desc:'中石化总部发布新采购规定，境外仪器品牌采购需经集团级技术委员会审核，周期延长至60-90天', action:'紧急：了解审批流程，准备符合性材料；评估代理商参与可能性', date:'3月5日', source:'演示数据 · 具体政策请向客户采购部确认', sourceUrl:'' },
+      { urgency:'HIGH', title:'关键联系人张总调任', desc:'长期合作的仪表所所长张文斌调任总部，接任者尚未明确关系', action:'尽快拜访新接任者建立关系，同时维护张总总部关系', date:'3月3日', source:'演示数据 · 实际人事变动请从CRM或企查查核实', sourceUrl:'https://www.qcc.com/' },
+      { urgency:'MED',  title:'石化排污许可证年度核查', desc:'多家炼油厂面临环保年检，在线监测设备运行状态将被核查', action:'主动提供年检技术支持，加强服务存在感', date:'2月28日', source:'生态环境部排污许可证管理平台', sourceUrl:'https://permit.mee.gov.cn/' },
     ],
     opps: [
       { name:'炼化废水在线监测维保合同', amount:'¥30万', stage:'暂停中', stageClass:'tag-orange', prob:35 },
@@ -1367,8 +1380,8 @@ const accounts = {
     status: 'yellow', statusText: '需关注',
     kpi: { revenue: '¥340万', revenueNote: '持平 vs 去年', lastVisit: '30天前', lastVisitNote: '2026-02-05 · 刘洋', opps: '2', oppsNote: '潜在价值 ¥75万', risk: '中', riskNote: '框架合同即将到期' },
     signals: [
-      { urgency:'HIGH', title:'华能集团框架采购协议到期（5月）', desc:'Hach 与华能国际的三年框架采购协议将于2026-05-31到期，续签谈判应立即启动', action:'立即启动续签谈判，争取3年续约并扩大产品覆盖范围', date:'3月4日' },
-      { urgency:'MED',  title:'华能碳中和目标推动循环水改造', desc:'华能2030碳中和路径中，火电厂循环水系统优化是重点，相关水质监测需求将增加',     action:'准备循环水监测专项方案，与碳中和战略挂钩',          date:'3月1日' },
+      { urgency:'HIGH', title:'华能集团框架采购协议到期（5月）', desc:'Hach 与华能国际的三年框架采购协议将于2026-05-31到期，续签谈判应立即启动', action:'立即启动续签谈判，争取3年续约并扩大产品覆盖范围', date:'3月4日', source:'演示数据 · 实际合同到期日请从CRM核实', sourceUrl:'' },
+      { urgency:'MED',  title:'华能碳中和目标推动循环水改造', desc:'华能2030碳中和路径中，火电厂循环水系统优化是重点，相关水质监测需求将增加', action:'准备循环水监测专项方案，与碳中和战略挂钩', date:'3月1日', source:'华能国际电力股份有限公司年报', sourceUrl:'http://www.huaneng.com.cn/' },
     ],
     opps: [
       { name:'框架协议续签（3年）',  amount:'¥50万/年', stage:'谈判准备', stageClass:'tag-blue',   prob:70 },
@@ -1392,8 +1405,8 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥260万', revenueNote: '↑ 15% vs 去年', lastVisit: '20天前', lastVisitNote: '2026-02-14 · 周敏', opps: '2', oppsNote: '潜在价值 ¥55万', risk: '低', riskNote: 'GMP合规驱动稳定' },
     signals: [
-      { urgency:'MED',  title:'新版 GMP 附录更新：纯化水监测要求提高', desc:'国家药监局新版GMP附录要求制药用水在线监测覆盖率提升，原有部分设施不达标', action:'提供GMP合规差距分析，推动监测点位升级', date:'3月2日' },
-      { urgency:'LOW',  title:'国药集团新建生物制药基地',             desc:'国药集团在苏州工业园区新建生物制药基地，2027年投产，纯水系统采购预计2026下半年启动', action:'提前与苏州基地筹建团队建立联系',        date:'2月24日' },
+      { urgency:'MED',  title:'新版 GMP 附录更新：纯化水监测要求提高', desc:'国家药监局新版GMP附录要求制药用水在线监测覆盖率提升，原有部分设施不达标', action:'提供GMP合规差距分析，推动监测点位升级', date:'3月2日', source:'国家药品监督管理局 nmpa.gov.cn', sourceUrl:'https://www.nmpa.gov.cn/' },
+      { urgency:'LOW',  title:'国药集团新建生物制药基地', desc:'国药集团在苏州工业园区新建生物制药基地，2027年投产，纯水系统采购预计2026下半年启动', action:'提前与苏州基地筹建团队建立联系', date:'2月24日', source:'演示数据 · 建议通过企查查/媒体报道核实', sourceUrl:'https://www.qcc.com/' },
     ],
     opps: [
       { name:'制药用水在线监测升级（GMP）', amount:'¥38万', stage:'报价阶段', stageClass:'tag-green', prob:75 },
@@ -1416,8 +1429,8 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥480万', revenueNote: '↑ 22% vs 去年', lastVisit: '10天前', lastVisitNote: '2026-02-24 · 林杰', opps: '3', oppsNote: '潜在价值 ¥120万', risk: '低', riskNote: '战略客户，关系深厚' },
     signals: [
-      { urgency:'HIGH', title:'中芯国际天津12英寸新厂开工', desc:'中芯国际天津新厂2026年Q3开工，超纯水系统仪器需求约¥80万，招标预计Q2启动', action:'立即对接天津厂筹建团队，确保进入供应商名录', date:'3月5日' },
-      { urgency:'MED',  title:'芯片制造用水排放标准趋严',  desc:'工信部新规要求半导体工厂废水中特定重金属指标实时在线监测，已有设施需升级',    action:'提供重金属在线监测升级方案',               date:'3月1日' },
+      { urgency:'HIGH', title:'中芯国际天津12英寸新厂开工', desc:'中芯国际天津新厂2026年Q3开工，超纯水系统仪器需求约¥80万，招标预计Q2启动', action:'立即对接天津厂筹建团队，确保进入供应商名录', date:'3月5日', source:'中芯国际官网/媒体报道', sourceUrl:'https://www.smics.com/' },
+      { urgency:'MED',  title:'芯片制造用水排放标准趋严', desc:'工信部新规要求半导体工厂废水中特定重金属指标实时在线监测，已有设施需升级', action:'提供重金属在线监测升级方案', date:'3月1日', source:'工业和信息化部 miit.gov.cn', sourceUrl:'https://www.miit.gov.cn/' },
     ],
     opps: [
       { name:'天津新厂超纯水仪器配套',  amount:'¥80万', stage:'早期接触', stageClass:'tag-blue',   prob:60 },
@@ -1441,9 +1454,9 @@ const accounts = {
     status: 'yellow', statusText: '需关注',
     kpi: { revenue: '¥220万', revenueNote: '↓ 10% vs 去年', lastVisit: '50天前', lastVisitNote: '2026-01-16 · 吴刚', opps: '1', oppsNote: '潜在价值 ¥40万', risk: '中', riskNote: '预算紧缩中' },
     signals: [
-      { urgency:'MED',  title:'宝武集团开展降本增效专项',   desc:'宝武总部2026年要求各子公司压缩非生产性开支20%，仪器维保预算受影响',             action:'主动推出维保优化方案，体现价值而非成本',         date:'3月3日' },
-      { urgency:'MED',  title:'湛江钢铁基地扩产',           desc:'宝武湛江基地二期扩产计划获批，新增高炉冷却水循环系统，配套仪器需求约¥40万',  action:'联系湛江基地采购部门，争取扩产配套仪器',         date:'2月28日' },
-      { urgency:'LOW',  title:'超低排放改造最后验收期',      desc:'宝钢股份旗下工厂超低排放改造须于2026年6月完成最终验收，在线监测设备需稳定运行', action:'主动提供验收准备技术支持，加强现场服务',          date:'2月22日' },
+      { urgency:'MED',  title:'宝武集团开展降本增效专项', desc:'宝武总部2026年要求各子公司压缩非生产性开支20%，仪器维保预算受影响', action:'主动推出维保优化方案，体现价值而非成本', date:'3月3日', source:'演示数据 · 建议通过年报或销售确认', sourceUrl:'https://www.baowugroup.com/' },
+      { urgency:'MED',  title:'湛江钢铁基地扩产', desc:'宝武湛江基地二期扩产计划获批，新增高炉冷却水循环系统，配套仪器需求约¥40万', action:'联系湛江基地采购部门，争取扩产配套仪器', date:'2月28日', source:'中国水网/钢铁行业媒体报道', sourceUrl:'https://www.h2o-china.com/' },
+      { urgency:'LOW',  title:'超低排放改造最后验收期', desc:'宝钢股份旗下工厂超低排放改造须于2026年6月完成最终验收，在线监测设备需稳定运行', action:'主动提供验收准备技术支持，加强现场服务', date:'2月22日', source:'生态环境部超低排放改造政策', sourceUrl:'https://www.mee.gov.cn/' },
     ],
     opps: [
       { name:'湛江基地扩产配套仪器',  amount:'¥40万', stage:'接触中', stageClass:'tag-blue', prob:50 },
@@ -1465,8 +1478,8 @@ const accounts = {
     status: 'green', statusText: '健康',
     kpi: { revenue: '¥195万', revenueNote: '↑ 18% vs 去年', lastVisit: '15天前', lastVisitNote: '2026-02-19 · 王芳', opps: '2', oppsNote: '潜在价值 ¥65万', risk: '低', riskNote: '食品安全高要求稳固' },
     signals: [
-      { urgency:'MED',  title:'伊利呼和浩特新建高端乳品工厂',  desc:'伊利新建智慧工厂2026年Q4投产，水质监测系统采购预计Q3招标，预算约¥50万', action:'对接新厂筹建项目组，参与方案设计阶段', date:'3月2日' },
-      { urgency:'LOW',  title:'乳品行业用水新标准征求意见',    desc:'国家标准委食品行业用水检测新标准征求意见，新增大肠菌群、硝酸盐等指标的在线监测要求', action:'准备合规分析报告提供给客户', date:'2月26日' },
+      { urgency:'MED',  title:'伊利呼和浩特新建高端乳品工厂', desc:'伊利新建智慧工厂2026年Q4投产，水质监测系统采购预计Q3招标，预算约¥50万', action:'对接新厂筹建项目组，参与方案设计阶段', date:'3月2日', source:'演示数据 · 建议通过伊利官网/媒体报道核实', sourceUrl:'https://www.yili.com/' },
+      { urgency:'LOW',  title:'乳品行业用水新标准征求意见', desc:'国家标准委食品行业用水检测新标准征求意见，新增大肠菌群、硝酸盐等指标的在线监测要求', action:'准备合规分析报告提供给客户', date:'2月26日', source:'国家标准化管理委员会 std.samr.gov.cn', sourceUrl:'https://std.samr.gov.cn/' },
     ],
     opps: [
       { name:'新建智慧工厂水质仪器配套', amount:'¥50万', stage:'早期接触', stageClass:'tag-blue',  prob:55 },
@@ -1518,6 +1531,10 @@ function renderOverview(acc) {
         <div class="signal-title">${s.title}</div>
         <div class="signal-desc">${s.desc}</div>
         <div class="signal-action">→ ${s.action}</div>
+        <div class="signal-source">${s.sourceUrl
+          ? `📎 来源: <a href="${s.sourceUrl}" target="_blank">${s.source}</a>`
+          : `📎 来源: <span class="demo-tag">演示数据</span> ${s.source || ''}`
+        }</div>
       </div>
       <div class="signal-date">${s.date}</div>
     </div>`).join('');
