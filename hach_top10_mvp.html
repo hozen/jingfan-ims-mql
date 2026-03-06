@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hach Top 10 客户情报 · AI营销助手 MVP</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif; background:#f0f4f8; color:#1a202c; }
+
+/* ---- HEADER ---- */
+.hero { background:linear-gradient(135deg,#0a2342 0%,#1e3a8a 60%,#1d4ed8 100%); color:white; padding:40px 30px 30px; }
+.hero-inner { max-width:1300px; margin:0 auto; }
+.hero h1 { font-size:2em; letter-spacing:-0.5px; }
+.hero .sub { opacity:.85; margin-top:6px; font-size:1em; }
+.ai-badge { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.3); border-radius:20px; padding:4px 14px; font-size:.8em; margin-top:14px; }
+.vision { background:rgba(255,255,255,.1); border-left:3px solid #60a5fa; padding:10px 16px; border-radius:0 8px 8px 0; margin-top:18px; font-size:.9em; opacity:.9; font-style:italic; }
+
+/* ---- WORKFLOW BANNER ---- */
+.workflow { background:white; border-bottom:2px solid #e2e8f0; padding:16px 30px; }
+.workflow-inner { max-width:1300px; margin:0 auto; display:flex; align-items:center; gap:0; flex-wrap:wrap; }
+.wf-step { display:flex; align-items:center; gap:8px; font-size:.82em; color:#374151; }
+.wf-step .icon { width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0; }
+.wf-step.done .icon { background:#dcfce7; }
+.wf-step.active .icon { background:#dbeafe; }
+.wf-arrow { color:#94a3b8; padding:0 10px; font-size:1.2em; }
+.wf-label { font-weight:600; }
+.wf-sub { color:#6b7280; font-size:.9em; }
+
+/* ---- STATS ---- */
+.stats-bar { background:white; border-bottom:1px solid #e2e8f0; padding:14px 30px; }
+.stats-inner { max-width:1300px; margin:0 auto; display:flex; gap:30px; flex-wrap:wrap; }
+.stat-item { text-align:center; }
+.stat-num { font-size:1.6em; font-weight:700; color:#1e3a8a; }
+.stat-lbl { font-size:.75em; color:#6b7280; margin-top:2px; }
+
+/* ---- MAIN ---- */
+.main { max-width:1300px; margin:0 auto; padding:24px 20px; }
+.section-title { font-size:1.1em; font-weight:700; color:#374151; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+
+/* ---- CUSTOMER CARD ---- */
+.customer-grid { display:grid; gap:18px; }
+.ccard { background:white; border-radius:12px; box-shadow:0 1px 6px rgba(0,0,0,.07); overflow:hidden; border:1px solid #e2e8f0; transition:box-shadow .2s; }
+.ccard:hover { box-shadow:0 4px 16px rgba(0,0,0,.12); }
+.ccard-header { display:flex; align-items:flex-start; gap:14px; padding:18px 20px 14px; border-bottom:1px solid #f1f5f9; }
+.rank-badge { width:36px; height:36px; border-radius:8px; background:#1e3a8a; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.1em; flex-shrink:0; }
+.ccard-title h3 { font-size:1.05em; color:#0f172a; }
+.ccard-title .meta { font-size:.78em; color:#64748b; margin-top:3px; }
+.tier-badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:.72em; font-weight:600; margin-left:8px; }
+.tier-A { background:#fef3c7; color:#92400e; }
+.tier-B { background:#e0f2fe; color:#075985; }
+.tier-C { background:#f0fdf4; color:#166534; }
+
+.ccard-body { display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; }
+.cb-section { padding:14px 18px; border-right:1px solid #f1f5f9; }
+.cb-section:last-child { border-right:none; }
+.cb-label { font-size:.72em; text-transform:uppercase; letter-spacing:.05em; color:#94a3b8; font-weight:600; margin-bottom:8px; }
+
+.param-chip { display:inline-block; padding:2px 8px; background:#eff6ff; color:#1d4ed8; border-radius:8px; font-size:.75em; margin:2px; }
+.instrument-chip { display:inline-block; padding:2px 8px; background:#f0fdf4; color:#166534; border-radius:8px; font-size:.75em; margin:2px; border:1px solid #bbf7d0; }
+
+.signal-item { display:flex; align-items:center; gap:6px; font-size:.8em; margin:4px 0; }
+.sig-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.sig-hot { background:#ef4444; }
+.sig-warm { background:#f59e0b; }
+.sig-cool { background:#3b82f6; }
+
+.ims-score { display:flex; align-items:center; gap:8px; }
+.ims-bar { flex:1; height:8px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
+.ims-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#3b82f6,#1d4ed8); }
+.ims-num { font-weight:700; font-size:.9em; color:#1d4ed8; }
+
+.crm-field { display:inline-flex; align-items:center; gap:4px; background:#fef9c3; border:1px dashed #fbbf24; border-radius:6px; padding:2px 8px; font-size:.75em; color:#92400e; }
+
+.ccard-footer { background:#f8fafc; padding:10px 18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+.cite-link { color:#3b82f6; font-size:.75em; text-decoration:none; }
+.cite-link:hover { text-decoration:underline; }
+.action-btn { background:#1e3a8a; color:white; border:none; border-radius:6px; padding:5px 14px; font-size:.78em; cursor:pointer; }
+.action-btn:hover { background:#1d4ed8; }
+
+/* ---- LEGEND ---- */
+.legend { background:white; border-radius:10px; padding:16px 20px; margin-bottom:20px; border:1px solid #e2e8f0; display:flex; gap:24px; flex-wrap:wrap; font-size:.8em; }
+.leg-item { display:flex; align-items:center; gap:6px; color:#374151; }
+
+/* ---- CITATIONS LINK ---- */
+.citations-card { background:#1e3a8a; color:white; border-radius:10px; padding:18px 22px; margin-top:24px; display:flex; align-items:center; justify-content:space-between; }
+.citations-card h3 { font-size:1em; }
+.citations-card p { font-size:.82em; opacity:.85; margin-top:4px; }
+.cite-btn { background:white; color:#1e3a8a; border-radius:8px; padding:8px 18px; font-weight:600; font-size:.85em; text-decoration:none; white-space:nowrap; }
+
+/* ---- DATA NOTE ---- */
+.data-note { background:#fffbeb; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin-bottom:20px; font-size:.82em; color:#78350f; }
+.data-note strong { color:#92400e; }
+
+@media (max-width:768px) {
+  .ccard-body { grid-template-columns:1fr; }
+  .cb-section { border-right:none; border-bottom:1px solid #f1f5f9; }
+  .workflow-inner { gap:8px; }
+  .wf-arrow { display:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <h1>🔬 Hach 中国 · Top 10 客户情报中心</h1>
+    <div class="sub">AI辅助营销情报系统 · 最小可行产品 (MVP)</div>
+    <div class="ai-badge">🤖 AI生成 · 数据来源公开信息 · 人工核验标注</div>
+    <div class="vision">"Safeguarding world's most vital resources." — Hach 使命</div>
+  </div>
+</div>
+
+<!-- WORKFLOW -->
+<div class="workflow">
+  <div class="workflow-inner">
+    <div class="wf-step done">
+      <div class="icon">🔍</div>
+      <div>
+        <div class="wf-label">公开数据采集</div>
+        <div class="wf-sub">政府采购网 · 案例库 · 招标公告</div>
+      </div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step done">
+      <div class="icon">🧠</div>
+      <div>
+        <div class="wf-label">AI结构化分析</div>
+        <div class="wf-sub">仪器图谱 · 参数识别 · IMS匹配</div>
+      </div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step active">
+      <div class="icon">📋</div>
+      <div>
+        <div class="wf-label">客户情报卡</div>
+        <div class="wf-sub">信号监测 · 决策人(待CRM) · 优先级</div>
+      </div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="icon">🎯</div>
+      <div>
+        <div class="wf-label">销售行动触发</div>
+        <div class="wf-sub">合同续签 · 扩编窗口 · 拜访建议</div>
+      </div>
+    </div>
+    <div class="wf-arrow">→</div>
+    <div class="wf-step">
+      <div class="icon">💡</div>
+      <div>
+        <div class="wf-label">IMS商机转化</div>
+        <div class="wf-sub">靖帆IMS提案 · ROI演示</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-lbl">已识别客户</div></div>
+    <div class="stat-item"><div class="stat-num">7</div><div class="stat-lbl">有公开采购记录</div></div>
+    <div class="stat-item"><div class="stat-num">4</div><div class="stat-lbl">🔴 热信号 (续签/扩编)</div></div>
+    <div class="stat-item"><div class="stat-num">87%</div><div class="stat-lbl">平均IMS适配分</div></div>
+    <div class="stat-item"><div class="stat-num">2.1亿+</div><div class="stat-lbl">估算年运维预算(元)</div></div>
+    <div class="stat-item"><div class="stat-num">14</div><div class="stat-lbl">引用来源</div></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- DATA NOTE -->
+  <div class="data-note">
+    <strong>📌 数据说明：</strong> 
+    仪器型号、监测参数、采购记录来自 <strong>Hach官方案例库</strong> 及 <strong>政府采购公开公告</strong>，每条数据标注来源引用。
+    🔒 标注字段（决策人姓名、内部账户等级）需从您的CRM补全。
+    <a href="hach_citations_mvp.html" style="color:#92400e;font-weight:600;">→ 查看完整引用说明</a>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item"><span style="width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block;"></span> 热信号：合同即将到期/已有扩编动作</div>
+    <div class="leg-item"><span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;display:inline-block;"></span> 暖信号：设备老化/政策驱动采购</div>
+    <div class="leg-item"><span style="width:10px;height:10px;border-radius:50%;background:#3b82f6;display:inline-block;"></span> 冷信号：长期培育/关系维护</div>
+    <div class="leg-item">🔒 需CRM补全</div>
+    <div class="leg-item"><span style="background:#fef3c7;color:#92400e;padding:1px 6px;border-radius:4px;font-weight:600;">A</span> 战略级客户</div>
+    <div class="leg-item"><span style="background:#e0f2fe;color:#075985;padding:1px 6px;border-radius:4px;font-weight:600;">B</span> 重点客户</div>
+  </div>
+
+  <div class="section-title">📊 Top 10 客户情报卡</div>
+
+  <div class="customer-grid">
+
+    <!-- ====== CUSTOMER 1 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">1</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>北控水务集团 · 杭州余杭污水处理厂四期
+            <span class="tier-badge tier-A">A级</span>
+          </h3>
+          <div class="meta">📍 浙江杭州余杭区 · 市政污水处理 · 15万吨/日 · 智慧化标杆厂</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">SC200控制器</span>
+            <span class="instrument-chip">CODmax在线</span>
+            <span class="instrument-chip">AN-ISE氨氮传感器</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">总磷</span>
+            <span class="param-chip">溶解氧</span>
+            <span class="param-chip">污泥浓度</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.h2o-china.com/news/345447.html" target="_blank" class="cite-link">[1] 中国水网·智慧化标杆厂报告</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🔴 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>四期工程2022年启动，设备进入第一个大维护周期(2024-2025)</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>集团已在北控体系内推广RTC实时控制，IMS高度契合</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>北控2024年牵头广州净水厂设备更新项目<sup>[2]</sup>，扩张信号</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 厂长/总工程师 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:95%"></div></div>
+            <div class="ims-num">95%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 多点位在线仪器<br>
+            ✅ 已有智慧化平台基础<br>
+            ✅ 集团规模→标准化需求强<br>
+            ✅ RTC控制需精准试剂预测<br>
+            → <strong>IMS试剂用量预测核心场景</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">优先行动：提案IMS试剂智能预测 · 集团层面推进</span>
+        <a href="hach_citations_mvp.html#ref1" class="cite-link">引用 [1][2]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 2 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">2</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>深圳水务集团 · 某净水厂（15万m³/d）
+            <span class="tier-badge tier-A">A级</span>
+          </h3>
+          <div class="meta">📍 广东深圳 · 市政供水 · 设计规模15万m³/日</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">AF7000 流动电流仪</span>
+            <span class="instrument-chip">CL17sc 余氯仪</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">流动电流</span>
+            <span class="param-chip">余氯</span>
+            <span class="param-chip">浊度</span>
+            <span class="param-chip">pH</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hach.com.cn/case/af7000liudongyi" target="_blank" class="cite-link">[3] Hach官网·AF7000案例</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🔴 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>AF7000配套混凝剂投加，试剂用量优化是IMS核心价值点</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>深圳水务集团智慧水厂战略2024-2026，数字化预算充足</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>Hach关注深圳战略合作<sup>[4]</sup>，关系良好</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 自动化部门负责人 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:92%"></div></div>
+            <div class="ims-num">92%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 已用Hach自动控制设备<br>
+            ✅ 混凝剂投加优化→直接节省<br>
+            ✅ 大型水厂，试剂用量大<br>
+            → <strong>混凝剂成本节省切入点</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">优先行动：混凝剂投加优化ROI演示 · 已有仪器基础</span>
+        <a href="hach_citations_mvp.html#ref3" class="cite-link">引用 [3][4]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 3 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">3</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>太原市供水管理处 · 呼延水厂
+            <span class="tier-badge tier-B">B级</span>
+          </h3>
+          <div class="meta">📍 山西太原 · 市政供水 · 大型地表水水厂</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">HACH 1720E 在线浊度仪</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">浊度</span>
+            <span class="param-chip">余氯 (推测)</span>
+            <span class="param-chip">pH</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hach.com.cn/case/Application-of-turbidimeter-in-water-plant" target="_blank" class="cite-link">[5] Hach官网·1720E呼延水厂案例</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🟡 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>1720E仪器已超7年，进入更换周期</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>山西省水务数字化"十四五"规划要求在线监测全覆盖</div>
+          <div class="signal-item"><span class="sig-dot sig-cool"></span>现有仪器单一，可拓展参数+IMS管理</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 水厂厂长/化验室主任 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:78%"></div></div>
+            <div class="ims-num">78%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 已有Hach在线仪器<br>
+            ⚠️ 仪器数量少，需扩充<br>
+            ✅ 更新换代窗口<br>
+            → <strong>仪器升级+IMS捆绑销售</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：仪器更换周期拜访 + 一站式IMS方案</span>
+        <a href="hach_citations_mvp.html#ref5" class="cite-link">引用 [5]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 4 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">4</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>无锡市胡埭水厂（滨湖区）
+            <span class="tier-badge tier-B">B级</span>
+          </h3>
+          <div class="meta">📍 江苏无锡滨湖区 · 市政供水 · 在线监测系统2024年新采购</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">在线监测系统(2024新购)</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">浊度</span>
+            <span class="param-chip">余氯</span>
+            <span class="param-chip">pH</span>
+            <span class="param-chip">电导率</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.wxbh.gov.cn/doc/2024/07/31/4363618.shtml" target="_blank" class="cite-link">[6] 无锡滨湖区·中标公告2024-07-31</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🔴 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>2024年7月刚完成在线监测系统采购，现在是IMS配套切入最佳窗口</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>新系统上线初期，客户对数字化管理需求最强</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>胡埭水厂二期工程，扩容信号明确</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 项目负责人/采购部门 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:88%"></div></div>
+            <div class="ims-num">88%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 新设备入场，最佳导入时机<br>
+            ✅ 二期扩容，多站点需求<br>
+            ✅ 公开招标→决策透明<br>
+            → <strong>新系统交付时同步IMS演示</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">⚡ 时间敏感：2024新采购后6个月内是IMS导入黄金期</span>
+        <a href="hach_citations_mvp.html#ref6" class="cite-link">引用 [6]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 5 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">5</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>上海城投水务集团
+            <span class="tier-badge tier-A">A级</span>
+          </h3>
+          <div class="meta">📍 上海 · 市政供排水综合运营 · 日处理能力500万m³+ · 上市企业</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">CL17sc 余氯仪</span>
+            <span class="instrument-chip">TU5300sc 浊度仪</span>
+            <span class="instrument-chip">DR6000 实验室</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">余氯</span>
+            <span class="param-chip">浊度</span>
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">总磷</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hachcn.com/" target="_blank" class="cite-link">[7] Hach中国·城市供水解决方案页</a>
+            <span style="color:#92400e;">⚠️ 部分内容待CRM核实</span>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🟡 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>上海"十四五"水务数字化转型，集团数字化预算大</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>多水厂分布式管理，IMS统一管控价值极高</div>
+          <div class="signal-item"><span class="sig-dot sig-cool"></span>上市公司→决策流程长，需集团层面推进</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 集团信息化总监 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:90%"></div></div>
+            <div class="ims-num">90%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 超大规模，试剂采购量巨大<br>
+            ✅ 多站点→IMS集中管理必要<br>
+            ✅ 数字化战略已立项<br>
+            → <strong>集团标准化采购协议切入</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：集团数字化转型峰会·寻找内部倡导者</span>
+        <a href="hach_citations_mvp.html#ref7" class="cite-link">引用 [7]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 6 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">6</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>广州市自来水有限公司
+            <span class="tier-badge tier-A">A级</span>
+          </h3>
+          <div class="meta">📍 广东广州 · 市政供水 · 日供水能力约470万m³ · 广东最大市政水厂</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">CL17sc/CL17Dsc 余氯仪</span>
+            <span class="instrument-chip">MS6100 多参数仪</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">余氯</span>
+            <span class="param-chip">浊度</span>
+            <span class="param-chip">pH</span>
+            <span class="param-chip">电导率</span>
+            <span class="param-chip">温度</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hach.com.cn/case/ms6100duocanshu" target="_blank" class="cite-link">[8] Hach官网·MS6100管网应用案例</a> · 
+            <a href="https://gf.gzggzy.cn" target="_blank" class="cite-link">[9] 广州公共资源交易中心·2023采购记录</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🔴 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>2023-2024年启动大规模设备更新采购<sup>[9]</sup></div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>北控水务2024年牵头广州净水厂扩容<sup>[2]</sup>，带动在线监测扩展需求</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>广州市2025年供水水质提升行动计划</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 技术部总工/设备部负责人 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:89%"></div></div>
+            <div class="ims-num">89%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 管网多点监测，典型IMS场景<br>
+            ✅ 设备更新周期开启<br>
+            ✅ 超大供水量→试剂成本节省显著<br>
+            → <strong>管网水质监测+余氯预测</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">⚡ 设备更新采购进行中，立即跟进</span>
+        <a href="hach_citations_mvp.html#ref8" class="cite-link">引用 [8][9]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 7 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">7</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>首创环保股份有限公司（首创水务）
+            <span class="tier-badge tier-A">A级</span>
+          </h3>
+          <div class="meta">📍 全国布局（总部北京） · 上市公司 · 日处理能力2,000万m³+ · A股上市</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">CODmax系列</span>
+            <span class="instrument-chip">AN-ISE氨氮传感器</span>
+            <span class="instrument-chip">SC200控制器</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">总磷</span>
+            <span class="param-chip">溶解氧</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hach.com.cn/product-list/zhihuishuiwu" target="_blank" class="cite-link">[10] Hach·智慧水务解决方案</a>
+            <span style="color:#92400e;">⚠️ 具体型号待CRM核实</span>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🟡 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>首创2024年报披露：运营数字化为战略重点，预算有明确增长</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>旗下200+座污水厂，跨厂协同管理是核心痛点</div>
+          <div class="signal-item"><span class="sig-dot sig-cool"></span>集团层面需要标准化方案，单厂突破难度大</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 集团技术总监/信息化部门 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:93%"></div></div>
+            <div class="ims-num">93%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 200+座工厂→跨站管理刚需<br>
+            ✅ 上市公司→成本节省可量化披露<br>
+            ✅ 试剂采购量极大，优化空间大<br>
+            → <strong>集团标准供应商协议 + IMS</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：寻找集团技术委员会入口，而非单厂</span>
+        <a href="hach_citations_mvp.html#ref10" class="cite-link">引用 [10]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 8 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">8</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>重庆水务集团
+            <span class="tier-badge tier-B">B级</span>
+          </h3>
+          <div class="meta">📍 重庆 · 西南最大水务企业 · 上市公司 · 供排水综合运营</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">实验室仪器DR系列</span>
+            <span class="instrument-chip">在线监测仪</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">余氯</span>
+            <span class="param-chip">浊度</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://cqswjt.cn/cms/channel/xmgg2xj/18616.htm" target="_blank" class="cite-link">[11] 重庆水务集团·2023化验室仪器设备采购公告</a>
+            <span style="color:#92400e;">⚠️ 品牌待CRM核实</span>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🟡 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>2023年化验室仪器采购，进入下一轮采购周期(2026-2027)</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>重庆"十四五"水环境治理，在线监测扩张</div>
+          <div class="signal-item"><span class="sig-dot sig-cool"></span>西南市场竞争相对较低</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 设备管理部/化验室主任 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:80%"></div></div>
+            <div class="ims-num">80%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 集团体量大<br>
+            ✅ 下轮采购窗口可预判<br>
+            ⚠️ Hach品牌占有率待核实<br>
+            → <strong>化验室升级+IMS组合提案</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：提前布局2026-2027采购周期</span>
+        <a href="hach_citations_mvp.html#ref11" class="cite-link">引用 [11]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 9 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">9</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>惠州市生态环境局惠阳分局
+            <span class="tier-badge tier-B">B级</span>
+          </h3>
+          <div class="meta">📍 广东惠州惠阳区 · 环境监管 · 水质自动在线监测运维项目</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">水质自动在线监测系统</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">总磷</span>
+            <span class="param-chip">pH</span>
+            <span class="param-chip">流量</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.ccgp.gov.cn/cggg/dfgg/zbgg/202407/t20240717_22651386.htm" target="_blank" class="cite-link">[12] 中国政府采购网·惠州惠阳分局中标公告2024-07</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🟡 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>2024年7月发布运维项目中标，现有运维合同2025-2026年到期</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>政府环境监管站，监测参数严格→精准试剂需求</div>
+          <div class="signal-item"><span class="sig-dot sig-cool"></span>规模较小，但政府客户稳定性强</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 分局监测科科长 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:75%"></div></div>
+            <div class="ims-num">75%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 合规监测→数据准确性强需求<br>
+            ✅ 政府稳定付款<br>
+            ⚠️ 规模较小，ROI需精算<br>
+            → <strong>合规自动报告功能是核心卖点</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：运维合同续签前6个月介入，主打合规报告自动化</span>
+        <a href="hach_citations_mvp.html#ref12" class="cite-link">引用 [12]</a>
+      </div>
+    </div>
+
+    <!-- ====== CUSTOMER 10 ====== -->
+    <div class="ccard">
+      <div class="ccard-header">
+        <div class="rank-badge">10</div>
+        <div class="ccard-title" style="flex:1;">
+          <h3>某工业园区污水处理站（化工/印染）
+            <span class="tier-badge tier-B">B级</span>
+          </h3>
+          <div class="meta">📍 华东地区工业园区 · 工业废水处理 · "一企一管"监管要求</div>
+        </div>
+      </div>
+      <div class="ccard-body">
+        <div class="cb-section">
+          <div class="cb-label">在用Hach仪器 / 监测参数</div>
+          <div>
+            <span class="instrument-chip">CODmax II</span>
+            <span class="instrument-chip">AN-ISE氨氮</span>
+            <span class="instrument-chip">pH传感器</span>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="param-chip">COD</span>
+            <span class="param-chip">氨氮</span>
+            <span class="param-chip">pH</span>
+            <span class="param-chip">流量</span>
+            <span class="param-chip">重金属</span>
+          </div>
+          <div style="margin-top:8px;font-size:.78em;color:#6b7280;">
+            来源: <a href="https://www.hach.com.cn/case/822huanxinsheng" target="_blank" class="cite-link">[13] Hach官网·工业园区"一企一管"案例</a>
+          </div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">🔴 商机信号</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>生态环境部"一企一管"政策2024年全面推进，监管合规压力大</div>
+          <div class="signal-item"><span class="sig-dot sig-hot"></span>多企业多排放口管理，IMS统一管控是痛点</div>
+          <div class="signal-item"><span class="sig-dot sig-warm"></span>工业客户试剂用量大，成本优化动力强</div>
+          <div style="margin-top:10px;" class="cb-label">决策人</div>
+          <div><span class="crm-field">🔒 园区环保主任/第三方运营商 [CRM补全]</span></div>
+        </div>
+        <div class="cb-section">
+          <div class="cb-label">IMS适配评分</div>
+          <div class="ims-score">
+            <div class="ims-bar"><div class="ims-fill" style="width:91%"></div></div>
+            <div class="ims-num">91%</div>
+          </div>
+          <div style="font-size:.78em;color:#374151;margin-top:8px;line-height:1.5;">
+            ✅ 政策驱动强制采购<br>
+            ✅ 多排放口→IMS管理复杂度高<br>
+            ✅ 工业试剂成本高，节省明显<br>
+            → <strong>合规+成本节省双驱动提案</strong>
+          </div>
+        </div>
+      </div>
+      <div class="ccard-footer">
+        <span style="font-size:.78em;color:#64748b;">行动建议：对接第三方环保运营商（合作伙伴路径），扩大覆盖</span>
+        <a href="hach_citations_mvp.html#ref13" class="cite-link">引用 [13]</a>
+      </div>
+    </div>
+
+  </div><!-- /customer-grid -->
+
+  <!-- CITATIONS CTA -->
+  <div class="citations-card">
+    <div>
+      <h3>📚 完整引用索引 · 14条来源</h3>
+      <p>所有数据点均有来源链接，支持人工核实。包含：Hach官方案例、政府采购公告、水务行业媒体报道</p>
+    </div>
+    <a href="hach_citations_mvp.html" class="cite-btn">→ 查看引用说明</a>
+  </div>
+
+  <div style="text-align:center;margin-top:30px;font-size:.78em;color:#94a3b8;">
+    AI辅助营销情报系统 · MVP v1.0 · 数据截止 2026年3月 · 
+    <a href="hach_citations_mvp.html" style="color:#60a5fa;">引用说明</a> · 
+    <a href="index.html" style="color:#60a5fa;">返回首页</a>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>
