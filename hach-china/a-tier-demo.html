@@ -1701,8 +1701,8 @@ function renderSignalsFull(acc) {
             <div class="signal-desc">${s.desc}</div>
             <div class="signal-action">→ ${s.action}</div>
             <div class="signal-source">${s.sourceUrl
-              ? \`📎 来源: <a href="\${s.sourceUrl}" target="_blank">\${s.source}</a>\`
-              : \`📎 来源: <span class="demo-tag">演示数据</span> \${s.source||''}\`
+              ? '📎 来源: <a href="' + s.sourceUrl + '" target="_blank">' + s.source + '</a>'
+              : '📎 来源: <span class="demo-tag">演示数据</span> ' + (s.source||'')
             }</div>
           </div>
           <div class="signal-date">${s.date}</div>
