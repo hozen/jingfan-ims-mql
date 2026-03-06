@@ -660,209 +660,20 @@
 
     <!-- ═══ PROFILE ═══ -->
     <div class="tab-panel" id="panel-profile">
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title">🏢 公司概况</div>
-          <table>
-            <tbody>
-              <tr><td style="color:var(--text-light);width:110px;">全称</td><td>北京市自来水集团有限责任公司</td></tr>
-              <tr><td style="color:var(--text-light);">性质</td><td>国有企业（北京市国资委直属）</td></tr>
-              <tr><td style="color:var(--text-light);">主营</td><td>自来水生产、供应及水务工程</td></tr>
-              <tr><td style="color:var(--text-light);">供水规模</td><td>日供水能力 300 万吨，覆盖 1400 万人口</td></tr>
-              <tr><td style="color:var(--text-light);">水厂数量</td><td>12 座主力水厂</td></tr>
-              <tr><td style="color:var(--text-light);">年收入</td><td>约 ¥80 亿 (估)</td></tr>
-              <tr><td style="color:var(--text-light);">采购方式</td><td>政府采购 + 框架协议 + 直接采购</td></tr>
-              <tr><td style="color:var(--text-light);">财年</td><td>1月-12月，Q4 预算集中释放</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="card">
-          <div class="card-title">📋 合规驱动因素</div>
-          <div style="margin-bottom:10px;">
-            <div style="font-size:12px;color:var(--text-light);margin-bottom:6px;">适用标准</div>
-            <span class="tag tag-blue">GB 5749-2022 生活饮用水</span>
-            <span class="tag tag-blue">GB 3838 地表水</span>
-            <span class="tag tag-blue">HJ/T 91 水污染物排放</span>
-            <span class="tag tag-blue">北京地方排放标准</span>
-          </div>
-          <div style="margin-top:12px;font-size:12px;color:var(--text-light);margin-bottom:6px;">近期合规压力</div>
-          <div class="signal-item" style="padding:8px 0;">
-            <div class="signal-urgency urg-high" style="font-size:10px;">新</div>
-            <div class="signal-content">
-              <div class="signal-title" style="font-size:12px;">饮用水新国标新增13项指标</div>
-              <div class="signal-desc">包括 TOC、农药残留，2027年执行，提前升级改造窗口已开启</div>
-            </div>
-          </div>
-          <div class="signal-item" style="padding:8px 0;">
-            <div class="signal-urgency urg-medium" style="font-size:10px;">持续</div>
-            <div class="signal-content">
-              <div class="signal-title" style="font-size:12px;">在线监控数据联网要求</div>
-              <div class="signal-desc">北京市要求主力水厂在线数据实时上传至市监管平台</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">👥 关键决策人图谱</div>
-        <div class="persona">
-          <div class="persona-avatar">张</div>
-          <div>
-            <div class="persona-name">张明华 <span class="tag tag-blue" style="font-size:10px;">决策者</span></div>
-            <div class="persona-title">集团环保与水务管理总监 (新任)</div>
-            <div class="persona-concern">关注点：合规达标、数字化转型、与监管部门关系 ｜ 入口：合规政策解读、行业会议</div>
-          </div>
-        </div>
-        <div class="persona">
-          <div class="persona-avatar" style="background:#059669;">李</div>
-          <div>
-            <div class="persona-name">李建国 <span class="tag tag-green" style="font-size:10px;">技术影响者</span></div>
-            <div class="persona-title">水质监测中心主任</div>
-            <div class="persona-concern">关注点：仪器稳定性、数据准确性、维护成本 ｜ 入口：技术交流、FAT/现场测试</div>
-          </div>
-        </div>
-        <div class="persona">
-          <div class="persona-avatar" style="background:#7C3AED;">王</div>
-          <div>
-            <div class="persona-name">王秀梅 <span class="tag tag-gray" style="font-size:10px;">采购把关</span></div>
-            <div class="persona-title">集团采购部经理</div>
-            <div class="persona-concern">关注点：价格合理性、交货期、入围名录 ｜ 入口：框架合同、供应商评审</div>
-          </div>
-        </div>
-        <div class="persona">
-          <div class="persona-avatar" style="background:#EA580C;">陈</div>
-          <div>
-            <div class="persona-name">陈伟 <span class="tag tag-gray" style="font-size:10px;">最终用户</span></div>
-            <div class="persona-title">第四水厂 仪表班长</div>
-            <div class="persona-concern">关注点：操作简便、故障率低、试剂供应稳定 ｜ 入口：培训、现场服务</div>
-          </div>
-        </div>
-      </div>
+      <div id="profile-content"></div>
     </div>
 
     <!-- ═══ SIGNALS ═══ -->
     <div class="tab-panel" id="panel-signals">
-      <div class="card">
-        <div class="card-title">📡 本周信号监控 — 北京自来水集团
-          <span class="status-badge status-yellow" style="margin-left:auto;">🟡 需关注</span>
-        </div>
-        <div class="signal-item">
-          <div class="signal-urgency urg-high">HIGH</div>
-          <div class="signal-content">
-            <div class="signal-title">【招标】在线水质综合监测系统采购项目</div>
-            <div class="signal-desc">来源：中国政府采购网。预算 ¥180万，要求覆盖 COD、氨氮、浊度、余氯、TOC 等参数，需与市监管平台数据对接。截止日期：2026-03-25。</div>
-            <div class="signal-action">→ 立即行动：协调销售准备投标文件；TOC 参数是 Hach 差异化优势，重点包装</div>
-          </div>
-          <div class="signal-date">2026-03-04</div>
-        </div>
-        <div class="signal-item">
-          <div class="signal-urgency urg-high">HIGH</div>
-          <div class="signal-content">
-            <div class="signal-title">【人事】集团新任环保总监张明华上任</div>
-            <div class="signal-desc">来源：企查查。张明华前任职于住建部水务司，具有强监管背景，预计将推动集团水质监测数字化升级。</div>
-            <div class="signal-action">→ 立即行动：准备新官拜访方案，侧重数字化合规主题，安排在3月内</div>
-          </div>
-          <div class="signal-date">2026-03-02</div>
-        </div>
-        <div class="signal-item">
-          <div class="signal-urgency urg-medium">MED</div>
-          <div class="signal-content">
-            <div class="signal-title">【竞品】YSI 在集团下属水厂发起比价</div>
-            <div class="signal-desc">来源：销售反馈 + LinkedIn。YSI 销售代表近期拜访集团第六、八、十水厂，主推低价在线监测产品，强调国产化替代概念。</div>
-            <div class="signal-action">→ 建议：准备全生命周期成本对比分析，突出 Hach 数据稳定性和服务响应优势</div>
-          </div>
-          <div class="signal-date">2026-03-01</div>
-        </div>
-        <div class="signal-item">
-          <div class="signal-urgency urg-medium">MED</div>
-          <div class="signal-content">
-            <div class="signal-title">【政策】北京市发布新版水厂在线监测数据上报规范</div>
-            <div class="signal-desc">来源：北京市生态环境局官网。要求所有规模以上水厂在线数据实时传输至市级平台，新增数据格式和接口标准。2026年底前完成改造。</div>
-            <div class="signal-action">→ 机会：Hach 数字化平台方案具备符合性，可主动推介系统升级方案</div>
-          </div>
-          <div class="signal-date">2026-02-28</div>
-        </div>
-        <div class="signal-item">
-          <div class="signal-urgency urg-low">LOW</div>
-          <div class="signal-content">
-            <div class="signal-title">【行业】中国水网报道：饮用水 TOC 检测需求快速增长</div>
-            <div class="signal-desc">来源：中国水网。新国标执行准备期内，各地水务集团加速 TOC 分析仪采购，预计2026年市场规模增长40%。</div>
-            <div class="signal-action">→ 参考：整理 Hach TOC 产品在同类水厂的案例，纳入客户资料包</div>
-          </div>
-          <div class="signal-date">2026-02-25</div>
-        </div>
-      </div>
+      <div id="signals-full-content"></div>
     </div>
 
     <!-- ═══ BRIEF ═══ -->
     <div class="tab-panel" id="panel-brief">
-      <div class="card" style="border-left:4px solid var(--hach-blue);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
-          <div>
-            <div style="font-size:16px;font-weight:700;">拜访简报</div>
-            <div style="font-size:12px;color:var(--text-light);margin-top:2px;">北京自来水集团 · 张明华（环保总监）· 2026-03-10 预约</div>
-          </div>
-          <div style="display:flex;gap:8px;">
-            <button class="btn btn-outline">📤 发送给销售</button>
-            <button class="btn btn-primary">🖨 打印</button>
-          </div>
-        </div>
-
-        <div class="brief-section">
-          <div class="brief-section-title">👤 联系人概况</div>
-          <ul>
-            <li><strong>张明华</strong>，集团环保与水务管理总监（新任，2026年2月上任）</li>
-            <li>来自住建部水务司，监管背景强，关注合规与数字化</li>
-            <li>⚠️ 首次拜访，尚未与其建立直接关系，需以专业姿态建立信任</li>
-          </ul>
-        </div>
-
-        <div class="brief-section">
-          <div class="brief-section-title">🔔 拜访前最重要的3件事</div>
-          <ul>
-            <li>集团刚发布在线水质监测系统招标（¥180万），截止 3月25日——这是核心话题</li>
-            <li>北京新版在线数据上报规范要求2026年底完成改造——合规压力真实存在</li>
-            <li>YSI 正在下属水厂活动——需提前备好竞品应对方案，但不要主动挑起</li>
-          </ul>
-        </div>
-
-        <div class="brief-section">
-          <div class="brief-section-title">📋 建议拜访议程（45分钟）</div>
-          <ul>
-            <li><strong>0-10min</strong> · 开场：了解新总监的工作重点和对水质监测的看法</li>
-            <li><strong>10-25min</strong> · 业务：结合新国标和北京数据上报要求，展示 Hach 解决方案如何帮助集团提前达标</li>
-            <li><strong>25-35min</strong> · 焦点：TOC 分析能力 + 数据平台对接方案（直接对应招标需求）</li>
-            <li><strong>35-45min</strong> · 确认：下一步合作形式——技术演示？提供投标支持？框架合同续签？</li>
-          </ul>
-        </div>
-
-        <div class="brief-section">
-          <div class="brief-section-title">💬 核心话术</div>
-          <ul>
-            <li>"新国标执行窗口期，现在是集团提前布局 TOC 监测能力的最佳时机"</li>
-            <li>"Hach 在北京已有12座水厂的在线监测部署，数据接口完全兼容市级上报平台"</li>
-            <li>"我们可以为这次招标提供全套技术方案支持，帮助集团降低评标风险"</li>
-          </ul>
-        </div>
-
-        <div class="brief-section" style="border-left-color:var(--red);">
-          <div class="brief-section-title" style="color:var(--red);">⛔ 注意事项</div>
-          <ul>
-            <li>不要主动提价格，等对方问；新官通常先看方案和能力，再谈价格</li>
-            <li>不要批评 YSI，如被问及竞品，用数据说话</li>
-            <li>避免过多历史介绍——他刚上任，更关注未来规划，而不是过去</li>
-          </ul>
-        </div>
-
-        <div class="brief-section" style="border-left-color:var(--green);">
-          <div class="brief-section-title" style="color:var(--green);">✅ 本次拜访理想结果</div>
-          <p>确认参与在线监测招标投标；获得一次技术演示机会；建立与新总监的初步信任关系</p>
-        </div>
-      </div>
+      <div id="brief-content"></div>
     </div>
 
-    <!-- ═══ WORKFLOW ═══ -->
+        <!-- ═══ WORKFLOW ═══ -->
     <div class="tab-panel" id="panel-workflow">
       <div class="card">
         <div class="card-title">🔄 A类客户管理 — AI 增强标准作业流程</div>
@@ -1499,6 +1310,454 @@ const accounts = {
   },
 };
 
+
+// ── Per-account profile & brief data ──────────────────────────────────────
+const profileData = {
+  beijing: {
+    info: [
+      ['全称','北京市自来水集团有限责任公司'],
+      ['性质','国有企业（北京市国资委直属）'],
+      ['主营','自来水生产、供应及水务工程'],
+      ['规模','日供水能力 300万吨，覆盖 1400万人口'],
+      ['水厂数量','12 座主力水厂'],
+      ['年收入','约 ¥80亿 (估)'],
+      ['采购方式','政府采购 + 框架协议 + 直接采购'],
+      ['财年','1月-12月，Q4预算集中释放'],
+    ],
+    standards: ['GB 5749-2022 生活饮用水','GB 3838 地表水','HJ/T 91 水污染物排放','北京地方排放标准'],
+    compliance: [
+      { level:'新', title:'饮用水新国标新增13项指标', desc:'含TOC、农药残留，2027年执行，升级窗口已开启' },
+      { level:'持续', title:'在线监控数据联网要求', desc:'北京市要求主力水厂在线数据实时上传至市监管平台' },
+    ],
+    contacts: [
+      { name:'张明华', role:'决策者', roleClass:'tag-blue', title:'集团环保与水务管理总监 (新任)', concern:'合规达标、数字化转型、监管关系 ｜ 入口：政策解读、行业会议', color:'#0057A8' },
+      { name:'李建国', role:'技术影响者', roleClass:'tag-green', title:'水质监测中心主任', concern:'仪器稳定性、数据准确性、维护成本 ｜ 入口：技术交流、现场测试', color:'#059669' },
+      { name:'王秀梅', role:'采购把关', roleClass:'tag-gray', title:'集团采购部经理', concern:'价格合理性、交货期、入围名录 ｜ 入口：框架合同、供应商评审', color:'#7C3AED' },
+      { name:'陈伟', role:'最终用户', roleClass:'tag-gray', title:'第四水厂仪表班长', concern:'操作简便、故障率低、试剂稳定 ｜ 入口：培训、现场服务', color:'#EA580C' },
+    ],
+  },
+  shanghai: {
+    info: [
+      ['全称','上海城投水务（集团）有限公司'],
+      ['性质','国有企业（上海城投集团旗下）'],
+      ['主营','供水、排水、污水处理综合运营'],
+      ['规模','日处理能力 500万m³+'],
+      ['覆盖','上海中心城区及周边'],
+      ['年收入','约 ¥50亿 (估)'],
+      ['采购方式','集团框架协议 + 子公司直接采购'],
+      ['财年','1月-12月'],
+    ],
+    standards: ['GB 5749-2022 生活饮用水','GB 18918 城镇污水处理','DB31 上海地方排放标准','HJ 212 污染源在线监控'],
+    compliance: [
+      { level:'新', title:'上海超低排放2026达标要求', desc:'上海市要求主要水厂2026年完成超低排放改造验收' },
+      { level:'持续', title:'在线数据实时上传', desc:'上海市水务局要求核心设施数据实时对接市级平台' },
+    ],
+    contacts: [
+      { name:'刘海涛', role:'决策者', roleClass:'tag-blue', title:'集团总工程师', concern:'技术可靠性、整体方案一致性 ｜ 入口：行业技术峰会、高层拜访', color:'#0057A8' },
+      { name:'陈静', role:'技术影响者', roleClass:'tag-green', title:'水质管理中心技术总监', concern:'产品性能、数据质量、维护便利性 ｜ 入口：技术对比测试', color:'#059669' },
+      { name:'张磊', role:'采购把关', roleClass:'tag-gray', title:'集团采购中心负责人', concern:'入围资格、竞争性报价 ｜ 入口：框架协议谈判', color:'#7C3AED' },
+    ],
+  },
+  guangzhou: {
+    info: [
+      ['全称','广州市自来水有限公司'],
+      ['性质','国有企业（广州市水务局监管）'],
+      ['主营','城市供水生产与配送'],
+      ['规模','日供水能力 470万m³，全国前三大市政水务'],
+      ['水厂数量','8 座主力水厂'],
+      ['年收入','约 ¥40亿 (估)'],
+      ['采购方式','政府采购（广州公共资源交易中心）'],
+      ['财年','1月-12月，Q3-Q4预算释放'],
+    ],
+    standards: ['GB 5749-2022 生活饮用水','GB 3838 地表水','广东省地方标准 DB44'],
+    compliance: [
+      { level:'新', title:'广东省地下水监测标准更新', desc:'新增10项检测指标，水源地监测仪器需升级' },
+      { level:'持续', title:'珠江流域水质联网监测', desc:'广东省要求核心水厂接入省级监测网络' },
+    ],
+    contacts: [
+      { name:'黄志强', role:'决策者', roleClass:'tag-blue', title:'公司副总经理（主管技术）', concern:'数字化升级、供水安全、监管合规 ｜ 入口：政策解读、标准参编', color:'#0057A8' },
+      { name:'李明', role:'技术影响者', roleClass:'tag-green', title:'水质技术部总工', concern:'监测精度、仪器寿命、试剂稳定供应 ｜ 入口：技术研讨', color:'#059669' },
+      { name:'陈雪', role:'采购把关', roleClass:'tag-gray', title:'物资采购部经理', concern:'入围名单、价格合理性 ｜ 入口：供应商评审', color:'#7C3AED' },
+    ],
+  },
+  chengdu: {
+    info: [
+      ['全称','成都兴蓉环境股份有限公司'],
+      ['性质','上市国企（A股：000598）'],
+      ['主营','市政供水、污水处理、固废处理'],
+      ['规模','日处理能力 220万m³（供水+污水）'],
+      ['覆盖','成都及四川省内多个城市'],
+      ['年收入','约 ¥35亿 (2024年报)'],
+      ['采购方式','上市公司公开招标 + 框架协议'],
+      ['财年','1月-12月，年报4月公布'],
+    ],
+    standards: ['GB 5749-2022','GB 18918-2002','四川省地方排放标准','碳排放核算标准（新适用）'],
+    compliance: [
+      { level:'新', title:'四川省碳排放核算纳入水务', desc:'水处理企业纳入碳排放管理，含碳指标检测需求新增' },
+      { level:'持续', title:'成都市"十四五"水环境治理', desc:'成都要求污水处理厂出水水质持续提升至准IV类' },
+    ],
+    contacts: [
+      { name:'赵强', role:'技术影响者', roleClass:'tag-green', title:'技术中心总工程师', concern:'工艺优化、仪器可靠性、节能降耗 ｜ 入口：技术合作项目', color:'#059669' },
+      { name:'李涛', role:'决策者', roleClass:'tag-blue', title:'副总经理（生产运营）', concern:'运营成本、合规达标、股东回报 ｜ 入口：上市公司经营论坛', color:'#0057A8' },
+      { name:'王燕', role:'采购把关', roleClass:'tag-gray', title:'采购中心主任', concern:'公开招标合规性、价格竞争力', color:'#7C3AED' },
+    ],
+  },
+  sinopec: {
+    info: [
+      ['全称','中国石油化工集团有限公司炼油事业部'],
+      ['性质','央企（国务院国资委直属）'],
+      ['主营','原油炼制、石化产品生产'],
+      ['规模','炼油能力 2.5亿吨/年，全国最大'],
+      ['仪器台数','Hach仪器约 200台+ (全国各炼厂)'],
+      ['年收入','约 ¥3万亿（集团总收入）'],
+      ['采购方式','集团统一框架 + 事业部技术委员会审批'],
+      ['风险','境外品牌审批新增流程，周期60-90天'],
+    ],
+    standards: ['GB 8978 污水综合排放','HJ 2025 炼化废水','GB 3096 石化厂界噪声','排污许可证要求'],
+    compliance: [
+      { level:'高风险', title:'境外品牌审批新规', desc:'中石化总部新规要求境外仪器采购经集团技术委员会审核，周期显著延长' },
+      { level:'持续', title:'排污许可证年度核查', desc:'生态环境部对炼厂年度在线监测数据合规性进行抽检' },
+    ],
+    contacts: [
+      { name:'(新接任者)', role:'决策者', roleClass:'tag-blue', title:'仪表所所长（新任，待确认）', concern:'待了解 ｜ 需尽快建立关系', color:'#0057A8' },
+      { name:'张文斌', role:'关系资产', roleClass:'tag-gray', title:'已调任集团总部（原仪表所所长）', concern:'调任后仍有影响力，维护总部关系 ｜ 入口：集团层面', color:'#94a3b8' },
+      { name:'郭志远', role:'采购把关', roleClass:'tag-gray', title:'物资供应处采购经理', concern:'新审批流程合规、国产替代压力 ｜ 入口：供应商资质维护', color:'#7C3AED' },
+    ],
+  },
+  huaneng: {
+    info: [
+      ['全称','华能国际电力股份有限公司'],
+      ['性质','央企控股上市公司（H股+A股）'],
+      ['主营','火力发电、风电、水电综合运营'],
+      ['规模','装机容量约 1.2亿千瓦（全国最大火电集团）'],
+      ['水处理场景','循环冷却水、锅炉给水、烟气脱硫废水'],
+      ['年收入','约 ¥2500亿 (2024年报)'],
+      ['采购方式','集团框架协议 + 区域公司分散采购'],
+      ['财年','1月-12月，预算Q1确定'],
+    ],
+    standards: ['GB 12348 工业企业厂界噪声','HJ/T 75 固定污染源排放','GB 13271 锅炉大气','DL/T 956 火力发电厂水处理'],
+    compliance: [
+      { level:'紧急', title:'框架采购协议5月到期', desc:'三年框架协议2026-05-31到期，须立即启动续签谈判' },
+      { level:'新', title:'华能2030碳中和路径发布', desc:'循环水系统优化纳入碳中和重点项目，仪器配套需求增加' },
+    ],
+    contacts: [
+      { name:'孙建民', role:'决策者', roleClass:'tag-blue', title:'集团技术委员会副主任', concern:'技术标准统一、合规管理 ｜ 入口：集团技术标准制定', color:'#0057A8' },
+      { name:'刘洋', role:'技术影响者', roleClass:'tag-green', title:'水务技术中心主任', concern:'仪器可靠性、全国统一维保体系 ｜ 入口：技术培训合作', color:'#059669' },
+      { name:'周晓红', role:'采购把关', roleClass:'tag-gray', title:'集团物资部高级采购经理', concern:'框架合同条款、服务响应时效', color:'#7C3AED' },
+    ],
+  },
+  sinopharm: {
+    info: [
+      ['全称','国药控股股份有限公司（医药生产基地）'],
+      ['性质','央企控股上市公司（港股：01099）'],
+      ['主营','医药制造、分销及供应链管理'],
+      ['规模','全国30+省市医药制造基地'],
+      ['水质场景','制药用水（注射用水、纯化水、WFI）'],
+      ['年收入','约 ¥6000亿 (集团总收入)'],
+      ['采购方式','各基地分散采购 + GMP资质要求严格'],
+      ['财年','1月-12月'],
+    ],
+    standards: ['GMP 2010版及新版附录','GB 5749-2022（原水）','中国药典纯化水标准','USP <645> 水电导率（参考）'],
+    compliance: [
+      { level:'新', title:'新版GMP附录更新', desc:'制药用水在线监测覆盖率提升要求，部分设施不达标' },
+      { level:'持续', title:'药监局飞行检查', desc:'在线水质监测数据须满足21 CFR Part 11合规要求' },
+    ],
+    contacts: [
+      { name:'周敏', role:'技术影响者', roleClass:'tag-green', title:'质量管理中心水质专家', concern:'GMP合规、数据完整性、法规符合性 ｜ 入口：GMP合规研讨', color:'#059669' },
+      { name:'张华', role:'决策者', roleClass:'tag-blue', title:'生产技术副总裁', concern:'生产安全、监管风险、成本控制 ｜ 入口：高层拜访', color:'#0057A8' },
+      { name:'李秀芳', role:'采购把关', roleClass:'tag-gray', title:'战略采购部经理', concern:'供应商资质、GMP认证、价格', color:'#7C3AED' },
+    ],
+  },
+  semiconductor: {
+    info: [
+      ['全称','中芯国际集成电路制造有限公司'],
+      ['性质','上市国企（港股+科创板）'],
+      ['主营','集成电路晶圆代工'],
+      ['规模','全国最大晶圆代工企业，月产能 80万片+'],
+      ['水质场景','超纯水（UPW）系统、废水处理与回用'],
+      ['年收入','约 ¥300亿 (2024年报)'],
+      ['采购方式','战略供应商框架协议（每2-3年评审）'],
+      ['财年','1月-12月，资本性支出Q4提前锁定'],
+    ],
+    standards: ['SEMI F40 超纯水标准','SEMI S23 能源节约','GB 14374 半导体废水排放','工信部半导体用水新规（2025）'],
+    compliance: [
+      { level:'新', title:'半导体工厂废水重金属在线监测', desc:'工信部新规要求实时在线监测，现有设施需升级' },
+      { level:'持续', title:'超纯水质量合规', desc:'晶圆良率对UPW水质极度敏感，监测精度要求极高' },
+    ],
+    contacts: [
+      { name:'林杰', role:'技术影响者', roleClass:'tag-green', title:'基础设施工程技术总监', concern:'超纯水质量稳定性、设备可靠性、产线影响最小化 ｜ 入口：技术合作', color:'#059669' },
+      { name:'王海', role:'决策者', roleClass:'tag-blue', title:'副总裁（生产基础设施）', concern:'产线产能、资本支出优化、供应链安全', color:'#0057A8' },
+      { name:'吴芳', role:'采购把关', roleClass:'tag-gray', title:'战略采购总监', concern:'战略供应商资质、长期供货保障', color:'#7C3AED' },
+    ],
+  },
+  steel: {
+    info: [
+      ['全称','中国宝武钢铁集团有限公司'],
+      ['性质','央企（全球最大钢铁企业）'],
+      ['主营','钢铁冶炼、深加工及相关材料'],
+      ['规模','粗钢产量约 1.3亿吨/年'],
+      ['水处理场景','高炉冷却水、连铸废水、烟气脱硫废水'],
+      ['年收入','约 ¥9000亿 (集团总收入)'],
+      ['采购方式','集团采购平台 + 子公司分散采购（宝钢股份/马钢等）'],
+      ['预算状态','2026年降本增效，非生产性支出压缩20%'],
+    ],
+    standards: ['GB 13456 钢铁工业水污染物排放','HJ 2022 焦化废水处理','超低排放改造要求','排污许可证年度要求'],
+    compliance: [
+      { level:'持续', title:'超低排放改造最终验收', desc:'2026年6月前完成全部在线监测设备验收，数据联网' },
+      { level:'新', title:'湛江基地扩产配套', desc:'湛江钢铁基地二期扩产获批，配套仪器采购启动' },
+    ],
+    contacts: [
+      { name:'吴刚', role:'技术影响者', roleClass:'tag-green', title:'宝钢股份仪表自动化研究所所长', concern:'仪器可靠性、国产化替代压力、维保成本 ｜ 入口：技术交流', color:'#059669' },
+      { name:'黄明', role:'决策者', roleClass:'tag-blue', title:'集团环保安全总监', concern:'超低排放达标、监管合规 ｜ 入口：行业环保论坛', color:'#0057A8' },
+      { name:'孙丽', role:'采购把关', roleClass:'tag-gray', title:'物资采购中心高级经理', concern:'集团框架协议、竞争性报价', color:'#7C3AED' },
+    ],
+  },
+  food: {
+    info: [
+      ['全称','内蒙古伊利实业集团股份有限公司'],
+      ['性质','上市民企（A股：600887）'],
+      ['主营','乳制品及冷饮生产销售'],
+      ['规模','全国最大乳品企业，100+座生产基地'],
+      ['水质场景','工艺用水、CIP清洗用水、锅炉给水'],
+      ['年收入','约 ¥1300亿 (2024年报)'],
+      ['采购方式','集团战略采购框架 + 工厂分散执行'],
+      ['财年','1月-12月，Q3预算规划'],
+    ],
+    standards: ['GB 5749-2022 生活饮用水','GB 19301 生乳','食品安全国家标准 GB 12693','乳品行业用水新标准（征求意见中）'],
+    compliance: [
+      { level:'新', title:'乳品用水新标准征求意见', desc:'新增大肠菌群、硝酸盐在线监测要求，预计2027年执行' },
+      { level:'持续', title:'FSSC 22000 食品安全管理体系', desc:'国际认证要求所有工艺用水有连续在线监测记录' },
+    ],
+    contacts: [
+      { name:'王芳', role:'技术影响者', roleClass:'tag-green', title:'集团质量安全中心水质负责人', concern:'食品安全合规、检测精度、跨厂统一 ｜ 入口：质量技术合作', color:'#059669' },
+      { name:'刘伟', role:'决策者', roleClass:'tag-blue', title:'生产制造副总裁', concern:'产品安全、成本控制、工厂达标', color:'#0057A8' },
+      { name:'张丽', role:'采购把关', roleClass:'tag-gray', title:'战略采购中心总经理', concern:'集团框架采购、供应商年度评审', color:'#7C3AED' },
+    ],
+  },
+};
+
+const briefData = {
+  beijing: {
+    subtitle:'张明华（环保总监）· 2026-03-10 预约',
+    contact:'张明华，集团环保与水务管理总监（新任，2026年2月上任）',
+    contactNotes:['来自住建部水务司，监管背景强，关注合规与数字化','⚠️ 首次拜访，需以专业姿态建立信任'],
+    top3:['集团刚发布在线水质监测系统招标（¥180万），截止3月25日——这是核心话题','北京新版在线数据上报规范要求2026年底完成改造——合规压力真实','YSI正在下属水厂活动——备好竞品应对方案，但不主动挑起'],
+    agenda:[['0-10min','开场：了解新总监工作重点'],['10-25min','结合新国标和上报规范，展示Hach合规方案'],['25-35min','TOC分析能力+数据平台对接（对应招标需求）'],['35-45min','确认下一步：技术演示？投标支持？续签？']],
+    talking:['"新国标执行窗口期，现在是布局TOC监测能力的最佳时机"','"Hach在北京12座水厂部署在线监测，数据接口完全兼容市级平台"','"我们可为本次招标提供全套技术方案支持，降低评标风险"'],
+    warnings:['不要主动提价格，等对方问','不要批评YSI，用数据说话','避免过多历史介绍——他关注未来规划'],
+    ideal:'确认参与在线监测招标投标；获得技术演示机会；与新总监建立初步信任',
+  },
+  shanghai: {
+    subtitle:'刘海涛（总工程师）· 下次拜访待安排',
+    contact:'刘海涛，集团总工程师',
+    contactNotes:['关注技术可靠性和整体解决方案一致性','⚠️ E+H已提交整体方案，形势紧迫，需尽快安排高层拜访'],
+    top3:['E+H已提交覆盖全流程的在线监测整体解决方案——必须立即应对','试剂年度框架合同4月30日到期——须在此之前完成续签','超低排放2026年达标要求——合规压力可作为切入点'],
+    agenda:[['0-10min','了解当前E+H方案的具体内容和客户反馈'],['10-25min','展示Hach整体解决方案与E+H的差异化'],['25-35min','超低排放监测合规方案——结合2026年底验收压力'],['35-45min','试剂合同续签+整体方案评估时间节点确认']],
+    talking:['"Hach方案完全整合于贵司现有SC控制器网络，无需更换基础设施"','"超低排放验收截止2026年底，Hach可提供完整的验收准备支持包"','"我们的数字化平台已完成上海市水务局数据对接认证"'],
+    warnings:['高危时刻——不要轻视E+H威胁，需高层关注','聚焦技术差异化，不要打价格战','续签谈判不要单独进行，需与整体方案捆绑'],
+    ideal:'试剂合同续签锁定；获得整体方案评比机会；争取在E+H方案决策前介入',
+  },
+  guangzhou: {
+    subtitle:'李明（水质技术部总工）· 常规拜访',
+    contact:'李明，水质技术部总工程师',
+    contactNotes:['关注监测精度、仪器寿命和试剂稳定供应','关系较好，12天前刚完成拜访，进展顺利'],
+    top3:['广州市数字水务平台采购意向，含水质数据集成（¥300万）','广东省地下水监测标准更新，新增10项检测指标需升级','设备更新采购2023-2024年持续进行，窗口开放'],
+    agenda:[['0-10min','跟进上次拜访提到的数字水务平台项目进展'],['10-25min','展示Hach在数字化平台对接的具体方案'],['25-35min','地下水新标准差距分析，推介升级方案'],['35-45min','确认未来6个月采购计划和Hach能配合的时间节点']],
+    talking:['"广州数字水务平台可直接调用Hach在线仪器API，无需额外集成开发"','"针对新地下水标准，Hach可提供一次性合规差距评估，免费提供"','"现有仪器软件升级即可满足新数据上报格式要求"'],
+    warnings:['国产化替代政策压力——做好竞争准备','数字平台项目规模大，可能需要集团层面决策，提前了解审批流程'],
+    ideal:'数字水务平台项目中进入候选名单；地下水升级项目开始报价；下次拜访确认',
+  },
+  chengdu: {
+    subtitle:'赵强（技术中心总工）· 新厂项目跟进',
+    contact:'赵强，技术中心总工程师',
+    contactNotes:['关注工艺优化和节能降耗，技术型决策影响者','上次拜访7天前，进展良好，关系深厚'],
+    top3:['第五污水处理厂（10万t/d）立项，Q4仪器采购启动——最重要的中期机会','现有水厂在线仪器升级报价阶段，概率75%','四川省碳排放核算标准新适用，新监测需求'],
+    agenda:[['0-10min','第五污水厂设计方案进展，了解仪器配置需求'],['10-25min','展示Hach在新污水厂的完整配套方案（在线+实验室+数字化）'],['25-35min','碳排放监测新需求——Hach对应产品简介'],['35-45min','现有水厂升级：确认报价细节和决策时间节点']],
+    talking:['"第五污水厂从设计阶段就引入Hach方案，可省去后期集成成本"','"碳排放监测和水质监测共用一套SC控制器，节省设备投资"','"成都已有3座Hach服务的标杆污水厂，现场参观随时安排"'],
+    warnings:['新厂项目周期长，需维持长期跟进，不要急于求成','公司为上市公司，采购需公开招标，提前准备技术规格建议'],
+    ideal:'进入第五污水厂供应商候选名单；现有水厂升级合同签约；碳监测需求确认',
+  },
+  sinopec: {
+    subtitle:'(新接任仪表所所长) · 关系重建拜访',
+    contact:'新任仪表所所长（姓名待CRM确认）',
+    contactNotes:['⚠️ 原联系人张文斌已调任，新接任者尚未建立关系','国产化替代压力极大，境外品牌审批新增流程'],
+    top3:['新联系人尚未建立关系——本次拜访核心目标是建立信任','境外品牌采购审批新规——需了解流程，提供符合性支持','维保合同暂停状态——恢复维保是最近期商机'],
+    agenda:[['0-10min','自我介绍，了解新负责人背景和工作重点'],['10-20min','Hach在该炼厂20台仪器的服务历史和价值回顾'],['20-35min','协助了解新审批流程，提供Hach本土化服务和认证文件'],['35-45min','探讨维保合同恢复的可行路径']],
+    talking:['"Hach在中国有完整的本土化服务网络，技术工程师均为本地团队"','"我们可协助准备集团技术委员会所需的全套技术符合性材料"','"维保合同恢复后，我们可优先安排在厂设备健康检查，零成本"'],
+    warnings:['高风险账户——保持低姿态，聚焦服务而非销售','不要在第一次拜访就谈新增采购','国产化替代是政策压力，不要反驳，而是强调Hach本土化价值'],
+    ideal:'与新负责人建立初步信任；了解审批新流程所需材料；维保合同恢复路径明确',
+  },
+  huaneng: {
+    subtitle:'刘洋（水务技术中心主任）· 框架合同续签',
+    contact:'刘洋，水务技术中心主任',
+    contactNotes:['关注全国统一维保体系和技术标准','⚡ 框架协议5月到期，本次拜访核心议题是续签'],
+    top3:['三年框架协议2026-05-31到期——续签是此次拜访核心任务','华能2030碳中和路径——循环水监测新需求，可捆绑续签扩大范围','E+H在工业仪器有渗透，续签期间防御重点'],
+    agenda:[['0-10min','确认续签意向和集团层面的意见'],['10-25min','过去三年框架合同执行情况回顾（服务质量、响应时效）'],['25-35min','新框架合同建议：扩大覆盖产品线，纳入碳排放监测'],['35-45min','确认续签谈判时间表和参与方']],
+    talking:['"过去三年全国服务响应平均4小时，高于合同要求的8小时"','"新框架合同可将循环水监测和碳排放监测一并纳入，无需单独招标"','"下一个三年框架锁定后，可为华能提供优先发布的新产品体验资格"'],
+    warnings:['续签期间E+H可能伺机介入，不要拖延','价格谈判时坚守底线，但可用增值服务换价格空间','确认参与续签决策的部门不止刘洋，需确认是否有更高层决策人'],
+    ideal:'续签意向确认；框架合同扩大范围（纳入碳排放监测）达成原则共识；时间节点锁定',
+  },
+  sinopharm: {
+    subtitle:'周敏（质量管理中心水质专家）· GMP合规推进',
+    contact:'周敏，质量管理中心水质专家',
+    contactNotes:['关注GMP合规、数据完整性和法规符合性','上次拜访20天前，进展顺利'],
+    top3:['新版GMP附录要求制药用水在线监测覆盖率提升——直接采购驱动','苏州新建生物制药基地2027年投产，Q3仪器采购将启动','药监局飞行检查——数据完整性要求Hach强项'],
+    agenda:[['0-10min','了解新版GMP附录对贵司具体哪些设施有影响'],['10-25min','Hach制药用水监测方案+数据完整性功能演示'],['25-35min','苏州新厂：了解筹建进度，确认Hach能否参与方案设计'],['35-45min','现有设施升级报价确认和时间节点']],
+    talking:['"Hach制药用水系统已通过FDA 21 CFR Part 11数据完整性验证"','"GMP合规差距评估我们可免费提供，帮助确认升级优先级"','"苏州新厂如果从设计阶段引入Hach，可获得GMP全流程文件支持包"'],
+    warnings:['制药行业决策周期长，不要催促','数据完整性是核心——不要过分强调价格','飞行检查是敏感话题，从帮助客户备考角度切入'],
+    ideal:'现有设施GMP升级项目报价确认；苏州新厂供应商名单进入；下次拜访带完整演示方案',
+  },
+  semiconductor: {
+    subtitle:'林杰（基础设施工程技术总监）· 天津新厂跟进',
+    contact:'林杰，基础设施工程技术总监',
+    contactNotes:['关注超纯水质量稳定性和设备可靠性','上次拜访10天前，关系非常稳固'],
+    top3:['天津12英寸新厂2026年Q3开工，超纯水仪器招标Q2启动——¥80万机会','重金属在线监测工信部新规，现有设施需升级','试剂框架合同扩容谈判进行中（¥35万，概率90%）'],
+    agenda:[['0-10min','天津新厂建设进度更新，采购时间节点确认'],['10-25min','Hach超纯水监测方案在天津厂的适用性演示'],['25-35min','重金属在线监测升级：Hach方案和合规时间表'],['35-45min','试剂合同扩容：确认产品范围和新价格']],
+    talking:['"Hach超纯水监测系统已在北京、上海中芯成功运行，天津可无缝复制"','"重金属在线监测模块可直接集成到现有SC控制器，无需新建基础设施"','"试剂合同扩容后，可升级为战略供应商级别，享受优先发货和专属技术支持"'],
+    warnings:['天津新厂是关键机会，确保进入供应商名单是最高优先级','其他供应商可能也在竞争天津新厂——需确认我们是否已进入推荐名单','不要让试剂扩容谈判拖延新厂项目'],
+    ideal:'天津新厂供应商名单确认进入；重金属升级报价提交；试剂扩容合同本次拜访后一周内签署',
+  },
+  steel: {
+    subtitle:'吴刚（宝钢股份仪表自动化研究所所长）· 湛江扩产跟进',
+    contact:'吴刚，宝钢股份仪表自动化研究所所长',
+    contactNotes:['关注仪器可靠性，同时承受国产化替代压力','上次拜访50天前，关系需要重新激活'],
+    top3:['湛江钢铁基地二期扩产配套仪器（¥40万）——需立即联系','超低排放改造6月最终验收——Hach仪器运行状态须保障','集团降本增效20%——需要主动展示ROI和降本价值'],
+    agenda:[['0-10min','了解降本增效压力对仪器采购预算的具体影响'],['10-20min','Hach维保合同优化方案：减少不必要的上门服务，降低综合成本'],['20-35min','湛江扩产配套：展示Hach方案与现有系统的兼容性'],['35-45min','超低排放验收准备：主动提供验收技术支持（免费）']],
+    talking:['"通过Hach远程诊断服务，预计可减少30%上门维保次数，直接降低服务成本"','"湛江扩产使用与现有厂一致的Hach型号，可大幅降低运维人员培训成本"','"超低排放验收支持包免费提供，包含检测报告模板和现场调试指导"'],
+    warnings:['预算压力很大——必须主动谈降本，不能只谈性能','国产化替代是真实威胁，不要轻视，准备好全生命周期成本对比','50天没拜访，关系需要重新暖热，不要第一句就谈生意'],
+    ideal:'维保优化方案获得认可；湛江扩产配套进入候选；超低排放验收支持承诺确认',
+  },
+  food: {
+    subtitle:'王芳（集团质量安全中心水质负责人）· 新工厂项目',
+    contact:'王芳，集团质量安全中心水质负责人',
+    contactNotes:['关注食品安全合规、检测精度、跨工厂统一','上次拜访15天前，进展顺利'],
+    top3:['呼和浩特新建智慧工厂2026年Q4投产，Q3水质仪器招标——¥50万机会','现有工厂FSSC 22000认证续期，水质监测记录完整性要求','乳品用水新标准征求意见，2027年执行，提前布局'],
+    agenda:[['0-10min','新建智慧工厂水质系统设计进展和供应商选型时间节点'],['10-25min','Hach食品/乳品行业水质监测方案演示，含数据记录完整性功能'],['25-35min','FSSC 22000 认证续期需要的水质数据支持文件'],['35-45min','乳品用水新标准预解读，Hach提前合规路径']],
+    talking:['"Hach工艺用水监测系统数据记录功能完全满足FSSC 22000审计要求，可一键导出"','"新标准中大肠菌群在线监测，Hach已有成熟产品，可在新工厂一步到位"','"全国100+伊利工厂统一使用Hach，跨厂数据比对和工艺优化将成为可能"'],
+    warnings:['食品安全是敏感话题，不要承诺产品能直接提高食品安全——强调合规和数据','上市公司采购需招标，提前介入方案设计比直接报价更有效'],
+    ideal:'新工厂供应商候选名单确认进入；FSSC 22000支持文件提供机会；新标准合规路径分享',
+  },
+};
+
+
+// ── Render Profile ────────────────────────────────────────────────────────
+function renderProfile(accId) {
+  const p = profileData[accId];
+  if (!p) return;
+  const html = `
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">🏢 公司概况</div>
+        <table><tbody>
+          ${p.info.map(r => `<tr><td style="color:var(--text-light);width:110px;">${r[0]}</td><td>${r[1]}</td></tr>`).join('')}
+        </tbody></table>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 合规驱动因素</div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:12px;color:var(--text-light);margin-bottom:6px;">适用标准</div>
+          ${p.standards.map(s => `<span class="tag tag-blue">${s}</span>`).join('')}
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text-light);margin-bottom:6px;">近期合规压力</div>
+        ${p.compliance.map(c => `
+          <div class="signal-item" style="padding:8px 0;">
+            <div class="signal-urgency urg-${c.level==='新'||c.level==='紧急'||c.level==='高风险'?'high':'medium'}" style="font-size:10px;">${c.level}</div>
+            <div class="signal-content">
+              <div class="signal-title" style="font-size:12px;">${c.title}</div>
+              <div class="signal-desc">${c.desc}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">👥 关键决策人图谱</div>
+      ${p.contacts.map(c => `
+        <div class="persona">
+          <div class="persona-avatar" style="background:${c.color};">${c.name[0]}</div>
+          <div>
+            <div class="persona-name">${c.name} <span class="tag ${c.roleClass}" style="font-size:10px;">${c.role}</span></div>
+            <div class="persona-title">${c.title}</div>
+            <div class="persona-concern">${c.concern}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+  document.getElementById('profile-content').innerHTML = html;
+}
+
+// ── Render Signals Full ───────────────────────────────────────────────────
+function renderSignalsFull(acc) {
+  const statusMap = { green:'status-green', yellow:'status-yellow', red:'status-red' };
+  const statusLabel = { green:'🟢 健康', yellow:'🟡 需关注', red:'🔴 风险' };
+  const html = `
+    <div class="card">
+      <div class="card-title">📡 本周信号监控 — ${acc.name}
+        <span class="status-badge ${statusMap[acc.status]}" style="margin-left:auto;">${statusLabel[acc.status]}</span>
+      </div>
+      ${acc.signals.map(s => `
+        <div class="signal-item">
+          <div class="signal-urgency ${urgencyClass(s.urgency)}">${urgencyLabel(s.urgency)}</div>
+          <div class="signal-content">
+            <div class="signal-title">${s.title}</div>
+            <div class="signal-desc">${s.desc}</div>
+            <div class="signal-action">→ ${s.action}</div>
+            <div class="signal-source">${s.sourceUrl
+              ? \`📎 来源: <a href="\${s.sourceUrl}" target="_blank">\${s.source}</a>\`
+              : \`📎 来源: <span class="demo-tag">演示数据</span> \${s.source||''}\`
+            }</div>
+          </div>
+          <div class="signal-date">${s.date}</div>
+        </div>`).join('')}
+    </div>`;
+  document.getElementById('signals-full-content').innerHTML = html;
+}
+
+// ── Render Brief ──────────────────────────────────────────────────────────
+function renderBrief(accId, accName) {
+  const b = briefData[accId];
+  if (!b) return;
+  const html = `
+    <div class="card" style="border-left:4px solid var(--hach-blue);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+        <div>
+          <div style="font-size:16px;font-weight:700;">拜访简报</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:2px;">${accName} · ${b.subtitle}</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline">📤 发送给销售</button>
+          <button class="btn btn-primary">🖨 打印</button>
+        </div>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-title">👤 联系人概况</div>
+        <ul>
+          <li><strong>${b.contact}</strong></li>
+          ${b.contactNotes.map(n => `<li>${n}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-title">🔔 拜访前最重要的3件事</div>
+        <ul>${b.top3.map(t => `<li>${t}</li>`).join('')}</ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-title">📋 建议拜访议程（45分钟）</div>
+        <ul>${b.agenda.map(a => `<li><strong>${a[0]}</strong> · ${a[1]}</li>`).join('')}</ul>
+      </div>
+      <div class="brief-section">
+        <div class="brief-section-title">💬 核心话术</div>
+        <ul>${b.talking.map(t => `<li>${t}</li>`).join('')}</ul>
+      </div>
+      <div class="brief-section" style="border-left-color:var(--red);">
+        <div class="brief-section-title" style="color:var(--red);">⛔ 注意事项</div>
+        <ul>${b.warnings.map(w => `<li>${w}</li>`).join('')}</ul>
+      </div>
+      <div class="brief-section" style="border-left-color:var(--green);">
+        <div class="brief-section-title" style="color:var(--green);">✅ 本次拜访理想结果</div>
+        <p>${b.ideal}</p>
+      </div>
+    </div>`;
+  document.getElementById('brief-content').innerHTML = html;
+}
+
 // ── Render helpers ────────────────────────────────────────────────────────
 function urgencyClass(u) {
   return u === 'HIGH' ? 'urg-high' : u === 'MED' ? 'urg-medium' : 'urg-low';
@@ -1582,6 +1841,9 @@ function selectAccount(el, id) {
   badge.className = 'status-badge status-' + acc.status;
   badge.textContent = '● ' + acc.statusText;
   renderOverview(acc);
+  renderProfile(id);
+  renderSignalsFull(acc);
+  renderBrief(id, acc.name);
 }
 
 // ── Tabs ──────────────────────────────────────────────────────────────────
@@ -1610,6 +1872,9 @@ function showPrompt(id) {
 
 // ── Init ──────────────────────────────────────────────────────────────────
 renderOverview(accounts.beijing);
+renderProfile('beijing');
+renderSignalsFull(accounts.beijing);
+renderBrief('beijing', accounts.beijing.name);
 </script>
 </body>
 </html>
