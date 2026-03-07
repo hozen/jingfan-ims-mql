@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E+H 收购 CodeWrights 深度分析</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.8; color: #333; background: #f5f7fa; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 40px 30px; text-align: center; border-radius: 12px; margin-bottom: 25px; }
+        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header p { opacity: 0.95; font-size: 1.1em; }
+        .section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h2 { color: #11998e; border-bottom: 3px solid #38ef7d; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.6em; }
+        h3 { color: #2a5298; margin: 25px 0 15px; font-size: 1.3em; }
+        .highlight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; margin: 20px 0; }
+        .highlight-box h4 { color: white; margin-bottom: 15px; }
+        .highlight-box ul { list-style: none; padding: 0; }
+        .highlight-box li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .highlight-box li::before { content: '▸'; position: absolute; left: 0; }
+        .summary-box { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 25px; border-radius: 10px; margin: 20px 0; }
+        .summary-box h4 { color: white; margin-bottom: 15px; }
+        .summary-box ul { list-style: none; padding: 0; }
+        .summary-box li { padding: 6px 0; }
+        .timeline { position: relative; padding-left: 30px; margin: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background: #11998e; }
+        .timeline-item { position: relative; margin-bottom: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #11998e; }
+        .timeline-item::before { content: ''; position: absolute; left: -24px; top: 22px; width: 12px; height: 12px; background: #11998e; border-radius: 50%; }
+        .timeline-date { font-weight: bold; color: #11998e; margin-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; font-weight: 600; color: #11998e; }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.8em; margin: 3px; background: #e8f5e9; color: #2e7d32; }
+        .sources { background: #f5f5f5; padding: 20px; border-radius: 10px; margin-top: 25px; }
+        .sources h4 { margin-bottom: 15px; color: #555; }
+        .sources ul { list-style: none; padding: 0; }
+        .sources li { padding: 8px 0; font-size: 0.9em; color: #666; border-bottom: 1px solid #e0e0e0; }
+        .sources a { color: #2196f3; text-decoration: none; }
+        .comparison { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+        .comparison-card { padding: 20px; border-radius: 10px; border: 2px solid #ddd; }
+        .comparison-card.eh { background: #e8f5e9; border-color: #4caf50; }
+        .comparison-card.hach { background: #e3f2fd; border-color: #2196f3; }
+        .comparison-card h4 { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 E+H 收购 CodeWrights 深度分析</h1>
+            <p>对Hach中国市场的影响评估</p>
+            <p style="margin-top:10px; font-size:0.9em;">分析日期：2026年3月</p>
+        </header>
+
+        <div class="section">
+            <h2>📊 交易概况</h2>
+            <table>
+                <tr><th style="width:30%;">收购方</th><td>Endress+Hauser (E+H)</td></tr>
+                <tr><th>被收购方</th><td>CodeWrights GmbH</td></tr>
+                <tr><th>卖方</th><td>Pepperl+Fuchs (倍加福)</td></tr>
+                <tr><th>收购时间</th><td>2025年8月 (正式宣布)</td></tr>
+                <tr><th>交易前持股</th><td>E+H 持有50%，Pepperl+Fuchs 持有50%</td></tr>
+                <tr><th>收购后持股</th><td>E+H 100%完全控股</td></tr>
+                <tr><th>公司历史</th><td>成立于2002年，合资公司</td></tr>
+                <tr><th>员工规模</th><td>约60人 (根据公开信息)</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🏢 CodeWrights 是什么？</h2>
+            <div class="summary-box">
+                <h4>公司定位</h4>
+                <ul>
+                    <li>成立于2002年，超过<strong>20年</strong>行业经验</li>
+                    <li>专注于<strong>工业自动化设备软件解决方案</strong></li>
+                    <li>完成<strong>2000+项目</strong>，拥有50+业务合作伙伴</li>
+                    <li>核心能力：设备集成软件、FDT/FDI技术、EDDL、HART协议</li>
+                </ul>
+            </div>
+            
+            <h3>核心产品/技术</h3>
+            <div style="margin: 20px 0;">
+                <span class="tag">设备集成软件</span>
+                <span class="tag">FDT/FDI技术</span>
+                <span class="tag">EDDL电子设备描述语言</span>
+                <span class="tag">HART协议</span>
+                <span class="tag">Fieldbus现场总线</span>
+                <span class="tag">设备调试工具</span>
+            </div>
+
+            <h3>主要服务</h3>
+            <ul style="margin-left: 20px;">
+                <li>为自动化设备制造商开发定制软件解决方案</li>
+                <li>设备集成：支持HART、Fieldbus、PROFIBUS等协议</li>
+                <li>设备调试和诊断工具开发</li>
+                <li>DTM (Device Type Manager) 开发</li>
+                <li>iDTM 集成诊断工具</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📅 交易背景时间线</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2002年</div>
+                    <h4>CodeWrights成立</h4>
+                    <p>作为E+H和Pepperl+Fuchs的合资公司成立，双方各持股50%</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年8月6日</div>
+                    <h4>E+H宣布收购CodeWrights</h4>
+                    <p>E+H从Pepperl+Fuchs手中收购剩余50%股份，成为100%控股股东</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年底-2026年初</div>
+                    <h4>整合完成</h4>
+                    <p>CodeWrights成为E+H全资子公司，继续运营</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 E+H 收购动机分析</h2>
+            <div class="highlight-box">
+                <h4>战略意图</h4>
+                <ul>
+                    <li><strong>补齐软件短板：</strong>CodeWrights在设备集成软件方面有20年经验，弥补E+H软件能力</li>
+                    <li><strong>强化数字化战略：</strong>与E+H的"数字化转型"战略一致</li>
+                    <li><strong>控制关键技术：</strong>掌握设备集成协议（FDT/FDI），不依赖第三方</li>
+                    <li><strong>提升客户粘性：</strong>软件集成增强客户依赖度</li>
+                </ul>
+            </div>
+
+            <h3>与ABB收购Real Tech对比</h3>
+            <table>
+                <tr><th>维度</th><th>E+H 收购 CodeWrights</th><th>ABB 收购 Real Tech</th></tr>
+                <tr><td>收购对象</td><td>软件公司</td><td>传感器硬件公司</td></tr>
+                <tr><td>技术领域</td><td>设备集成软件</td><td>光学传感技术</td></tr>
+                <tr><td>战略方向</td><td>数字化/软件</td><td>硬件+实时监测</td></tr>
+                <tr><td>对Hach影响</td><td>软件能力接近</td><td>产品线直接竞争</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 对 Hach 的影响评估</h2>
+            
+            <div class="comparison">
+                <div class="comparison-card eh">
+                    <h4>E+H 收购后优势</h4>
+                    <ul style="margin-left: 15px;">
+                        <li>设备集成能力增强</li>
+                        <li>软件生态更完善</li>
+                        <li>与IMS定位接近</li>
+                        <li>客户粘性提升</li>
+                    </ul>
+                </div>
+                <div class="comparison-card hach">
+                    <h4>Hach 现有优势</h4>
+                    <ul style="margin-left: 15px;">
+                        <li>IMS先发优势（更成熟）</li>
+                        <li>中国市场深耕更久</li>
+                        <li>服务网络更完善</li>
+                        <li>试剂供应体系</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>威胁程度评估</h3>
+            <table>
+                <tr><th>维度</th><th>影响程度</th><th>说明</th></tr>
+                <tr><td>软件能力</td><td style="color:#e65100;">🟡 中等</td><td>E+H现在有类似能力，但IMS更成熟</td></tr>
+                <tr><td>产品差异化</td><td style="color:#4caf50;">🟢 降低</td><td>软件差距缩小，但Hach仍有优势</td></tr>
+                <tr><td>客户粘性</td><td style="color:#e65100;">🟡 中等</td><td>E+H可提供更完整方案</td></tr>
+                <tr><td>竞争压力</td><td style="color:#ff9800;">🟡 中高</td><td>E+H现在更难对付</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 Hach 应对建议</h2>
+            <div class="highlight-box">
+                <h4>应对策略</h4>
+                <ul>
+                    <li><strong>加速IMS功能迭代：</strong>保持软件领先，确保功能持续领先E+H</li>
+                    <li><strong>强调先发优势：</strong>IMS已有多年成熟应用案例，E+H需要时间追赶</li>
+                    <li><strong>强化服务+试剂生态：</strong>这是E+H短期内无法复制的优势</li>
+                    <li><strong>差异化定位：</strong>Hach = 完整解决方案（硬件+软件+服务+试剂）</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sources">
+            <h4>📚 参考来源</h4>
+            <ul>
+                <li>[1] Endress+Hauser acquires full ownership of CodeWrights - Endress+Hauser官网 (2025-08) <a href="https://www.endress.com/en/endress-hauser-group/press-center/news-and-press-releases/codewrights-ownership" target="_blank">https://www.endress.com/...codewrights-ownership</a></li>
+                <li>[2] Endress+Hauser Acquires Full Ownership of CodeWrights - Automation.com <a href="https://www.automation.com/en-us/articles/august-2025/endress-hauser-acquires-full-ownership-codewrights" target="_blank">https://www.automation.com/...</a></li>
+                <li>[3] CodeWrights官方网站 <a href="https://www.codewrights.de/en" target="_blank">https://www.codewrights.de/en</a></li>
+                <li>[4] Endress+Hauser becomes sole owner of CodeWrights - Water & Wastewater Asia <a href="https://waterwastewaterasia.com/endresshauser-becomes-sole-owner-of-codewrights/" target="_blank">https://waterwastewaterasia.com/...</a></li>
+                <li>[5] CodeWrights Offers Multi-tool for Field Device Troubleshooting - Control Global (2017) <a href="https://www.controlglobal.com/industry-news/news/11316116/codewrights-offers-multi-tool-for-field-device-troubleshooting-and-commissioning" target="_blank">https://www.controlglobal.com/...</a></li>
+            </ul>
+        </div>
+
+        <div style="text-align:center; padding:20px; color:#666; font-size:0.9em;">
+            <p>Created: 2026-03-05 | For Competitive Analysis</p>
+        </div>
+    </div>
+</body>
+</html>

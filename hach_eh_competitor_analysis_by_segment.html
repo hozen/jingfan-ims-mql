@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E+H 竞品动态分析 - 按市场细分</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; line-height: 1.8; color: #333; background: #f5f7fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 30px; text-align: center; border-radius: 12px; margin-bottom: 25px; }
+        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header p { opacity: 0.95; }
+        .section { background: white; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+        h2 { color: #1e3c72; border-bottom: 3px solid #2a5298; padding-bottom: 10px; margin-bottom: 20px; }
+        h3 { color: #2a5298; margin: 25px 0 15px; }
+        h4 { color: #444; margin: 15px 0 10px; }
+        .market-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+        .market-card { padding: 20px; border-radius: 10px; border: 2px solid #ddd; }
+        .market-card.muni { border-color: #2196f3; background: #e3f2fd; }
+        .market-card.ind { border-color: #4caf50; background: #e8f5e9; }
+        .market-card h4 { margin-bottom: 10px; }
+        .timeline { position: relative; padding-left: 30px; margin: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background: #2a5298; }
+        .timeline-item { position: relative; margin-bottom: 20px; padding: 18px; background: #f8f9fa; border-radius: 8px; }
+        .timeline-item::before { content: ''; position: absolute; left: -24px; top: 20px; width: 12px; height: 12px; background: #2a5298; border-radius: 50%; }
+        .timeline-date { font-weight: bold; color: #2a5298; margin-bottom: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; font-weight: 600; }
+        .impact-high { color: #c62828; font-weight: bold; }
+        .impact-medium { color: #e65100; }
+        .impact-low { color: #2e7d32; }
+        .highlight-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .highlight-box h4 { color: white; }
+        .highlight-box ul { list-style: none; padding: 0; }
+        .highlight-box li { padding: 6px 0; padding-left: 20px; position: relative; }
+        .highlight-box li::before { content: '▸'; position: absolute; left: 0; }
+        .sources { background: #f5f5f5; padding: 20px; border-radius: 10px; margin-top: 25px; font-size: 0.9em; color: #666; }
+        .sources h4 { margin-bottom: 10px; color: #555; }
+        .sources ul { padding-left: 20px; }
+        .sources li { margin: 5px 0; }
+        @media (max-width: 768px) { .market-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 E+H 竞品动态分析</h1>
+            <p>按市场细分：Muni (市政供水/污水) + IND (电力/化工/制药/半导体)</p>
+            <p style="margin-top:10px; font-size:0.9em;">分析日期：2026年3月</p>
+        </header>
+
+        <div class="section">
+            <h2>📊 Hach 市场细分</h2>
+            <div class="market-grid">
+                <div class="market-card muni">
+                    <h4>🏛️ Muni (市政)</h4>
+                    <ul>
+                        <li>市政供水 (DWTP)</li>
+                        <li>市政污水 (WWTP)</li>
+                    </ul>
+                </div>
+                <div class="market-card ind">
+                    <h4>🏭 IND (工业)</h4>
+                    <ul>
+                        <li>电力 (Power)</li>
+                        <li>化工 (Chem)</li>
+                        <li>生物制药 (Biopharma)</li>
+                        <li>半导体 (Semiconductor)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏢 E+H 概况</h2>
+            <table>
+                <tr><th style="width:30%;">公司</th><td>Endress+Hauser (E+H / 恩德斯豪斯)</td></tr>
+                <tr><th>总部</td><td>瑞士</td></tr>
+                <tr><th>成立</td><td>1953年</td></tr>
+                <tr><th>员工</td><td>5,800+人</td></tr>
+                <tr><th>核心业务</td><td>工业过程自动化仪表</td></tr>
+                <tr><th>产品线</td><td>流量计、液位计、压力、温度、分析仪表</td></tr>
+                <tr><th>优势领域</td><td>化工、电力、过程工业</td></tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📅 E+H 近期重大动态 (2024-2026)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年8月</div>
+                    <h4>收购 CodeWrights 100%股权</h4>
+                    <p>从Pepperl+Fuchs手中收购CodeWrights剩余50%股份，成为100%控股股东。CodeWrights专注于工业设备软件集成（FDT/FDI/EDDL技术）。</p>
+                    <p><strong>战略意图：</strong>补齐软件能力，强化数字化战略</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025年</div>
+                    <h4>强化分析仪表产品线</h4>
+                    <p>推广Liquiline平台、CA80系列水质分析仪、teqwave产品</p>
+                    <p><strong>战略意图：</strong>在水务市场与Hach竞争</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">持续</div>
+                    <h4>中国本土化扩张</h4>
+                    <p>加强在中国市场的直销和渠道建设，重点布局化工、电力行业</p>
+                    <p><strong>战略意图：</strong>扩大市场份额</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🎯 E+H 动态对各市场细分的影响</h2>
+            
+            <h3>🏛️ Muni (市政) 市场</h3>
+            <table>
+                <tr><th>市场</th><th>E+H影响</th><th>威胁程度</th><th>原因</th></tr>
+                <tr>
+                    <td>市政供水 (DWTP)</td>
+                    <td class="impact-medium">中等</td>
+                    <td>🟡</td>
+                    <td>E+H主要优势在工业流量计，供水不是核心重点，但正在渗透</td>
+                </tr>
+                <tr>
+                    <td>市政污水 (WWTP)</td>
+                    <td class="impact-medium">中等</td>
+                    <td>🟡</td>
+                    <td>E+H有分析仪产品线，但在市政污水领域不如Hach专注</td>
+                </tr>
+            </table>
+
+            <h3>🏭 IND (工业) 市场</h3>
+            <table>
+                <tr><th>市场</th><th>E+H影响</th><th>威胁程度</th><th>原因</th></tr>
+                <tr>
+                    <td>电力 (Power)</td>
+                    <td class="impact-high">高</td>
+                    <td>🔴</td>
+                    <td>E+H传统强势领域，有完整的过程仪表产品线，与Hach直接竞争</td>
+                </tr>
+                <tr>
+                    <td>化工 (Chem)</td>
+                    <td class="impact-high">高</td>
+                    <td>🔴</td>
+                    <td>E+H核心市场，化工行业客户关系深厚，全面竞争</td>
+                </tr>
+                <tr>
+                    <td>生物制药 (Biopharma)</td>
+                    <td class="impact-medium">中等</td>
+                    <td>🟡</td>
+                    <td>制药用水(Ultra-pure water)需要高精度，Hach有优势</td>
+                </tr>
+                <tr>
+                    <td>半导体 (Semiconductor)</td>
+                    <td class="impact-medium">中等</td>
+                    <td>🟡</td>
+                    <td>超纯水领域Hach占主导，E+H正在进入</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>💡 各市场细分应对策略</h2>
+            
+            <h3>🔴 高威胁市场 (IND - 电力/化工)</h3>
+            <div class="highlight-box">
+                <h4>电力 & 化工 - 应对策略</h4>
+                <ul>
+                    <li><strong>差异化定位：</strong>强调Hach在水务监测的专业性，E+H是"全能选手"</li>
+                    <li><strong>IMS软件优势：</strong>E+H收购CodeWrights后软件能力增强，但IMS更成熟</li>
+                    <li><strong>案例竞争：</strong>收集Hach在电力/化工的成功案例vs E+H</li>
+                    <li><strong>试剂+服务：</strong>强调完整试剂供应和本地服务网络</li>
+                </ul>
+            </div>
+
+            <h3>🟡 中等威胁市场 (Muni + Biopharma/Semi)</h3>
+            <div class="highlight-box" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <h4>市政 & 制药/半导体 - 应对策略</h4>
+                <ul>
+                    <li><strong>市政供水：</strong>巩固CL17余氯分析仪市场地位，强化与E+H差异</li>
+                    <li><strong>市政污水：</strong>强调Hach在污水监测的专注度</li>
+                    <li><strong>制药/半导体：</strong>保持高精度优势，超纯水是Hach强项</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 E+H vs Hach 各市场对比</h2>
+            <table>
+                <tr><th>市场</th><th>E+H 优势</th><th>Hach 优势</th><th>Hach 应对</th></tr>
+                <tr>
+                    <td>电力</td>
+                    <td>流量计、过程仪表完整</td>
+                    <td>水质监测专业</td>
+                    <td>强化水务监测方案</td>
+                </tr>
+                <tr>
+                    <td>化工</td>
+                    <td>客户关系深、全能型</td>
+                    <td>水质分析专注</td>
+                    <td>专注水质监测差异化</td>
+                </tr>
+                <tr>
+                    <td>市政供水</td>
+                    <td>正在进入</td>
+                    <td>CL17等拳头产品</td>
+                    <td>保持领先，持续创新</td>
+                </tr>
+                <tr>
+                    <td>市政污水</td>
+                    <td>一般</td>
+                    <td>专注度高</td>
+                    <td>巩固地位</td>
+                </tr>
+                <tr>
+                    <td>生物制药</td>
+                    <td>一般</td>
+                    <td>超纯水技术领先</td>
+                    <td>保持技术领先</td>
+                </tr>
+                <tr>
+                    <td>半导体</td>
+                    <td>一般</td>
+                    <td>超纯水技术领先</td>
+                    <td>保持技术领先</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>📋 下一步行动</h2>
+            <div class="highlight-box">
+                <ul>
+                    <li><strong>收集E+H在各市场的成功案例</strong></li>
+                    <li><strong>对比Hach vs E+H在各行业的解决方案</strong></li>
+                    <li><strong>针对高威胁市场(电力/化工)制定专项竞争策略</strong></li>
+                    <li><strong>持续监控E+H在中国市场的动向</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="sources">
+            <h4>📚 参考来源</h4>
+            <ul>
+                <li>[1] E+H官方网站 - www.endress.com.cn</li>
+                <li>[2] E+H收购CodeWrights新闻 - Automation.com (2025-08)</li>
+                <li>[3] 百度百科 - E+H公司介绍</li>
+                <li>[4] 哈希(Hach)百度百科 - 市场领域介绍</li>
+            </ul>
+        </div>
+
+        <div style="text-align:center; padding:20px; color:#666; font-size:0.9em;">
+            <p>Created: 2026-03-05 | Framework: 竞品动态 → 市场影响 → 应对策略</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hach IMS MQL Pipeline Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 2.2em;
+        }
+        .header p {
+            color: #7f8c8d;
+            margin: 10px 0 0 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .mql-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .mql-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            border-left: 6px solid #667eea;
+            transition: all 0.3s;
+        }
+        .mql-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .mql-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .mql-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .mql-id {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .mql-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .mql-stat {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .mql-stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .mql-stat-label {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .progress-bar {
+            background: #ecf0f1;
+            border-radius: 10px;
+            height: 8px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+        .priority-urgent { background: #e74c3c; }
+        .priority-high { background: #f39c12; }
+        .priority-medium { background: #3498db; }
+        
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .tag {
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: white;
+        }
+        .tag-provincial { background: #9b59b6; }
+        .tag-municipal { background: #3498db; }
+        .tag-industrial { background: #e67e22; }
+        .tag-rural { background: #27ae60; }
+        .tag-partnership { background: #e74c3c; }
+        
+        .action-box {
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .action-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+        .action-text {
+            color: #856404;
+            font-size: 0.9em;
+        }
+        
+        .conversion-funnel {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .funnel-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .funnel-stages {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .funnel-stage {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+        .funnel-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .funnel-label {
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        .funnel-arrow {
+            font-size: 2em;
+            color: #bdc3c7;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Hach IMS MQL Pipeline Dashboard</h1>
+            <p>Marketing Qualified Leads → Sales Qualified Leads Conversion Tracking | Generated: 2026-03-03 20:00 GMT+8</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total MQLs</div>
+                <div class="stat-number" style="color: #667eea;">10</div>
+                <div>Representing 50+ sites</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Conversion Rate</div>
+                <div class="stat-number" style="color: #27ae60;">79.5%</div>
+                <div>Target: 80%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Expected SQLs</div>
+                <div class="stat-number" style="color: #f39c12;">8</div>
+                <div>Out of 10 MQLs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">IMS Revenue Potential</div>
+                <div class="stat-number" style="color: #9b59b6;">1,175-2,340万</div>
+                <div>Weighted: 934-1,860万</div>
+            </div>
+        </div>
+
+        <div class="conversion-funnel">
+            <div class="funnel-title">📊 MQL → SQL Conversion Funnel</div>
+            <div class="funnel-stages">
+                <div class="funnel-stage">
+                    <div class="funnel-number">10</div>
+                    <div class="funnel-label">MQLs</div>
+                </div>
+                <div class="funnel-arrow">→</div>
+                <div class="funnel-stage">
+                    <div class="funnel-number" style="color: #27ae60;">8</div>
+                    <div class="funnel-label">Expected SQLs</div>
+                </div>
+                <div class="funnel-arrow">→</div>
+                <div class="funnel-stage">
+                    <div class="funnel-number" style="color: #f39c12;">5</div>
+                    <div class="funnel-label">Closed Deals</div>
+                </div>
+                <div class="funnel-arrow">→</div>
+                <div class="funnel-stage">
+                    <div class="funnel-number" style="color: #9b59b6;">50+</div>
+                    <div class="funnel-label">End Sites</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mql-grid">
+            <!-- MQL #1 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">湖北省生态环境监测中心站</div>
+                    <div class="mql-id">MQL #1</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-provincial">Provincial</span>
+                    <span class="tag tag-rural">Multi-site</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">95%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">85%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">150-300万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-urgent" style="width: 85%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 2 weeks to SQL | Priority: 🔴 HIGHEST
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Include IMS demo in provincial tender proposal - Schedule platform demonstration</div>
+                </div>
+            </div>
+
+            <!-- MQL #2 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">麻城市乡镇污水处理厂</div>
+                    <div class="mql-id">MQL #2</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-rural">Rural</span>
+                    <span class="tag tag-municipal">Municipal</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">90%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">80%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">20-40万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-high" style="width: 80%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 1 week to SQL | Priority: 🟠 HIGH
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Create rural IMS package proposal - Demonstrate 40% reduction in site visits</div>
+                </div>
+            </div>
+
+            <!-- MQL #3 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">环县自来水集团</div>
+                    <div class="mql-id">MQL #3</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-municipal">Municipal</span>
+                    <span class="tag tag-partnership">Partnership</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">92%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">88%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">15-30万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-urgent" style="width: 88%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 3 days to SQL | Priority: 🔴 URGENT (48H)
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🚨 URGENT - 48 Hour Response</div>
+                    <div class="action-text">Respond to inquiry with IMS + SCADA solution - Include IMS demo in 48h response</div>
+                </div>
+            </div>
+
+            <!-- MQL #4 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">郑州市侯寨渗滤液项目</div>
+                    <div class="mql-id">MQL #4</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-industrial">Industrial</span>
+                    <span class="tag tag-municipal">Municipal</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">85%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">75%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">10-20万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-medium" style="width: 75%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 1 week to SQL | Priority: 🔵 MEDIUM
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Technical evaluation with IMS focus - Demonstrate predictive maintenance for harsh environments</div>
+                </div>
+            </div>
+
+            <!-- MQL #5 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">南京市水务局 (Follow-up)</div>
+                    <div class="mql-id">MQL #5</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-municipal">Municipal</span>
+                    <span class="tag tag-provincial">Upgrade</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">88%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">70%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">30-50万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-medium" style="width: 70%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 2-4 weeks to SQL | Priority: 🔵 MEDIUM
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Follow-up contact for Q2 2026 - Position IMS as system upgrade over competitor</div>
+                </div>
+            </div>
+
+            <!-- MQL #6 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">武汉市政府水务集团</div>
+                    <div class="mql-id">MQL #6</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-provincial">Provincial</span>
+                    <span class="tag tag-municipal">Smart City</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">93%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">82%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">200-400万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-high" style="width: 82%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 2-3 weeks to SQL | Priority: 🟠 HIGH
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Research and initial outreach - Align with smart city initiative</div>
+                </div>
+            </div>
+
+            <!-- MQL #7 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">湖北省5城市环保局</div>
+                    <div class="mql-id">MQL #7</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-provincial">Provincial</span>
+                    <span class="tag tag-rural">Multi-city</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">90%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">78%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">300-600万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-high" style="width: 78%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 3-4 weeks to SQL | Priority: 🟠 HIGH
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Identify and prioritize 5 cities - Propose standardized IMS platform</div>
+                </div>
+            </div>
+
+            <!-- MQL #8 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">10工业园区污水处理厂</div>
+                    <div class="mql-id">MQL #8</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-industrial">Industrial</span>
+                    <span class="tag tag-municipal">Cluster</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">87%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">75%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">150-300万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-medium" style="width: 75%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 2-3 weeks to SQL | Priority: 🔵 MEDIUM
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Map target industrial parks - Propose shared IMS platform for cost reduction</div>
+                </div>
+            </div>
+
+            <!-- MQL #9 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">20县自来水公司</div>
+                    <div class="mql-id">MQL #9</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-rural">Rural</span>
+                    <span class="tag tag-provincial">Government Program</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">85%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">72%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">200-400万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-medium" style="width: 72%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 3-4 weeks to SQL | Priority: 🔵 MEDIUM
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Identify counties with government programs - Propose rural water IMS initiative</div>
+                </div>
+            </div>
+
+            <!-- MQL #10 -->
+            <div class="mql-card">
+                <div class="mql-header">
+                    <div class="mql-title">5第三方运维服务公司</div>
+                    <div class="mql-id">MQL #10</div>
+                </div>
+                <div class="tags">
+                    <span class="tag tag-partnership">Partnership</span>
+                    <span class="tag tag-provincial">Reseller</span>
+                </div>
+                <div class="mql-stats">
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">95%</div>
+                        <div class="mql-stat-label">IMS Fit</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">90%</div>
+                        <div class="mql-stat-label">Conversion</div>
+                    </div>
+                    <div class="mql-stat">
+                        <div class="mql-stat-value">100-200万</div>
+                        <div class="mql-stat-label">IMS Revenue</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill priority-high" style="width: 90%;"></div>
+                </div>
+                <div style="font-size: 0.85em; color: #7f8c8d; margin-bottom: 10px;">
+                    Timeline: 1-2 weeks to SQL | Priority: 🟠 HIGH
+                </div>
+                <div class="action-box">
+                    <div class="action-title">🎯 Next Action</div>
+                    <div class="action-text">Identify top 5 O&M companies - Partnership outreach (reseller/integrator program)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎯 Generated by Hach IMS Marketing Team | Next Review: 2026-03-10</p>
+            <p>Goal: Convert 8 out of 10 MQLs to SQLs within 4 weeks!</p>
+        </div>
+    </div>
+</body>
+</html>

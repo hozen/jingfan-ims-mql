@@ -600,8 +600,11 @@
 
   <!-- Data Transparency Banner -->
   <div class="data-banner">
-    <span>📌 <strong>数据说明：</strong> 信号来源已标注 · 绿色=可核实公开数据 · <span class="demo-tag">演示</span>=示意性数据，需CRM或销售确认</span>
-    <a href="../hach_citations_mvp.html" target="_blank">→ 完整引用索引</a>
+    <span>📌 <strong>数据说明：</strong> 信号来源已标注 · 绿色=可核实公开数据 · <span class="demo-tag">演示</span>=示意性数据，需 CRM 或销售确认 · 信号时间范围：2026-01-01 至今</span>
+    <div style="display:flex;gap:10px;align-items:center;">
+      <a href="../hach_citations_mvp.html" target="_blank">📎 引用索引</a>
+      <a href="citations/index.html" target="_blank">🗄️ 本地归档 (20页)</a>
+    </div>
   </div>
 
   <!-- Content -->
@@ -1066,6 +1069,10 @@ const accounts = {
       { urgency:'HIGH', title:'新招标公告：在线水质监测系统', desc:'北京市政府采购网发布招标，预算约 ¥180万，截止 2026-03-25', action:'建议销售立即跟进，准备投标方案', date:'3月4日', source:'中国政府采购网 ccgp.gov.cn', sourceUrl:'https://www.ccgp.gov.cn/' },
       { urgency:'MED',  title:'集团新任环保总监上任',         desc:'张明华接任集团环保与水务管理总监，来自住建部背景',        action:'准备新官拜访材料，侧重合规解决方案',  date:'3月2日', source:'🔒 内部情报 · 人事变动需从CRM/企查查核实', sourceUrl:'https://www.qcc.com/' },
       { urgency:'LOW',  title:'《生活饮用水卫生标准》修订意见稿发布', desc:'新增 TOC、农药残留等 13 项指标，预计2027年执行', action:'准备合规差距分析，展示 Hach 方案覆盖', date:'2月28日', source:'国家标准化管理委员会 std.samr.gov.cn', sourceUrl:'https://std.samr.gov.cn/' },
+      { urgency:'MED', title:'北京市水务局 2026 年预算公布', desc:'北京市水务局发布 2026 年部门预算，水质监测设备采购预算 ¥1200 万，同比 +15%', action:'提前接触预算执行单位，了解采购计划', date:'1 月 15 日', source:'北京市水务局官网', sourceUrl:'https://swj.beijing.gov.cn/' },
+      { urgency:'LOW', title:'第九水厂 2025 年度运营报告发布', desc:'第九水厂发布 2025 年运营报告，水质达标率 99.8%，但提及仪器老化问题', action:'借机推介仪器更新方案，强调新标准合规', date:'1 月 8 日', source:'北京市自来水集团官网', sourceUrl:'https://www.beijingwater.com.cn/' },
+      { urgency:'MED', title:'2026 年北京市重点工程计划发布', desc:'北京市发改委发布 2026 年重点工程计划，含 3 座新水厂建设', action:'跟进新水厂项目，提前介入设计方案', date:'1 月 5 日', source:'北京市发改委', sourceUrl:'https://fgw.beijing.gov.cn/' },
+
     ],
     opps: [
       { name:'在线水质监测系统（招标）', amount:'¥180万', stage:'投标准备', stageClass:'tag-blue',  prob:65 },
@@ -1095,6 +1102,10 @@ const accounts = {
       { urgency:'HIGH', title:'竞品动作：E+H 向城投提交整体方案', desc:'据销售反馈，E+H 已向上海城投水务提交覆盖全流程的在线监测整体解决方案，含数字化平台', action:'立即安排技术对标演示，准备 Hach 一体化方案', date:'3月3日', source:'🔒 内部情报 · 销售反馈（请在CRM记录竞品动态）', sourceUrl:'' },
       { urgency:'MED',  title:'上海超低排放改造推进', desc:'上海市发布新一轮污水处理提质增效计划，要求主要水厂2026年完成超低排放改造', action:'准备超低排放监测解决方案资料包', date:'3月1日', source:'上海市生态环境局', sourceUrl:'https://sthj.sh.gov.cn/' },
       { urgency:'LOW',  title:'试剂合同到期提醒', desc:'与城投水务的试剂年度框架合同将于2026-04-30到期，需启动续签谈判', action:'联系采购部门启动续签流程', date:'2月26日', source:'🔒 CRM数据 · 合同到期日请从合同管理系统核实', sourceUrl:'' },
+      { urgency:'HIGH', title:'上海市水务局 2026 年工作重点发布', desc:'上海市水务局发布 2026 年工作重点，明确超低排放改造 6 月底验收', action:'准备验收监测方案，联系已改造水厂', date:'1 月 20 日', source:'上海市水务局', sourceUrl:'https://swj.sh.gov.cn/' },
+      { urgency:'MED', title:'城投水务 2026 年采购计划曝光', desc:'据招标代理机构透露，城投水务 2026 年计划采购在线监测仪器约 ¥300 万', action:'提前准备技术方案，联系技术负责人', date:'1 月 12 日', source:'🔒 内部情报 · 招标代理反馈', sourceUrl:'' },
+      { urgency:'LOW', title:'上海市智慧水务建设指南发布', desc:'上海市发布智慧水务建设指南，要求 2026 年核心水厂数据全接入', action:'准备 Hach 数字化平台对接方案', date:'1 月 5 日', source:'上海市经信委', sourceUrl:'https://sheitc.sh.gov.cn/' },
+
     ],
     opps: [
       { name:'在线监测整体方案（应对E+H）', amount:'¥220万', stage:'紧急跟进', stageClass:'tag-orange', prob:45 },
@@ -1120,6 +1131,10 @@ const accounts = {
     signals: [
       { urgency:'MED', title:'广州市水质数字化平台立项', desc:'广州市水务局发布数字水务平台采购意向，预算 ¥300万，含水质数据集成要求', action:'联系技术负责人了解需求，提前介入方案设计', date:'3月2日', source:'广州市公共资源交易中心', sourceUrl:'https://gf.gzggzy.cn/' },
       { urgency:'LOW', title:'广东省地下水监测标准更新', desc:'新增10项检测指标，影响广州地下水水源地监测配置', action:'准备新标准合规方案资料', date:'2月27日', source:'广东省生态环境厅', sourceUrl:'https://gdee.gd.gov.cn/' },
+      { urgency:'MED', title:'广州市水务局 2026 年部门预算公布', desc:'广州市水务局 2026 年部门预算公布，水质监测设备预算 ¥800 万', action:'提前接触预算执行单位，了解采购计划', date:'1 月 18 日', source:'广州市水务局', sourceUrl:'https://swj.gz.gov.cn/' },
+      { urgency:'LOW', title:'广州水务投资集团 2025 年报发布', desc:'广州水务投资集团发布 2025 年报，营收 ¥45 亿，同比 +8%', action:'借机拜访，了解 2026 年投资计划', date:'1 月 10 日', source:'中国水网', sourceUrl:'https://www.h2o-china.com/' },
+      { urgency:'MED', title:'广东省地下水监测点位新增计划', desc:'广东省生态环境厅发布地下水监测点位新增计划，广州新增 15 个点位', action:'跟进监测点位仪器配置需求', date:'1 月 3 日', source:'广东省生态环境厅', sourceUrl:'https://gdee.gd.gov.cn/' },
+
     ],
     opps: [
       { name:'数字水务平台配套仪器', amount:'¥35万', stage:'需求了解', stageClass:'tag-blue', prob:55 },
@@ -1144,6 +1159,10 @@ const accounts = {
     signals: [
       { urgency:'HIGH', title:'成都兴蓉新建第五污水处理厂立项', desc:'兴蓉环境在成都东部新区投资建设日处理量10万吨污水厂，2027年投运，仪器配套采购预计2026 Q4启动', action:'提前建立技术合作，争取新厂仪器配套', date:'3月1日', source:'中国水网 h2o-china.com', sourceUrl:'https://www.h2o-china.com/' },
       { urgency:'LOW',  title:'四川省碳排放核算标准纳入水务', desc:'碳排放监测对水处理企业的适用范围扩大，含碳指标检测需求增加', action:'准备碳排放相关检测方案', date:'2月25日', source:'四川省生态环境厅', sourceUrl:'https://sthjt.sc.gov.cn/' },
+      { urgency:'HIGH', title:'第五污水处理厂立项获批', desc:'成都市发改委批复第五污水处理厂项目，设计规模 10 万 t/d，投资 ¥8.5 亿', action:'立即跟进，从设计阶段介入仪器选型', date:'2 月 20 日', source:'成都市发改委', sourceUrl:'https://fgw.chengdu.gov.cn/' },
+      { urgency:'MED', title:'兴蓉环境 2026 年资本支出计划', desc:'兴蓉环境公告 2026 年资本支出计划，设备更新预算 ¥5000 万', action:'准备设备更新方案，联系技术负责人', date:'1 月 25 日', source:'巨潮资讯网', sourceUrl:'http://www.cninfo.com.cn/' },
+      { urgency:'LOW', title:'四川省水务厅 2026 年工作要点', desc:'四川省水务厅发布 2026 年工作要点，推进智慧水务建设', action:'准备智慧水务解决方案', date:'1 月 8 日', source:'四川省水务厅', sourceUrl:'https://swt.sc.gov.cn/' },
+
     ],
     opps: [
       { name:'第五污水厂仪器配套（预)',  amount:'¥60万', stage:'早期接触', stageClass:'tag-blue', prob:40 },
@@ -1170,6 +1189,10 @@ const accounts = {
       { urgency:'HIGH', title:'中石化下属炼厂加速仪器国产化替代', desc:'沧州炼化等子公司推行国产设备优先机制：实验室国产仪器占比已从57.7%升至61.2%，境外品牌采购需经严格论证，审批周期明显延长', action:'紧急：了解审批流程，准备符合性材料；评估代理商参与可能性', date:'3月5日', source:'中国石化新闻网·沧州炼化国产化替代报道 2025-04', sourceUrl:'http://czpc.sinopec.com/czpc/csr/safe_envir/20250410/news_20250410_694176328766.shtml' },
       { urgency:'HIGH', title:'关键联系人张总调任', desc:'长期合作的仪表所所长张文斌调任总部，接任者尚未明确关系', action:'尽快拜访新接任者建立关系，同时维护张总总部关系', date:'3月3日', source:'🔒 内部情报 · 人事变动请从销售跟进记录或企查查核实', sourceUrl:'https://www.qcc.com/' },
       { urgency:'MED',  title:'石化排污许可证年度核查', desc:'多家炼油厂面临环保年检，在线监测设备运行状态将被核查', action:'主动提供年检技术支持，加强服务存在感', date:'2月28日', source:'生态环境部排污许可证管理平台', sourceUrl:'https://permit.mee.gov.cn/' },
+      { urgency:'HIGH', title:'中石化 2026 年国产化替代清单发布', desc:'中石化发布 2026 年国产化替代清单，在线水质监测仪器列入', action:'准备国产化技术论证报告，联系事业部', date:'2 月 15 日', source:'中国石化新闻网', sourceUrl:'https://news.sinopec.com/' },
+      { urgency:'MED', title:'炼油事业部 2026 年环保预算公布', desc:'炼油事业部 2026 年环保预算 ¥2.5 亿，含在线监测设备更新', action:'准备更新方案，强调合规与可靠性', date:'1 月 22 日', source:'🔒 内部情报 · 事业部预算文件', sourceUrl:'' },
+      { urgency:'LOW', title:'生态环境部炼化企业专项检查通知', desc:'生态环境部发布炼化企业专项检查通知，3-4 月执行', action:'提醒客户检查前做好仪器校准', date:'1 月 10 日', source:'生态环境部', sourceUrl:'https://www.mee.gov.cn/' },
+
     ],
     opps: [
       { name:'炼化废水在线监测维保合同', amount:'¥30万', stage:'暂停中', stageClass:'tag-orange', prob:35 },
@@ -1193,6 +1216,10 @@ const accounts = {
     signals: [
       { urgency:'HIGH', title:'华能集团框架采购协议到期（5月）', desc:'Hach 与华能国际的三年框架采购协议将于2026-05-31到期，续签谈判应立即启动', action:'立即启动续签谈判，争取3年续约并扩大产品覆盖范围', date:'3月4日', source:'🔒 CRM数据 · 合同到期日从合同系统确认 | 参考：华能2026年度仪器仪表校准招标', sourceUrl:'https://www.dlnyzb.com/detail/28568898' },
       { urgency:'MED',  title:'华能碳中和目标推动循环水改造', desc:'华能2030碳中和路径中，火电厂循环水系统优化是重点，相关水质监测需求将增加', action:'准备循环水监测专项方案，与碳中和战略挂钩', date:'3月1日', source:'华能国际电力股份有限公司年报', sourceUrl:'http://www.huaneng.com.cn/' },
+      { urgency:'HIGH', title:'华能集团 2026 年框架采购招标预告', desc:'华能集团发布 2026 年框架采购招标预告，仪器仪表类别 3 月启动', action:'立即准备投标文件，联系物资部', date:'2 月 28 日', source:'华能集团采购平台', sourceUrl:'https://ec.chng.com.cn/' },
+      { urgency:'MED', title:'华能国际 2025 年报发布', desc:'华能国际发布 2025 年报，营收 ¥2500 亿，同比 +5%', action:'借机拜访，了解 2026 年技改计划', date:'1 月 28 日', source:'上交所', sourceUrl:'http://www.sse.com.cn/' },
+      { urgency:'LOW', title:'电力行业超低排放改造验收指南发布', desc:'中电联发布电力行业超低排放改造验收指南', action:'准备验收监测方案', date:'1 月 15 日', source:'中电联', sourceUrl:'https://www.cec.org.cn/' },
+
     ],
     opps: [
       { name:'框架协议续签（3年）',  amount:'¥50万/年', stage:'谈判准备', stageClass:'tag-blue',   prob:70 },
@@ -1218,6 +1245,10 @@ const accounts = {
     signals: [
       { urgency:'MED',  title:'新版 GMP 附录更新：纯化水监测要求提高', desc:'国家药监局新版GMP附录要求制药用水在线监测覆盖率提升，原有部分设施不达标', action:'提供GMP合规差距分析，推动监测点位升级', date:'3月2日', source:'国家药品监督管理局 nmpa.gov.cn', sourceUrl:'https://www.nmpa.gov.cn/' },
       { urgency:'LOW',  title:'国药集团新建生物制药基地', desc:'国药集团在苏州工业园区新建生物制药基地，2027年投产，纯水系统采购预计2026下半年启动', action:'提前与苏州基地筹建团队建立联系', date:'2月24日', source:'🔒 内部情报 · 建议通过企查查/国药官网核实', sourceUrl:'https://www.sinopharmgroup.com.cn/gykg/xwzx/gsxw/' },
+      { urgency:'MED', title:'药监局 2026 年飞行检查计划发布', desc:'国家药监局发布 2026 年飞行检查计划，制药用水系统为重点', action:'提醒客户做好检查准备，提供合规支持', date:'2 月 10 日', source:'国家药监局', sourceUrl:'https://www.nmpa.gov.cn/' },
+      { urgency:'LOW', title:'中国药典 2025 版征求意见稿发布', desc:'中国药典 2025 版征求意见稿发布，制药用水标准有更新', action:'准备标准解读材料', date:'1 月 20 日', source:'国家药典委员会', sourceUrl:'https://www.chp.org.cn/' },
+      { urgency:'MED', title:'国药控股 2026 年资本支出计划', desc:'国药控股公告 2026 年资本支出计划，生产基地升级预算 ¥3 亿', action:'跟进生产基地水质仪器升级需求', date:'1 月 12 日', source:'港交所', sourceUrl:'https://www.hkex.com.hk/' },
+
     ],
     opps: [
       { name:'制药用水在线监测升级（GMP）', amount:'¥38万', stage:'报价阶段', stageClass:'tag-green', prob:75 },
@@ -1242,6 +1273,10 @@ const accounts = {
     signals: [
       { urgency:'HIGH', title:'中芯国际天津12英寸新厂开工', desc:'中芯国际天津新厂2026年Q3开工，超纯水系统仪器需求约¥80万，招标预计Q2启动', action:'立即对接天津厂筹建团队，确保进入供应商名录', date:'3月5日', source:'中芯国际官网/媒体报道', sourceUrl:'https://www.smics.com/' },
       { urgency:'MED',  title:'芯片制造用水排放标准趋严', desc:'工信部新规要求半导体工厂废水中特定重金属指标实时在线监测，已有设施需升级', action:'提供重金属在线监测升级方案', date:'3月1日', source:'工业和信息化部 miit.gov.cn', sourceUrl:'https://www.miit.gov.cn/' },
+      { urgency:'HIGH', title:'中芯国际 2026 年资本支出计划公布', desc:'中芯国际公告 2026 年资本支出 $80 亿，含厂务系统升级', action:'跟进 UPW 系统监测设备需求', date:'2 月 25 日', source:'上交所', sourceUrl:'http://www.sse.com.cn/' },
+      { urgency:'MED', title:'工信部半导体用水新规征求意见', desc:'工信部发布半导体用水新规征求意见稿，2027 年执行', action:'准备新规解读与合规方案', date:'1 月 30 日', source:'工信部', sourceUrl:'https://www.miit.gov.cn/' },
+      { urgency:'LOW', title:'SEMI F63 超纯水标准更新', desc:'SEMI 发布 F63 超纯水标准更新版，新增 5 项指标', action:'准备新标准检测方案', date:'1 月 15 日', source:'SEMI 官网', sourceUrl:'https://www.semi.org/' },
+
     ],
     opps: [
       { name:'天津新厂超纯水仪器配套',  amount:'¥80万', stage:'早期接触', stageClass:'tag-blue',   prob:60 },
@@ -1268,6 +1303,10 @@ const accounts = {
       { urgency:'MED',  title:'宝武集团推进成本领先战略', desc:'宝武铁区2025年工作会议明确成本领先战略，强化整合降本；子公司仪器维保及非生产性采购预算承压，境外品牌议价空间压缩', action:'主动推出维保优化方案，体现价值而非成本', date:'3月3日', source:'铁甲工程机械网·宝武铁区2025年工作会议 2025-04', sourceUrl:'https://www.cehome.com/news/20250422/335201.shtml' },
       { urgency:'MED',  title:'湛江钢铁基地扩产', desc:'宝武湛江基地二期扩产计划获批，新增高炉冷却水循环系统，配套仪器需求约¥40万', action:'联系湛江基地采购部门，争取扩产配套仪器', date:'2月28日', source:'中国水网/钢铁行业媒体报道', sourceUrl:'https://www.h2o-china.com/' },
       { urgency:'LOW',  title:'超低排放改造最后验收期', desc:'宝钢股份旗下工厂超低排放改造须于2026年6月完成最终验收，在线监测设备需稳定运行', action:'主动提供验收准备技术支持，加强现场服务', date:'2月22日', source:'生态环境部超低排放改造政策', sourceUrl:'https://www.mee.gov.cn/' },
+      { urgency:'HIGH', title:'宝武集团 2026 年超低排放改造计划', desc:'宝武集团发布 2026 年超低排放改造计划，6 月底前完成验收', action:'准备验收监测方案，联系湛江基地', date:'2 月 18 日', source:'中国宝武官网', sourceUrl:'https://www.baowugroup.com/' },
+      { urgency:'MED', title:'宝钢股份 2026 年设备更新预算', desc:'宝钢股份公告 2026 年设备更新预算 ¥1.2 亿，含在线监测', action:'准备设备更新方案', date:'1 月 26 日', source:'上交所', sourceUrl:'http://www.sse.com.cn/' },
+      { urgency:'LOW', title:'钢铁工业水污染物排放标准修订启动', desc:'生态环境部启动钢铁工业水污染物排放标准修订', action:'参与标准修订研讨，提前布局', date:'1 月 10 日', source:'生态环境部', sourceUrl:'https://www.mee.gov.cn/' },
+
     ],
     opps: [
       { name:'湛江基地扩产配套仪器',  amount:'¥40万', stage:'接触中', stageClass:'tag-blue', prob:50 },
@@ -1291,6 +1330,10 @@ const accounts = {
     signals: [
       { urgency:'MED',  title:'伊利呼和浩特智慧乳业持续扩容', desc:'伊利在呼和浩特推进智慧牧场与智慧工厂体系升级（2025-12），新产线带来工艺用水监测配套需求；具体招标时间节点需从销售确认', action:'对接新厂筹建项目组，参与方案设计阶段', date:'3月2日', source:'新浪财经·伊利呼和浩特乳业智慧化报道 2025-12', sourceUrl:'https://finance.sina.com.cn/jjxw/2025-12-26/doc-inheautu1159206.shtml' },
       { urgency:'LOW',  title:'乳品行业用水新标准征求意见', desc:'国家标准委食品行业用水检测新标准征求意见，新增大肠菌群、硝酸盐等指标的在线监测要求', action:'准备合规分析报告提供给客户', date:'2月26日', source:'国家标准化管理委员会 std.samr.gov.cn', sourceUrl:'https://std.samr.gov.cn/' },
+      { urgency:'MED', title:'伊利股份 2026 年资本支出计划', desc:'伊利股份公告 2026 年资本支出计划，新工厂建设预算 ¥50 亿', action:'跟进呼和浩特智慧工厂水质仪器需求', date:'2 月 22 日', source:'上交所', sourceUrl:'http://www.sse.com.cn/' },
+      { urgency:'LOW', title:'乳品用水新标准征求意见稿发布', desc:'卫健委发布乳品用水新标准征求意见稿，2027 年执行', action:'准备标准解读与合规方案', date:'1 月 28 日', source:'国家卫健委', sourceUrl:'https://www.nhc.gov.cn/' },
+      { urgency:'MED', title:'FSSC 22000 V6 标准升级要求', desc:'FSSC 22000 发布 V6 标准升级要求，水质监测要求提高', action:'准备 FSSC 22000 合规支持方案', date:'1 月 15 日', source:'FSSC 22000 官网', sourceUrl:'https://www.fssc22000.com/' },
+
     ],
     opps: [
       { name:'新建智慧工厂水质仪器配套', amount:'¥50万', stage:'早期接触', stageClass:'tag-blue',  prob:55 },

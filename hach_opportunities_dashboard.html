@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hach Water Quality Opportunities - Business Type Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .summary-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .summary-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .services { color: #e74c3c; }
+        .software { color: #3498db; }
+        .hardware { color: #f39c12; }
+        .mixed { color: #9b59b6; }
+        
+        .opportunities-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .table-header {
+            background: #34495e;
+            color: white;
+            padding: 20px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .table-content {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        th {
+            background: #ecf0f1;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .business-type {
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 0.9em;
+        }
+        .type-services { background: #e74c3c; }
+        .type-software { background: #3498db; }
+        .type-hardware { background: #f39c12; }
+        .type-mixed { background: #9b59b6; }
+        
+        .priority {
+            font-weight: bold;
+        }
+        .priority-highest { color: #e74c3c; }
+        .priority-high { color: #f39c12; }
+        .priority-medium { color: #3498db; }
+        
+        .hach-instruments {
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        
+        .action-button {
+            background: #27ae60;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .action-button:hover {
+            background: #229954;
+        }
+        
+        .action-urgent {
+            background: #e74c3c;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        .detailed-view {
+            margin-top: 30px;
+        }
+        .opportunity-detail {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #3498db;
+        }
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .detail-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .detail-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .meta-item {
+            font-size: 0.9em;
+        }
+        .meta-label {
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .instruments-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .instruments-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .instruments-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .footer {
+            text-align: center;
+            color: #7f8c8d;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+            .detail-meta {
+                grid-template-columns: 1fr;
+            }
+            .table-content {
+                font-size: 0.8em;
+            }
+            th, td {
+                padding: 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔍 Hach Water Quality Opportunities Dashboard</h1>
+        <p>Business Type Classification & Instrument Mapping | Generated: 2026-03-03 19:44 GMT+8</p>
+    </div>
+
+    <div class="summary-cards">
+        <div class="summary-card">
+            <h3 class="services">🔧 SERVICES</h3>
+            <div class="number services">3</div>
+            <p>O&M Contracts, Training<br>Value: 580-1180万元</p>
+        </div>
+        <div class="summary-card">
+            <h3 class="software">💻 SOFTWARE</h3>
+            <div class="number software">1</div>
+            <p>SCADA, Data Management<br>Value: 30-80万元</p>
+        </div>
+        <div class="summary-card">
+            <h3 class="hardware">⚙️ HARDWARE+Services</h3>
+            <div class="number hardware">1</div>
+            <p>Equipment + Maintenance<br>Value: 20-50万元</p>
+        </div>
+        <div class="summary-card">
+            <h3 class="mixed">💼 TOTAL</h3>
+            <div class="number mixed">4</div>
+            <p>Active Opportunities<br>Value: 630-1310万元</p>
+        </div>
+    </div>
+
+    <div class="opportunities-table">
+        <div class="table-header">
+            📋 Opportunities Summary - Business Type & Hach Instruments
+        </div>
+        <div class="table-content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Business Type</th>
+                        <th>Organization</th>
+                        <th>Location</th>
+                        <th>Value</th>
+                        <th>Priority</th>
+                        <th>Hach Focus</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>HUB003</strong></td>
+                        <td><span class="business-type type-services">🔧 SERVICES</span></td>
+                        <td>湖北省生态环境监测中心站</td>
+                        <td>湖北省</td>
+                        <td>500-1000万</td>
+                        <td class="priority priority-highest">🔴 HIGHEST</td>
+                        <td class="hach-instruments">Multi-parameter monitors + O&M + Training</td>
+                        <td><a href="#hube003" class="action-button action-urgent">URGENT</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HUB001</strong></td>
+                        <td><span class="business-type type-services">🔧 SERVICES</span></td>
+                        <td>麻城市政府</td>
+                        <td>湖北省麻城市</td>
+                        <td>50-100万</td>
+                        <td class="priority priority-high">🟠 HIGH</td>
+                        <td class="hach-instruments">COD analyzers + Remote monitoring</td>
+                        <td><a href="#hube001" class="action-button">Contact</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HUB002</strong></td>
+                        <td><span class="business-type type-software">💻 SOFTWARE</span></td>
+                        <td>环县自来水集团</td>
+                        <td>甘肃省环县</td>
+                        <td>30-80万</td>
+                        <td class="priority priority-high">🟠 HIGH</td>
+                        <td class="hach-instruments">SCADA systems + Training programs</td>
+                        <td><a href="#hube002" class="action-button action-urgent">48H RESPONSE</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>HEN001</strong></td>
+                        <td><span class="business-type type-mixed">⚙️ HARDWARE+Services</span></td>
+                        <td>郑州市项目单位</td>
+                        <td>河南省郑州市</td>
+                        <td>20-50万</td>
+                        <td class="priority priority-medium">🔵 MEDIUM</td>
+                        <td class="hach-instruments">Industrial analyzers + Maintenance</td>
+                        <td><a href="#hen001" class="action-button">Evaluate</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="detailed-view">
+        <h2>📋 Detailed Opportunity Information</h2>
+        
+        <div id="hube003" class="opportunity-detail">
+            <div class="detail-header">
+                <div class="detail-title">湖北省生态环境监测中心站地表水自动监测系统运行维护项目</div>
+                <span class="business-type type-services">🔧 SERVICES</span>
+            </div>
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Organization</div>
+                    <div>湖北省生态环境监测中心站</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Location</div>
+                    <div>湖北省 (Province-wide)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Value</div>
+                    <div>500-1000万元</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div>2025年</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Priority</div>
+                    <div class="priority priority-highest">🔴 HIGHEST</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div>ACTIVE</div>
+                </div>
+            </div>
+            <div class="instruments-list">
+                <div class="instruments-title">🔧 Relevant Hach Instruments</div>
+                <ul>
+                    <li><strong>Multi-Parameter Monitors:</strong> Surface water monitoring systems</li>
+                    <li><strong>Online Monitoring:</strong> SCADA integration and data management</li>
+                    <li><strong>O&M Services:</strong> 24/7 response, preventive maintenance</li>
+                    <li><strong>Training Services:</strong> Operator training and certification</li>
+                    <li><strong>Calibration:</strong> Quality assurance and validation</li>
+                </ul>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Action Required</div>
+                <div style="color: #e74c3c; font-weight: bold;">准备综合标书 - 省级项目需要完整技术方案</div>
+            </div>
+        </div>
+
+        <div id="hube001" class="opportunity-detail">
+            <div class="detail-header">
+                <div class="detail-title">麻城市乡镇生活污水处理厂水质在线监测系统运维服务采购项目</div>
+                <span class="business-type type-services">🔧 SERVICES</span>
+            </div>
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Organization</div>
+                    <div>麻城市政府</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Location</div>
+                    <div>湖北省麻城市</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Value</div>
+                    <div>50-100万元</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div>2025-2026年度</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Priority</div>
+                    <div class="priority priority-high">🟠 HIGH</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div>ACTIVE</div>
+                </div>
+            </div>
+            <div class="instruments-list">
+                <div class="instruments-title">🔧 Relevant Hach Instruments</div>
+                <ul>
+                    <li><strong>COD Analyzers:</strong> Wastewater treatment plant monitoring</li>
+                    <li><strong>pH/DO Sensors:</strong> Process monitoring applications</li>
+                    <li><strong>Remote Monitoring:</strong> Mobile and cloud-based solutions</li>
+                    <li><strong>O&M Services:</strong> Cost-effective maintenance programs</li>
+                    <li><strong>Wastewater Monitors:</strong> Rural treatment specific equipment</li>
+                </ul>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Action Required</div>
+                <div style="color: #f39c12; font-weight: bold;">立即注册并联系 - 注册湖北招标网并准备 Hach O&M方案</div>
+            </div>
+        </div>
+
+        <div id="hube002" class="opportunity-detail">
+            <div class="detail-header">
+                <div class="detail-title">环县自来水集团污水处理厂水质污染源自动监控系统第三方运维服务</div>
+                <span class="business-type type-software">💻 SOFTWARE</span>
+            </div>
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Organization</div>
+                    <div>环县自来水集团有限公司</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Location</div>
+                    <div>甘肃省环县</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Value</div>
+                    <div>30-80万元</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div>待确认 (48小时内回应)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Priority</div>
+                    <div class="priority priority-high">🟠 HIGH</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div>ACTIVE INQUIRY</div>
+                </div>
+            </div>
+            <div class="instruments-list">
+                <div class="instruments-title">💻 Relevant Hach Software & Systems</div>
+                <ul>
+                    <li><strong>SCADA Systems:</strong> Control system integration</li>
+                    <li><strong>Remote Access:</strong> Mobile monitoring applications</li>
+                    <li><strong>Data Management:</strong> Compliance reporting platforms</li>
+                    <li><strong>Training Programs:</strong> Operator certification</li>
+                    <li><strong>Third-party Services:</strong> Independent maintenance providers</li>
+                </ul>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Action Required</div>
+                <div style="color: #e74c3c; font-weight: bold;">48小时内回应询价 - 立即联系并提供技术方案</div>
+            </div>
+        </div>
+
+        <div id="hen001" class="opportunity-detail">
+            <div class="detail-header">
+                <div class="detail-title">侯寨渗滤液项目水质在线监测设备运维服务采购公告</div>
+                <span class="business-type type-mixed">⚙️ HARDWARE+Services</span>
+            </div>
+            <div class="detail-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Organization</div>
+                    <div>郑州市项目单位</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Location</div>
+                    <div>河南省郑州市</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Value</div>
+                    <div>20-50万元</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Timeline</div>
+                    <div>截止: 2025-11-10</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Priority</div>
+                    <div class="priority priority-medium">🔵 MEDIUM</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div>ACTIVE</div>
+                </div>
+            </div>
+            <div class="instruments-list">
+                <div class="instruments-title">⚙️ Relevant Hach Hardware & Services</div>
+                <ul>
+                    <li><strong>COD Analyzers:</strong> Industrial-grade for leachate treatment</li>
+                    <li><strong>Ammonia Analyzers:</strong> Nitrogen monitoring systems</li>
+                    <li><strong>Phosphorus Analyzers:</strong> Industrial waste monitoring</li>
+                    <li><strong>Maintenance Services:</strong> Harsh environment expertise</li>
+                    <li><strong>Industrial Monitors:</strong> Robust equipment for demanding applications</li>
+                </ul>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Action Required</div>
+                <div style="color: #3498db; font-weight: bold;">评估技术要求 - 分析渗滤液处理特殊需求</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🔍 Generated by Hach Water Quality Bidding Monitor | Updated: 2026-03-03 19:44 GMT+8</p>
+        <p>For immediate action: Focus on HUB002 (48h response) and HUB003 (provincial level)</p>
+    </div>
+</body>
+</html>

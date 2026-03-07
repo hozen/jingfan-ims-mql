@@ -1,0 +1,22 @@
+Storyboard for 10-second Introduction Video of Hach NH6000sc:
+
+**1. Opening Scene (1-2 seconds)**
+- **Background**: Subtle blue gradient matching Hach branding.
+- **Visuals**: Animated Hach logo fades in.
+- **Text on Screen**: "Introducing the Hach NH6000sc."
+
+**2. Product Display (3-4 seconds)**
+- **Background**: Clean white backdrop.
+- **Visuals**: Close-up footage of NH6000sc rotating slowly. Show its interface and sleek design.
+- **Overlay Text**: "Precision | Real-Time Data | Easy Integration"
+
+**3. Application Highlight (4-7 seconds)**
+- **Background**: Subtle water-related graphics (e.g., ripples, flowing water).
+- **Visuals**: Responsive animation transitioning through scenarios like wastewater treatment plants, environmental testing sites.
+- **Overlay Text**: "Empowering Water Quality Management"
+
+**4. Closing Scene (8-10 seconds)**
+- **Background**: Hach-themed gradient.
+- **Visuals**: Static NH6000sc image with subtle glow.
+- **Overlay Text**: Tagline - "Your Partner in Nutrient Analysis."
+- **CTA**: "Visit hach.com to learn more."

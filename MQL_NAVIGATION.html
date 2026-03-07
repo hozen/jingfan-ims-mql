@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靖帆 IMS MQL - 快速导航</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            color: #667eea;
+            font-size: 2em;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        .card h2 {
+            margin: 0 0 15px 0;
+            color: #667eea;
+        }
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .link-card {
+            display: block;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        .link-card:hover {
+            background: #ecf0f1;
+            transform: translateX(5px);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        }
+        .link-card h3 {
+            margin: 0 0 8px 0;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+        .link-card p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .link-card .stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.85em;
+        }
+        .link-card .stat {
+            color: #667eea;
+            font-weight: bold;
+        }
+        .priority-urgent { border-left-color: #e74c3c; }
+        .priority-high { border-left-color: #f39c12; }
+        .priority-medium { border-left-color: #3498db; }
+        
+        .highlight {
+            background: linear-gradient(135deg, #f8f9fa 0%, #fff3cd 100%);
+            border: 2px solid #f39c12;
+        }
+        .highlight h3 {
+            color: #f39c12 !important;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: white;
+            margin-left: 8px;
+        }
+        .badge-urgent { background: #e74c3c; }
+        .badge-high { background: #f39c12; }
+        .badge-medium { background: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 靖帆 IMS MQL 导航中心</h1>
+            <p>所有 MQL 详情页面索引 | 生成时间：2026-03-03 20:05 GMT+8</p>
+        </div>
+        
+        <div class="card">
+            <h2>📊 仪表板与文档</h2>
+            <div class="link-grid">
+                <a href="jingfan_ims_mql_dashboard.html" class="link-card">
+                    <h3>📊 可视化仪表板</h3>
+                    <p>所有 10 个 MQL 的图形化展示，包含转化漏斗和统计</p>
+                    <div class="stats">
+                        <span class="stat">10 MQLs</span>
+                        <span class="stat">84.1% 转化率</span>
+                    </div>
+                </a>
+                <a href="jingfan_ims_mql_pipeline_20260303.md" class="link-card">
+                    <h3>📄 完整策略文档</h3>
+                    <p>详细的 MQL 分析、转化路径、行动计划 (Markdown 格式)</p>
+                    <div class="stats">
+                        <span class="stat">9.3 KB</span>
+                        <span class="stat">中文详情</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>🔥 紧急 MQLs (本周行动)</h2>
+            <div class="link-grid">
+                <a href="mql_03_huanxian_detail.html" class="link-card priority-urgent">
+                    <h3>MQL #3: 环县自来水集团 <span class="badge badge-urgent">48 小时</span></h3>
+                    <p>第三方运维服务 - 48 小时内必须回复</p>
+                    <div class="stats">
+                        <span class="stat">96% 匹配</span>
+                        <span class="stat">92% 转化</span>
+                        <span class="stat">20-40 万</span>
+                    </div>
+                </a>
+                <a href="mql_02_macheng_detail.html" class="link-card priority-high">
+                    <h3>MQL #2: 麻城市乡镇污水厂 <span class="badge badge-high">高优先级</span></h3>
+                    <p>农村污水处理运维 - 靖帆 IMS 套餐方案</p>
+                    <div class="stats">
+                        <span class="stat">95% 匹配</span>
+                        <span class="stat">88% 转化</span>
+                        <span class="stat">30-50 万</span>
+                    </div>
+                </a>
+                <a href="mql_10_partnerships_detail.html" class="link-card priority-high">
+                    <h3>MQL #10: 5 第三方运维公司 <span class="badge badge-high">合作</span></h3>
+                    <p>合作伙伴计划 - 经销商/集成商</p>
+                    <div class="stats">
+                        <span class="stat">98% 匹配</span>
+                        <span class="stat">95% 转化</span>
+                        <span class="stat">150-300 万</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 高优先级 MQLs (2 周内)</h2>
+            <div class="link-grid">
+                <a href="mql_01_hubei_provincial_detail.html" class="link-card priority-high">
+                    <h3>MQL #1: 湖北省生态环境监测中心 <span class="badge badge-high">省级</span></h3>
+                    <p>省级地表水监测网络 - 最大单一机会</p>
+                    <div class="stats">
+                        <span class="stat">98% 匹配</span>
+                        <span class="stat">90% 转化</span>
+                        <span class="stat">200-400 万</span>
+                    </div>
+                </a>
+                <a href="mql_06_wuhan_detail.html" class="link-card priority-high">
+                    <h3>MQL #6: 武汉市政府水务集团 <span class="badge badge-high">智慧城市</span></h3>
+                    <p>智慧城市对接 - 全市部署</p>
+                    <div class="stats">
+                        <span class="stat">97% 匹配</span>
+                        <span class="stat">85% 转化</span>
+                        <span class="stat">300-500 万</span>
+                    </div>
+                </a>
+                <a href="mql_07_5cities_detail.html" class="link-card priority-high">
+                    <h3>MQL #7: 湖北省 5 城市环保局 <span class="badge badge-high">多城市</span></h3>
+                    <p>省级标准化推广 - 5 城市集群</p>
+                    <div class="stats">
+                        <span class="stat">94% 匹配</span>
+                        <span class="stat">80% 转化</span>
+                        <span class="stat">400-700 万</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📌 中等优先级 MQLs (3-4 周)</h2>
+            <div class="link-grid">
+                <a href="mql_08_industrial_parks_detail.html" class="link-card priority-medium highlight">
+                    <h3>🎯 MQL #8: 10 工业园区污水处理厂 <span class="badge badge-medium">你选择的</span></h3>
+                    <p>工业园区集群 - 共享靖帆 IMS 平台</p>
+                    <div class="stats">
+                        <span class="stat">91% 匹配</span>
+                        <span class="stat">78% 转化</span>
+                        <span class="stat">200-400 万</span>
+                    </div>
+                </a>
+                <a href="mql_04_zhengzhou_detail.html" class="link-card priority-medium">
+                    <h3>MQL #4: 郑州侯寨渗滤液项目 <span class="badge badge-medium">工业</span></h3>
+                    <p>渗滤液处理 - 恶劣环境预测性维护</p>
+                    <div class="stats">
+                        <span class="stat">90% 匹配</span>
+                        <span class="stat">82% 转化</span>
+                        <span class="stat">15-30 万</span>
+                    </div>
+                </a>
+                <a href="mql_05_nanjing_detail.html" class="link-card priority-medium">
+                    <h3>MQL #5: 南京市水务局 <span class="badge badge-medium">跟进</span></h3>
+                    <p>已完成项目跟进 - 系统升级机会</p>
+                    <div class="stats">
+                        <span class="stat">92% 匹配</span>
+                        <span class="stat">75% 转化</span>
+                        <span class="stat">40-60 万</span>
+                    </div>
+                </a>
+                <a href="mql_09_20counties_detail.html" class="link-card priority-medium">
+                    <h3>MQL #9: 20 县自来水公司 <span class="badge badge-medium">农村</span></h3>
+                    <p>农村供水项目 - 政府资金支持</p>
+                    <div class="stats">
+                        <span class="stat">89% 匹配</span>
+                        <span class="stat">76% 转化</span>
+                        <span class="stat">250-450 万</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>💡 如何使用</h2>
+            <div style="color: #2c3e50; line-height: 1.8;">
+                <p><strong>1. 快速总览:</strong> 打开 <a href="jingfan_ims_mql_dashboard.html" style="color: #667eea;">可视化仪表板</a> 查看所有 MQL 的图形化展示</p>
+                <p><strong>2. 详细策略:</strong> 阅读 <a href="jingfan_ims_mql_pipeline_20260303.md" style="color: #667eea;">完整策略文档</a> 了解每个 MQL 的详细转化路径</p>
+                <p><strong>3. 单个 MQL 详情:</strong> 点击上方任意 MQL 卡片查看该 MQL 的完整详情页面</p>
+                <p><strong>4. 优先行动:</strong> 从"紧急 MQLs"开始，特别是 MQL #3 (48 小时回复)</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center; color: white; margin-top: 30px;">
+            <p>🎯 目标：4 周内将 8-9 个 MQL 转化为 SQL!</p>
+            <p>由靖帆 IMS 营销团队生成 | 下次审查：2026-03-10</p>
+        </div>
+    </div>
+</body>
+</html>

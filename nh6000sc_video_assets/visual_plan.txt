@@ -1,0 +1,27 @@
+Visual Asset Plan for NH6000sc 10-Second Video
+===============================================
+
+Video specs: 1920x1080, 30fps, 10 seconds total
+
+Segment 1 (0-2s): Opening Title
+- Blue gradient background (#1e3a8a to #3b82f6)
+- Text: "Hach NH6000sc"
+- Subtitle: "Precision Ammonia Monitoring"
+
+Segment 2 (2-4s): Product Features
+- Light blue background (#dbeafe)
+- Text: "Real-Time Data"
+- Icon/Graphic: Simple data visualization
+
+Segment 3 (4-6s): Integration
+- Green-blue background (#06b6d4 to #0891b2)
+- Text: "Easy Integration"
+
+Segment 4 (6-8s): Application
+- Water-themed background (#0ea5e9)
+- Text: "Your Nutrient Analysis Partner"
+
+Segment 5 (8-10s): Call to Action
+- Professional blue background (#1e40af)
+- Text: "hach.com"
+- Subtitle: "Learn More"

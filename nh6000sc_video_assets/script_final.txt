@@ -1,0 +1,29 @@
+10-Second Hach NH6000sc Introduction Script
+============================================
+
+Duration: 10 seconds
+Word count: ~22 words (optimal for 10 seconds at normal speaking pace)
+
+FINAL SCRIPT (USED):
+--------------------
+"The Hach NH6000sc. Precision ammonia monitoring. Real-time data. Easy integration. 
+Your nutrient analysis partner. hach.com."
+
+Duration: 9.44 seconds
+Voice: Samantha (macOS built-in TTS)
+
+TIMING BREAKDOWN:
+-----------------
+0-2s:  "Introducing the Hach NH6000sc."
+2-4s:  "Precision ammonia monitoring for water quality."
+4-6s:  "Real-time data. Easy integration."
+6-8s:  "Your partner in nutrient analysis."
+8-10s: "Visit hach.com to learn more."
+
+VISUAL SEQUENCE:
+----------------
+0-2s:  Blue gradient background + Hach logo + "NH6000sc" text
+2-4s:  Product image + "Precision Ammonia Monitoring" text
+4-6s:  Data visualization graphic + "Real-Time Data | Easy Integration"
+6-8s:  Water treatment facility background + "Nutrient Analysis Partner"
+8-10s:  Clean closing screen + "hach.com" CTA
