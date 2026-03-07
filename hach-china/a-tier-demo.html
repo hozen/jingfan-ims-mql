@@ -1330,10 +1330,10 @@ const profileData = {
       { level:'持续', title:'在线监控数据联网要求', desc:'北京市要求主力水厂在线数据实时上传至市监管平台' },
     ],
     contacts: [
-      { name:'张明华', role:'决策者', roleClass:'tag-blue', title:'集团环保与水务管理总监 (新任)', concern:'合规达标、数字化转型、监管关系 ｜ 入口：政策解读、行业会议', color:'#0057A8' },
-      { name:'李建国', role:'技术影响者', roleClass:'tag-green', title:'水质监测中心主任', concern:'仪器稳定性、数据准确性、维护成本 ｜ 入口：技术交流、现场测试', color:'#059669' },
-      { name:'王秀梅', role:'采购把关', roleClass:'tag-gray', title:'集团采购部经理', concern:'价格合理性、交货期、入围名录 ｜ 入口：框架合同、供应商评审', color:'#7C3AED' },
-      { name:'陈伟', role:'最终用户', roleClass:'tag-gray', title:'第四水厂仪表班长', concern:'操作简便、故障率低、试剂稳定 ｜ 入口：培训、现场服务', color:'#EA580C' },
+      { name:'刘锁祥', role:'决策者', roleClass:'tag-blue', title:'党委书记、董事长（1964年生）', concern:'集团战略、数字化转型、监管合规 ｜ 入口：重大政策研讨、行业会议', color:'#0057A8', verified:true, sourceUrl:'https://www.cuwa.org.cn/fuhuizhang.html', sourceLabel:'中国水协副会长名录' },
+      { name:'🔒 总经理', role:'运营负责人', roleClass:'tag-gray', title:'集团总经理（姓名需CRM核实）', concern:'运营效率、采购合规、成本管控', color:'#7C3AED', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 总工程师', role:'技术影响者', roleClass:'tag-green', title:'集团总工程师（姓名需CRM核实）', concern:'仪器稳定性、水质达标、技术规范 ｜ 入口：技术研讨、现场测试', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 水质监测中心主任', role:'最终用户', roleClass:'tag-gray', title:'水质监测中心主任（姓名需CRM核实）', concern:'操作简便、故障率低、试剂稳定 ｜ 入口：培训、现场服务', color:'#EA580C', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   shanghai: {
@@ -1353,16 +1353,17 @@ const profileData = {
       { level:'持续', title:'在线数据实时上传', desc:'上海市水务局要求核心设施数据实时对接市级平台' },
     ],
     contacts: [
-      { name:'刘海涛', role:'决策者', roleClass:'tag-blue', title:'集团总工程师', concern:'技术可靠性、整体方案一致性 ｜ 入口：行业技术峰会、高层拜访', color:'#0057A8' },
-      { name:'陈静', role:'技术影响者', roleClass:'tag-green', title:'水质管理中心技术总监', concern:'产品性能、数据质量、维护便利性 ｜ 入口：技术对比测试', color:'#059669' },
-      { name:'张磊', role:'采购把关', roleClass:'tag-gray', title:'集团采购中心负责人', concern:'入围资格、竞争性报价 ｜ 入口：框架协议谈判', color:'#7C3AED' },
+      { name:'周骅', role:'决策者', roleClass:'tag-blue', title:'党委副书记、董事长、总经理', concern:'技术可靠性、整体方案一致性、监管关系 ｜ 入口：行业峰会、高层拜访', color:'#0057A8', verified:true, sourceUrl:'https://www.shanghaiwater.com/xinxigongkai.html', sourceLabel:'上海城投水务官网·企业信息公开' },
+      { name:'梁波', role:'运营负责人', roleClass:'tag-gray', title:'党委书记、副总经理', concern:'集团合规管理、采购决策 ｜ 入口：集团合规渠道', color:'#7C3AED', verified:true, sourceUrl:'https://www.shanghaiwater.com/xinxigongkai.html', sourceLabel:'上海城投水务官网·企业信息公开' },
+      { name:'申一尘', role:'技术影响者', roleClass:'tag-green', title:'副总经理（资深水务专家，1961年生）', concern:'仪器可靠性、运行稳定性、技术标准 ｜ 水务经验30年+ ｜ 入口：技术交流', color:'#059669', verified:true, sourceUrl:'https://www.cuwa.org.cn/fuhuizhang.html', sourceLabel:'中国水协副会长名录' },
+      { name:'🔒 水质部门负责人', role:'最终用户', roleClass:'tag-gray', title:'水质管理部负责人（姓名需CRM核实）', concern:'监测精度、试剂供应、系统联网 ｜ 入口：技术培训', color:'#EA580C', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   guangzhou: {
     info: [
-      ['全称','广州市自来水有限公司'],
-      ['性质','国有企业（广州市水务局监管）'],
-      ['主营','城市供水生产与配送'],
+      ['全称','广州市水务投资集团有限公司（含广州市自来水有限公司）'],
+      ['性质','国有企业（广州市国资委直属）'],
+      ['主营','城市供水、排水、水环境综合运营'],
       ['规模','日供水能力 470万m³，全国前三大市政水务'],
       ['水厂数量','8 座主力水厂'],
       ['年收入','约 ¥40亿 (估)'],
@@ -1375,15 +1376,16 @@ const profileData = {
       { level:'持续', title:'珠江流域水质联网监测', desc:'广东省要求核心水厂接入省级监测网络' },
     ],
     contacts: [
-      { name:'黄志强', role:'决策者', roleClass:'tag-blue', title:'公司副总经理（主管技术）', concern:'数字化升级、供水安全、监管合规 ｜ 入口：政策解读、标准参编', color:'#0057A8' },
-      { name:'李明', role:'技术影响者', roleClass:'tag-green', title:'水质技术部总工', concern:'监测精度、仪器寿命、试剂稳定供应 ｜ 入口：技术研讨', color:'#059669' },
-      { name:'陈雪', role:'采购把关', roleClass:'tag-gray', title:'物资采购部经理', concern:'入围名单、价格合理性 ｜ 入口：供应商评审', color:'#7C3AED' },
+      { name:'孙伟', role:'决策者', roleClass:'tag-blue', title:'副总经理（2024年4月新任，博士，前广州净水公司董事长）', concern:'数字水务升级、供水安全、监管合规 ｜ 入口：政策解读、标准参编', color:'#0057A8', verified:true, sourceUrl:'https://www.h2o-china.com/news/350477.html', sourceLabel:'中国水网·广州水务投资集团高管变动 2024-04' },
+      { name:'周军', role:'运营负责人', roleClass:'tag-gray', title:'副总经理（2024年4月新任，硕士，前广州排水公司董事长）', concern:'排水系统升级、运营合规 ｜ 入口：排水标准制定', color:'#7C3AED', verified:true, sourceUrl:'https://www.h2o-china.com/news/350477.html', sourceLabel:'中国水网·广州水务投资集团高管变动 2024-04' },
+      { name:'高跃生', role:'采购把关', roleClass:'tag-gray', title:'副总经理（2024年4月新任，博士，前广州国资委处长）', concern:'供应商管理、采购合规、国资委要求 ｜ 入口：供应商资质审查', color:'#6B7280', verified:true, sourceUrl:'https://www.h2o-china.com/news/350477.html', sourceLabel:'中国水网·广州水务投资集团高管变动 2024-04' },
+      { name:'🔒 技术部门负责人', role:'技术影响者', roleClass:'tag-green', title:'水质技术部总工（姓名需CRM核实）', concern:'监测精度、仪器寿命、试剂稳定供应 ｜ 入口：技术研讨', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   chengdu: {
     info: [
-      ['全称','成都兴蓉环境股份有限公司'],
-      ['性质','上市国企（A股：000598）'],
+      ['全称','成都市兴蓉环境股份有限公司'],
+      ['性质','上市国企（A股：000598，母公司：成都环境投资集团）'],
       ['主营','市政供水、污水处理、固废处理'],
       ['规模','日处理能力 220万m³（供水+污水）'],
       ['覆盖','成都及四川省内多个城市'],
@@ -1397,9 +1399,10 @@ const profileData = {
       { level:'持续', title:'成都市"十四五"水环境治理', desc:'成都要求污水处理厂出水水质持续提升至准IV类' },
     ],
     contacts: [
-      { name:'赵强', role:'技术影响者', roleClass:'tag-green', title:'技术中心总工程师', concern:'工艺优化、仪器可靠性、节能降耗 ｜ 入口：技术合作项目', color:'#059669' },
-      { name:'李涛', role:'决策者', roleClass:'tag-blue', title:'副总经理（生产运营）', concern:'运营成本、合规达标、股东回报 ｜ 入口：上市公司经营论坛', color:'#0057A8' },
-      { name:'王燕', role:'采购把关', roleClass:'tag-gray', title:'采购中心主任', concern:'公开招标合规性、价格竞争力', color:'#7C3AED' },
+      { name:'杨玉清', role:'决策者', roleClass:'tag-blue', title:'党委书记、董事长（1976年生，高级会计师，注册会计师）', concern:'集团战略、ESG合规、资本市场形象 ｜ 入口：高层拜访、行业论坛', color:'#0057A8', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SZ000598&type=web', sourceLabel:'东方财富·兴蓉环境高管信息（000598）' },
+      { name:'饶怡', role:'运营负责人', roleClass:'tag-gray', title:'党委副书记、总经理、法定代表人（1979年生）', concern:'生产运营合规、成本管控 ｜ 入口：运营管理渠道', color:'#7C3AED', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SZ000598&type=web', sourceLabel:'东方财富·兴蓉环境高管信息（000598）' },
+      { name:'赵健', role:'技术影响者', roleClass:'tag-green', title:'副总经理/技术管理部部长/兴蓉研究院院长（1989年生，博士·环境科学与工程，高级工程师）', concern:'工艺优化、仪器可靠性、新技术引进 ｜ 最年轻的技术VP，关注数字化 ｜ 入口：技术合作项目、学术交流', color:'#059669', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SZ000598&type=web', sourceLabel:'东方财富·兴蓉环境高管信息（000598）' },
+      { name:'🔒 采购中心主任', role:'采购把关', roleClass:'tag-gray', title:'采购中心主任（姓名需CRM核实）', concern:'公开招标合规性、价格竞争力', color:'#6B7280', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   sinopec: {
@@ -1411,23 +1414,23 @@ const profileData = {
       ['仪器台数','Hach仪器约 200台+ (全国各炼厂)'],
       ['年收入','约 ¥3万亿（集团总收入）'],
       ['采购方式','集团统一框架 + 事业部技术委员会审批'],
-      ['风险','境外品牌审批新增流程，周期60-90天'],
+      ['趋势','2024-2025年推行国产化替代，境外品牌审批周期显著延长'],
     ],
     standards: ['GB 8978 污水综合排放','HJ 2025 炼化废水','GB 3096 石化厂界噪声','排污许可证要求'],
     compliance: [
-      { level:'高风险', title:'境外品牌审批新规', desc:'中石化总部新规要求境外仪器采购经集团技术委员会审核，周期显著延长' },
+      { level:'高风险', title:'国产化替代加速（官方政策）', desc:'中石化下属炼厂推行"国产设备优先"机制，境外品牌采购需经严格技术论证' },
       { level:'持续', title:'排污许可证年度核查', desc:'生态环境部对炼厂年度在线监测数据合规性进行抽检' },
     ],
     contacts: [
-      { name:'(新接任者)', role:'决策者', roleClass:'tag-blue', title:'仪表所所长（新任，待确认）', concern:'待了解 ｜ 需尽快建立关系', color:'#0057A8' },
-      { name:'张文斌', role:'关系资产', roleClass:'tag-gray', title:'已调任集团总部（原仪表所所长）', concern:'调任后仍有影响力，维护总部关系 ｜ 入口：集团层面', color:'#94a3b8' },
-      { name:'郭志远', role:'采购把关', roleClass:'tag-gray', title:'物资供应处采购经理', concern:'新审批流程合规、国产替代压力 ｜ 入口：供应商资质维护', color:'#7C3AED' },
+      { name:'田宏斌', role:'集团高层', roleClass:'tag-blue', title:'中国石化集团副总经理、党组成员（2026年1月中组部任命）', concern:'集团战略、绿色低碳、降本增效 ｜ 注：集团级别，炼油仪器决策在事业部层面', color:'#0057A8', verified:true, sourceUrl:'https://m.bjnews.com.cn/detail/1767960544129032.html', sourceLabel:'新京报·田宏斌任中石化副总经理 2026-01' },
+      { name:'🔒 炼油事业部仪表所所长', role:'技术决策者', roleClass:'tag-green', title:'炼油事业部仪表所所长（姓名需CRM核实，原联系人已调任总部）', concern:'仪器国产化方向、技术规范、可靠性验证 ｜ 核心决策人，需立即重建关系', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 采购部经理', role:'采购把关', roleClass:'tag-gray', title:'物资供应处采购经理（姓名需CRM核实）', concern:'国产化优先采购机制合规、供应商资质', color:'#6B7280', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   huaneng: {
     info: [
       ['全称','华能国际电力股份有限公司'],
-      ['性质','央企控股上市公司（H股+A股）'],
+      ['性质','央企控股上市公司（A股：600011 / H股：0902）'],
       ['主营','火力发电、风电、水电综合运营'],
       ['规模','装机容量约 1.2亿千瓦（全国最大火电集团）'],
       ['水处理场景','循环冷却水、锅炉给水、烟气脱硫废水'],
@@ -1441,9 +1444,10 @@ const profileData = {
       { level:'新', title:'华能2030碳中和路径发布', desc:'循环水系统优化纳入碳中和重点项目，仪器配套需求增加' },
     ],
     contacts: [
-      { name:'孙建民', role:'决策者', roleClass:'tag-blue', title:'集团技术委员会副主任', concern:'技术标准统一、合规管理 ｜ 入口：集团技术标准制定', color:'#0057A8' },
-      { name:'刘洋', role:'技术影响者', roleClass:'tag-green', title:'水务技术中心主任', concern:'仪器可靠性、全国统一维保体系 ｜ 入口：技术培训合作', color:'#059669' },
-      { name:'周晓红', role:'采购把关', roleClass:'tag-gray', title:'集团物资部高级采购经理', concern:'框架合同条款、服务响应时效', color:'#7C3AED' },
+      { name:'赵克宇', role:'决策者', roleClass:'tag-blue', title:'董事长、党委书记（1966年生，高级政工师）', concern:'集团战略、碳中和目标、降本合规 ｜ 注：集团采购决策在VP层面', color:'#0057A8', verified:true, sourceUrl:'https://www.lixinger.com/equity/company/detail/sh/600011/600011/senior-executive/resume', sourceLabel:'理杏仁·华能国际高管履历（600011）' },
+      { name:'黄历新', role:'运营负责人', roleClass:'tag-gray', title:'总经理、党委副书记（1966年生，清华EMBA，正高级会计师）', concern:'生产运营成本、框架合同执行 ｜ 入口：集团运营管理层', color:'#7C3AED', verified:true, sourceUrl:'https://www.lixinger.com/equity/company/detail/sh/600011/600011/senior-executive/resume', sourceLabel:'理杏仁·华能国际高管履历（600011）' },
+      { name:'🔒 水务技术中心主任', role:'技术影响者', roleClass:'tag-green', title:'水务技术中心主任（姓名需CRM核实）', concern:'仪器可靠性、全国统一维保体系 ｜ 入口：技术培训合作', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 集团物资部采购经理', role:'采购把关', roleClass:'tag-gray', title:'集团物资部高级采购经理（姓名需CRM核实）', concern:'框架合同条款、服务响应时效', color:'#6B7280', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   sinopharm: {
@@ -1463,15 +1467,15 @@ const profileData = {
       { level:'持续', title:'药监局飞行检查', desc:'在线水质监测数据须满足21 CFR Part 11合规要求' },
     ],
     contacts: [
-      { name:'周敏', role:'技术影响者', roleClass:'tag-green', title:'质量管理中心水质专家', concern:'GMP合规、数据完整性、法规符合性 ｜ 入口：GMP合规研讨', color:'#059669' },
-      { name:'张华', role:'决策者', roleClass:'tag-blue', title:'生产技术副总裁', concern:'生产安全、监管风险、成本控制 ｜ 入口：高层拜访', color:'#0057A8' },
-      { name:'李秀芳', role:'采购把关', roleClass:'tag-gray', title:'战略采购部经理', concern:'供应商资质、GMP认证、价格', color:'#7C3AED' },
+      { name:'🔒 生产技术副总裁', role:'决策者', roleClass:'tag-blue', title:'生产技术副总裁（姓名需CRM核实）', concern:'生产安全、监管风险、成本控制 ｜ 入口：高层拜访', color:'#0057A8', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 质量管理中心水质专家', role:'技术影响者', roleClass:'tag-green', title:'质量管理中心水质专家（姓名需CRM核实）', concern:'GMP合规、数据完整性、法规符合性 ｜ 入口：GMP合规研讨', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
+      { name:'🔒 战略采购部经理', role:'采购把关', roleClass:'tag-gray', title:'战略采购部经理（姓名需CRM核实）', concern:'供应商资质、GMP认证、价格', color:'#6B7280', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   semiconductor: {
     info: [
-      ['全称','中芯国际集成电路制造有限公司'],
-      ['性质','上市国企（港股+科创板）'],
+      ['全称','中芯国际集成电路制造有限公司 (SMIC)'],
+      ['性质','上市国企（港股：00981 / 科创板：688981）'],
       ['主营','集成电路晶圆代工'],
       ['规模','全国最大晶圆代工企业，月产能 80万片+'],
       ['水质场景','超纯水（UPW）系统、废水处理与回用'],
@@ -1485,21 +1489,22 @@ const profileData = {
       { level:'持续', title:'超纯水质量合规', desc:'晶圆良率对UPW水质极度敏感，监测精度要求极高' },
     ],
     contacts: [
-      { name:'林杰', role:'技术影响者', roleClass:'tag-green', title:'基础设施工程技术总监', concern:'超纯水质量稳定性、设备可靠性、产线影响最小化 ｜ 入口：技术合作', color:'#059669' },
-      { name:'王海', role:'决策者', roleClass:'tag-blue', title:'副总裁（生产基础设施）', concern:'产线产能、资本支出优化、供应链安全', color:'#0057A8' },
-      { name:'吴芳', role:'采购把关', roleClass:'tag-gray', title:'战略采购总监', concern:'战略供应商资质、长期供货保障', color:'#7C3AED' },
+      { name:'刘训峰', role:'决策者', roleClass:'tag-blue', title:'董事长、执行董事（博士·西安交通大学管理科学，教授级高级工程师，前华谊集团董事长）', concern:'企业战略、供应链安全、技术引进 ｜ 注：设施采购决策在VP层面', color:'#0057A8', verified:true, sourceUrl:'https://www.smics.com/en/site/about_team', sourceLabel:'中芯国际官网·管理层介绍' },
+      { name:'赵海军', role:'技术领导', roleClass:'tag-green', title:'联席CEO（博士·清华大学电子工程，30年半导体运营经验）', concern:'晶圆良率、UPW系统可靠性、产线稳定性 ｜ 核心技术决策人', color:'#059669', verified:true, sourceUrl:'https://www.smics.com/en/site/about_team', sourceLabel:'中芯国际官网·管理层介绍' },
+      { name:'梁孟松', role:'技术领导', roleClass:'tag-green', title:'联席CEO（博士·UC Berkeley EE，450+专利，350+技术论文，IEEE院士）', concern:'技术节点升级、超纯水质量要求 ｜ 技术最高决策人', color:'#0EA5E9', verified:true, sourceUrl:'https://www.smics.com/en/site/about_team', sourceLabel:'中芯国际官网·管理层介绍' },
+      { name:'🔒 基础设施VP', role:'采购决策', roleClass:'tag-gray', title:'基础设施/公用工程副总裁（姓名需CRM核实）', concern:'UPW系统采购、供应商资质 ｜ 实际采购决策人', color:'#6B7280', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
   steel: {
     info: [
-      ['全称','中国宝武钢铁集团有限公司'],
-      ['性质','央企（全球最大钢铁企业）'],
+      ['全称','宝山钢铁股份有限公司（宝钢股份，中国宝武钢铁集团旗下）'],
+      ['性质','央企控股上市公司（A股：600019）'],
       ['主营','钢铁冶炼、深加工及相关材料'],
-      ['规模','粗钢产量约 1.3亿吨/年'],
+      ['规模','粗钢产量约 1.3亿吨/年（宝武集团）'],
       ['水处理场景','高炉冷却水、连铸废水、烟气脱硫废水'],
-      ['年收入','约 ¥9000亿 (集团总收入)'],
-      ['采购方式','集团采购平台 + 子公司分散采购（宝钢股份/马钢等）'],
-      ['预算状态','2026年降本增效，非生产性支出压缩20%'],
+      ['年收入','约 ¥2800亿 (宝钢股份2024年报)'],
+      ['采购方式','集团采购平台 + 子公司分散采购'],
+      ['预算状态','2026年降本增效，成本领先战略加压非生产性支出'],
     ],
     standards: ['GB 13456 钢铁工业水污染物排放','HJ 2022 焦化废水处理','超低排放改造要求','排污许可证年度要求'],
     compliance: [
@@ -1507,9 +1512,10 @@ const profileData = {
       { level:'新', title:'湛江基地扩产配套', desc:'湛江钢铁基地二期扩产获批，配套仪器采购启动' },
     ],
     contacts: [
-      { name:'吴刚', role:'技术影响者', roleClass:'tag-green', title:'宝钢股份仪表自动化研究所所长', concern:'仪器可靠性、国产化替代压力、维保成本 ｜ 入口：技术交流', color:'#059669' },
-      { name:'黄明', role:'决策者', roleClass:'tag-blue', title:'集团环保安全总监', concern:'超低排放达标、监管合规 ｜ 入口：行业环保论坛', color:'#0057A8' },
-      { name:'孙丽', role:'采购把关', roleClass:'tag-gray', title:'物资采购中心高级经理', concern:'集团框架协议、竞争性报价', color:'#7C3AED' },
+      { name:'邹继新', role:'决策者', roleClass:'tag-blue', title:'党委书记、董事长（1968年生，正高级工程师，享国务院政府特殊津贴）', concern:'绿色钢铁战略、ESG目标、集团降本 ｜ 注：仪器采购决策在事业部层面', color:'#0057A8', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600019&type=web', sourceLabel:'东方财富·宝钢股份高管信息（600019）' },
+      { name:'刘宝军', role:'运营负责人', roleClass:'tag-gray', title:'总经理、党委副书记（1978年生，低碳冶金管理经验，正高级工程师）', concern:'生产运营成本、低碳转型目标 ｜ 入口：运营管理渠道', color:'#7C3AED', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600019&type=web', sourceLabel:'东方财富·宝钢股份高管信息（600019）' },
+      { name:'蔡延擘', role:'采购影响者', roleClass:'tag-gray', title:'副总经理（1976年生，前运行中心+安全监督部+采购经营管理办公室主任）', concern:'ESG体系、安全监督、采购合规 ｜ 关键：采购管理背景，直接影响仪器采购决策', color:'#DC2626', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600019&type=web', sourceLabel:'东方财富·宝钢股份高管信息（600019）' },
+      { name:'吴军', role:'技术影响者', roleClass:'tag-green', title:'副总经理/中央研究院院长（1968年生，博士·华东理工化工，主管科研管理）', concern:'仪器可靠性、国产化替代技术评估、创新方案 ｜ 入口：技术合作', color:'#059669', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600019&type=web', sourceLabel:'东方财富·宝钢股份高管信息（600019）' },
     ],
   },
   food: {
@@ -1529,12 +1535,14 @@ const profileData = {
       { level:'持续', title:'FSSC 22000 食品安全管理体系', desc:'国际认证要求所有工艺用水有连续在线监测记录' },
     ],
     contacts: [
-      { name:'王芳', role:'技术影响者', roleClass:'tag-green', title:'集团质量安全中心水质负责人', concern:'食品安全合规、检测精度、跨厂统一 ｜ 入口：质量技术合作', color:'#059669' },
-      { name:'刘伟', role:'决策者', roleClass:'tag-blue', title:'生产制造副总裁', concern:'产品安全、成本控制、工厂达标', color:'#0057A8' },
-      { name:'张丽', role:'采购把关', roleClass:'tag-gray', title:'战略采购中心总经理', concern:'集团框架采购、供应商年度评审', color:'#7C3AED' },
+      { name:'潘刚', role:'决策者', roleClass:'tag-blue', title:'董事长、总裁、法定代表人（1970年生，博士，持股2.867亿股，薪酬1974万/年）', concern:'全球乳业地位、品牌安全、ESG ｜ 注：仪器采购决策在事业部VP层面', color:'#0057A8', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600887&type=web', sourceLabel:'东方财富·伊利股份高管信息（600887）' },
+      { name:'赵成霞', role:'运营负责人', roleClass:'tag-gray', title:'副总裁、财务负责人、董事（1970年生）', concern:'成本管控、采购预算合规 ｜ 入口：集团财务渠道', color:'#7C3AED', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600887&type=web', sourceLabel:'东方财富·伊利股份高管信息（600887）' },
+      { name:'王晓刚', role:'IT/数字化', roleClass:'tag-gray', title:'副总裁（1973年生，前信息工程部总经理，主管数字化）', concern:'智慧工厂数字化、数据集成、系统互联 ｜ 入口：数字化转型项目', color:'#0EA5E9', verified:true, sourceUrl:'https://emweb.eastmoney.com/PC_HSF10/CompanyManagement/Index?code=SH600887&type=web', sourceLabel:'东方财富·伊利股份高管信息（600887）' },
+      { name:'🔒 质量安全中心水质负责人', role:'技术影响者', roleClass:'tag-green', title:'质量安全中心水质负责人（姓名需CRM核实）', concern:'食品安全合规、检测精度、跨厂统一 ｜ 入口：质量技术合作', color:'#059669', verified:false, sourceUrl:'', sourceLabel:'' },
     ],
   },
 };
+
 
 const briefData = {
   beijing: {
@@ -1673,11 +1681,15 @@ function renderProfile(accId) {
       <div class="card-title">👥 关键决策人图谱</div>
       ${p.contacts.map(c => `
         <div class="persona">
-          <div class="persona-avatar" style="background:${c.color};">${c.name[0]}</div>
-          <div>
-            <div class="persona-name">${c.name} <span class="tag ${c.roleClass}" style="font-size:10px;">${c.role}</span></div>
+          <div class="persona-avatar" style="background:${c.color};">${c.name[0] === '🔒' ? '🔒' : c.name[0]}</div>
+          <div style="flex:1;">
+            <div class="persona-name">
+              ${c.name} <span class="tag ${c.roleClass}" style="font-size:10px;">${c.role}</span>
+              ${c.verified ? '<span style="color:#16a34a;font-size:10px;font-weight:600;">✓ 已核实</span>' : '<span style="color:#b45309;font-size:10px;">🔒 CRM补全</span>'}
+            </div>
             <div class="persona-title">${c.title}</div>
-            <div class="persona-concern">${c.concern}</div>
+            <div class="persona-concern" style="font-size:11px;color:var(--text-light);margin-top:2px;">${c.concern}</div>
+            ${c.verified && c.sourceUrl ? `<div style="font-size:10px;margin-top:3px;">📎 <a href="${c.sourceUrl}" target="_blank" style="color:#3b82f6;">${c.sourceLabel}</a></div>` : ''}
           </div>
         </div>`).join('')}
     </div>`;
