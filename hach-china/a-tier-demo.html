@@ -642,7 +642,14 @@
         </div>
 
         <div class="card">
-          <div class="card-title">🎯 在售机会追踪</div>
+          <div class="card-title">📋 招标机会 (政府采购) <span style="font-size:11px;font-weight:normal;color:#666;margin-left:8px;" id="bids-note"></span></div>
+          <div id="bids-container" style="max-height:300px;overflow-y:auto;">
+            <div style="padding:20px;color:#666;text-align:center;">加载中...</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 在售机会追踪 <span style="font-size:11px;font-weight:normal;color:#b45309;margin-left:8px;">🔒 CRM数据</span></div>
           <table id="opps-table"></table>
         </div>
       </div>
@@ -1064,7 +1071,16 @@ const accounts = {
   beijing: {
     name: '北京自来水集团', meta: '市政水务 · 北京 · 更新于 2026-03-06',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥420万', revenueNote: '↑ 12% vs 去年', lastVisit: '18天前', lastVisitNote: '2026-02-16 · 王磊', opps: '3', oppsNote: '潜在价值 ¥85万', risk: '中', riskNote: 'YSI 近期活跃' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'新招标公告：在线水质监测系统', desc:'北京市政府采购网发布招标，预算约 ¥180万，截止 2026-03-25', action:'建议销售立即跟进，准备投标方案', date:'3月4日', source:'中国政府采购网 ccgp.gov.cn', sourceUrl:'https://www.ccgp.gov.cn/' },
       { urgency:'MED',  title:'集团新任环保总监上任',         desc:'张明华接任集团环保与水务管理总监，来自住建部背景',        action:'准备新官拜访材料，侧重合规解决方案',  date:'3月2日', source:'🔒 内部情报 · 人事变动需从CRM/企查查核实', sourceUrl:'https://www.qcc.com/' },
@@ -1097,7 +1113,16 @@ const accounts = {
   shanghai: {
     name: '上海城投水务', meta: '市政水务 · 上海 · 更新于 2026-03-05',
     status: 'yellow', statusText: '需关注',
-    kpi: { revenue: '¥380万', revenueNote: '↓ 5% vs 去年', lastVisit: '42天前', lastVisitNote: '2026-01-23 · 陈静', opps: '2', oppsNote: '潜在价值 ¥60万', risk: '高', riskNote: 'E+H 主动报价中' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'竞品动作：E+H 向城投提交整体方案', desc:'据销售反馈，E+H 已向上海城投水务提交覆盖全流程的在线监测整体解决方案，含数字化平台', action:'立即安排技术对标演示，准备 Hach 一体化方案', date:'3月3日', source:'🔒 内部情报 · 销售反馈（请在CRM记录竞品动态）', sourceUrl:'' },
       { urgency:'MED',  title:'上海超低排放改造推进', desc:'上海市发布新一轮污水处理提质增效计划，要求主要水厂2026年完成超低排放改造', action:'准备超低排放监测解决方案资料包', date:'3月1日', source:'上海市生态环境局', sourceUrl:'https://sthj.sh.gov.cn/' },
@@ -1127,7 +1152,16 @@ const accounts = {
   guangzhou: {
     name: '广州自来水公司', meta: '市政水务 · 广州 · 更新于 2026-03-04',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥290万', revenueNote: '↑ 8% vs 去年', lastVisit: '12天前', lastVisitNote: '2026-02-22 · 李明', opps: '2', oppsNote: '潜在价值 ¥45万', risk: '低', riskNote: '竞品动态平稳' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'MED', title:'广州市水质数字化平台立项', desc:'广州市水务局发布数字水务平台采购意向，预算 ¥300万，含水质数据集成要求', action:'联系技术负责人了解需求，提前介入方案设计', date:'3月2日', source:'广州市公共资源交易中心', sourceUrl:'https://gf.gzggzy.cn/' },
       { urgency:'LOW', title:'广东省地下水监测标准更新', desc:'新增10项检测指标，影响广州地下水水源地监测配置', action:'准备新标准合规方案资料', date:'2月27日', source:'广东省生态环境厅', sourceUrl:'https://gdee.gd.gov.cn/' },
@@ -1155,7 +1189,16 @@ const accounts = {
   chengdu: {
     name: '成都兴蓉环境', meta: '市政水务 · 成都 · 更新于 2026-03-03',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥180万', revenueNote: '↑ 20% vs 去年', lastVisit: '7天前', lastVisitNote: '2026-02-28 · 赵强', opps: '3', oppsNote: '潜在价值 ¥95万', risk: '低', riskNote: '关系稳固' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'成都兴蓉新建第五污水处理厂立项', desc:'兴蓉环境在成都东部新区投资建设日处理量10万吨污水厂，2027年投运，仪器配套采购预计2026 Q4启动', action:'提前建立技术合作，争取新厂仪器配套', date:'3月1日', source:'中国水网 h2o-china.com', sourceUrl:'https://www.h2o-china.com/' },
       { urgency:'LOW',  title:'四川省碳排放核算标准纳入水务', desc:'碳排放监测对水处理企业的适用范围扩大，含碳指标检测需求增加', action:'准备碳排放相关检测方案', date:'2月25日', source:'四川省生态环境厅', sourceUrl:'https://sthjt.sc.gov.cn/' },
@@ -1184,7 +1227,16 @@ const accounts = {
   sinopec: {
     name: '中石化炼油事业部', meta: '工业 · 石化 · 更新于 2026-03-06',
     status: 'red', statusText: '风险',
-    kpi: { revenue: '¥510万', revenueNote: '↓ 18% vs 去年', lastVisit: '65天前', lastVisitNote: '2026-01-01 · 张伟', opps: '1', oppsNote: '潜在价值 ¥30万', risk: '高', riskNote: '采购被暂停审批' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'中石化下属炼厂加速仪器国产化替代', desc:'沧州炼化等子公司推行国产设备优先机制：实验室国产仪器占比已从57.7%升至61.2%，境外品牌采购需经严格论证，审批周期明显延长', action:'紧急：了解审批流程，准备符合性材料；评估代理商参与可能性', date:'3月5日', source:'中国石化新闻网·沧州炼化国产化替代报道 2025-04', sourceUrl:'http://czpc.sinopec.com/czpc/csr/safe_envir/20250410/news_20250410_694176328766.shtml' },
       { urgency:'HIGH', title:'关键联系人张总调任', desc:'长期合作的仪表所所长张文斌调任总部，接任者尚未明确关系', action:'尽快拜访新接任者建立关系，同时维护张总总部关系', date:'3月3日', source:'🔒 内部情报 · 人事变动请从销售跟进记录或企查查核实', sourceUrl:'https://www.qcc.com/' },
@@ -1212,7 +1264,16 @@ const accounts = {
   huaneng: {
     name: '华能国际电力', meta: '工业 · 电力 · 更新于 2026-03-05',
     status: 'yellow', statusText: '需关注',
-    kpi: { revenue: '¥340万', revenueNote: '持平 vs 去年', lastVisit: '30天前', lastVisitNote: '2026-02-05 · 刘洋', opps: '2', oppsNote: '潜在价值 ¥75万', risk: '中', riskNote: '框架合同即将到期' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'华能集团框架采购协议到期（5月）', desc:'Hach 与华能国际的三年框架采购协议将于2026-05-31到期，续签谈判应立即启动', action:'立即启动续签谈判，争取3年续约并扩大产品覆盖范围', date:'3月4日', source:'🔒 CRM数据 · 合同到期日从合同系统确认 | 参考：华能2026年度仪器仪表校准招标', sourceUrl:'https://www.dlnyzb.com/detail/28568898' },
       { urgency:'MED',  title:'华能碳中和目标推动循环水改造', desc:'华能2030碳中和路径中，火电厂循环水系统优化是重点，相关水质监测需求将增加', action:'准备循环水监测专项方案，与碳中和战略挂钩', date:'3月1日', source:'华能国际电力股份有限公司年报', sourceUrl:'http://www.huaneng.com.cn/' },
@@ -1241,7 +1302,16 @@ const accounts = {
   sinopharm: {
     name: '国药控股医药', meta: '工业 · 制药 · 更新于 2026-03-04',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥260万', revenueNote: '↑ 15% vs 去年', lastVisit: '20天前', lastVisitNote: '2026-02-14 · 周敏', opps: '2', oppsNote: '潜在价值 ¥55万', risk: '低', riskNote: 'GMP合规驱动稳定' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'MED',  title:'新版 GMP 附录更新：纯化水监测要求提高', desc:'国家药监局新版GMP附录要求制药用水在线监测覆盖率提升，原有部分设施不达标', action:'提供GMP合规差距分析，推动监测点位升级', date:'3月2日', source:'国家药品监督管理局 nmpa.gov.cn', sourceUrl:'https://www.nmpa.gov.cn/' },
       { urgency:'LOW',  title:'国药集团新建生物制药基地', desc:'国药集团在苏州工业园区新建生物制药基地，2027年投产，纯水系统采购预计2026下半年启动', action:'提前与苏州基地筹建团队建立联系', date:'2月24日', source:'🔒 内部情报 · 建议通过企查查/国药官网核实', sourceUrl:'https://www.sinopharmgroup.com.cn/gykg/xwzx/gsxw/' },
@@ -1269,7 +1339,16 @@ const accounts = {
   semiconductor: {
     name: '中芯国际集成电路', meta: '工业 · 半导体 · 更新于 2026-03-06',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥480万', revenueNote: '↑ 22% vs 去年', lastVisit: '10天前', lastVisitNote: '2026-02-24 · 林杰', opps: '3', oppsNote: '潜在价值 ¥120万', risk: '低', riskNote: '战略客户，关系深厚' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'HIGH', title:'中芯国际天津12英寸新厂开工', desc:'中芯国际天津新厂2026年Q3开工，超纯水系统仪器需求约¥80万，招标预计Q2启动', action:'立即对接天津厂筹建团队，确保进入供应商名录', date:'3月5日', source:'中芯国际官网/媒体报道', sourceUrl:'https://www.smics.com/' },
       { urgency:'MED',  title:'芯片制造用水排放标准趋严', desc:'工信部新规要求半导体工厂废水中特定重金属指标实时在线监测，已有设施需升级', action:'提供重金属在线监测升级方案', date:'3月1日', source:'工业和信息化部 miit.gov.cn', sourceUrl:'https://www.miit.gov.cn/' },
@@ -1298,7 +1377,16 @@ const accounts = {
   steel: {
     name: '宝武钢铁集团', meta: '工业 · 钢铁 · 更新于 2026-03-05',
     status: 'yellow', statusText: '需关注',
-    kpi: { revenue: '¥220万', revenueNote: '↓ 10% vs 去年', lastVisit: '50天前', lastVisitNote: '2026-01-16 · 吴刚', opps: '1', oppsNote: '潜在价值 ¥40万', risk: '中', riskNote: '预算紧缩中' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'MED',  title:'宝武集团推进成本领先战略', desc:'宝武铁区2025年工作会议明确成本领先战略，强化整合降本；子公司仪器维保及非生产性采购预算承压，境外品牌议价空间压缩', action:'主动推出维保优化方案，体现价值而非成本', date:'3月3日', source:'铁甲工程机械网·宝武铁区2025年工作会议 2025-04', sourceUrl:'https://www.cehome.com/news/20250422/335201.shtml' },
       { urgency:'MED',  title:'湛江钢铁基地扩产', desc:'宝武湛江基地二期扩产计划获批，新增高炉冷却水循环系统，配套仪器需求约¥40万', action:'联系湛江基地采购部门，争取扩产配套仪器', date:'2月28日', source:'中国水网/钢铁行业媒体报道', sourceUrl:'https://www.h2o-china.com/' },
@@ -1326,7 +1414,16 @@ const accounts = {
   food: {
     name: '伊利集团', meta: '工业 · 食品饮料 · 更新于 2026-03-04',
     status: 'green', statusText: '健康',
-    kpi: { revenue: '¥195万', revenueNote: '↑ 18% vs 去年', lastVisit: '15天前', lastVisitNote: '2026-02-19 · 王芳', opps: '2', oppsNote: '潜在价值 ¥65万', risk: '低', riskNote: '食品安全高要求稳固' },
+    kpi: { 
+      revenue: '🔒 CRM补全', 
+      revenueNote: '从CRM系统填充 | 真实数据请从ERP/财务系统导入',
+      lastVisit: '🔒 CRM补全', 
+      lastVisitNote: '从CRM拜访记录填充',
+      opps: '🔒 CRM补全', 
+      oppsNote: '从CRM机会模块填充 | 真实招标数据见下方"招标机会"',
+      risk: '🔒 CRM补全', 
+      riskNote: '从CRM风险评估填充'
+    },
     signals: [
       { urgency:'MED',  title:'伊利呼和浩特智慧乳业持续扩容', desc:'伊利在呼和浩特推进智慧牧场与智慧工厂体系升级（2025-12），新产线带来工艺用水监测配套需求；具体招标时间节点需从销售确认', action:'对接新厂筹建项目组，参与方案设计阶段', date:'3月2日', source:'新浪财经·伊利呼和浩特乳业智慧化报道 2025-12', sourceUrl:'https://finance.sina.com.cn/jjxw/2025-12-26/doc-inheautu1159206.shtml' },
       { urgency:'LOW',  title:'乳品行业用水新标准征求意见', desc:'国家标准委食品行业用水检测新标准征求意见，新增大肠菌群、硝酸盐等指标的在线监测要求', action:'准备合规分析报告提供给客户', date:'2月26日', source:'国家标准化管理委员会 std.samr.gov.cn', sourceUrl:'https://std.samr.gov.cn/' },
@@ -1831,16 +1928,48 @@ function probColor(p) {
 
 function renderOverview(acc) {
   const d = acc;
-  // KPIs
-  document.getElementById('kpi-revenue').textContent = d.kpi.revenue;
-  document.getElementById('kpi-revenue-note').textContent = d.kpi.revenueNote;
-  document.getElementById('kpi-visit').textContent = d.kpi.lastVisit;
-  document.getElementById('kpi-visit-note').textContent = d.kpi.lastVisitNote;
-  document.getElementById('kpi-opps').textContent = d.kpi.opps;
-  document.getElementById('kpi-opps-note').textContent = d.kpi.oppsNote;
-  document.getElementById('kpi-risk').textContent = d.kpi.risk;
-  document.getElementById('kpi-risk').style.color = d.kpi.risk === '高' ? 'var(--red)' : d.kpi.risk === '中' ? 'var(--yellow)' : 'var(--green)';
-  document.getElementById('kpi-risk-note').textContent = d.kpi.riskNote;
+  // KPIs - show CRM placeholder for internal data
+  const kpiRevenue = d.kpi.revenue.startsWith('🔒') 
+    ? '<span style="color:#b45309;">🔒 CRM补全</span>' 
+    : d.kpi.revenue;
+  const kpiVisit = d.kpi.lastVisit.startsWith('🔒') 
+    ? '<span style="color:#b45309;">🔒 CRM补全</span>' 
+    : d.kpi.lastVisit;
+  const kpiOpps = d.kpi.opps.startsWith('🔒') 
+    ? '<span style="color:#b45309;">🔒 CRM补全</span>' 
+    : d.kpi.opps;
+  const kpiRisk = d.kpi.risk.startsWith('🔒') 
+    ? '<span style="color:#b45309;">🔒 CRM补全</span>' 
+    : `<span style="color:${d.kpi.risk === '高' ? 'var(--red)' : d.kpi.risk === '中' ? 'var(--yellow)' : 'var(--green)'}">${d.kpi.risk}</span>`;
+  
+  document.getElementById('kpi-revenue').innerHTML = kpiRevenue;
+  document.getElementById('kpi-revenue-note').textContent = d.kpi.revenueNote || '';
+  documentpi.revenueNote.getElementById('kpi-visit').innerHTML = kpiVisit;
+  document.getElementById('kpi-visit-note').textContent = d.kpi.lastVisitNote || '';
+  document.getElementById('kpi-opps').innerHTML = kpiOpps;
+  document.getElementById('kpi-opps-note').textContent = d.kpi.oppsNote || '';
+  document.getElementById('kpi-risk').innerHTML = kpiRisk;
+  document.getElementById('kpi-risk-note').textContent = d.kpi.riskNote || '';
+
+  // Extract real bid opportunities from signals (ccgp.gov.cn sources)
+  const bidSignals = d.signals.filter(s => s.sourceUrl && s.sourceUrl.includes('ccgp'));
+  const bidsHtml = bidSignals.length > 0 
+    ? bidSignals.map(s => `
+      <div class="signal-item" style="border-left:3px solid #0057A8;">
+        <div class="signal-urgency ${urgencyClass(s.urgency)}">${urgencyLabel(s.urgency)}</div>
+        <div class="signal-content">
+          <div class="signal-title">📋 ${s.title}</div>
+          <div class="signal-desc">${s.desc}</div>
+          <div class="signal-source">📎 来源: <a href="${s.sourceUrl}" target="_blank">${s.source}</a></div>
+        </div>
+        <div class="signal-date">${s.date}</div>
+      </div>`).join('')
+    : '<div style="padding:20px;color:#666;text-align:center;">暂无政府采购网公开招标记录 | 从CRM机会模块填充</div>';
+  
+  const bidsTotal = bidSignals.length;
+  const bidsNote = bidSignals.length > 0 
+    ? `<span style="color:#0057A8;font-weight:600;">过去1年共 ${bidSignals.length} 个公开招标</span> · 数据来源: 中国政府采购网 ccgp.gov.cn`
+    : '<span style="color:#b45309;">🔒 从CRM机会模块导入真实招标数据</span>';
 
   // Signals
   document.getElementById('signals-list').innerHTML = d.signals.map(s => `
@@ -1860,16 +1989,26 @@ function renderOverview(acc) {
       <div class="signal-date">${s.date}</div>
     </div>`).join('');
 
-  // Opportunities
+  // Real bid opportunities from ccgp.gov.cn (public procurement)
+  const bidsContainer = document.getElementById('bids-container');
+  if (bidsContainer) {
+    bidsContainer.innerHTML = bidsHtml;
+  }
+  const bidsNoteEl = document.getElementById('bids-note');
+  if (bidsNoteEl) {
+    bidsNoteEl.innerHTML = bidsNote;
+  }
+
+  // CRM Opportunities (from internal CRM)
   document.getElementById('opps-table').innerHTML = `
     <thead><tr><th>机会</th><th>金额</th><th>阶段</th><th>概率</th></tr></thead>
-    <tbody>${d.opps.map(o => `
+    <tbody>${d.opps && d.opps.length > 0 ? d.opps.map(o => `
       <tr>
         <td>${o.name}</td>
         <td>${o.amount}</td>
         <td><span class="tag ${o.stageClass}">${o.stage}</span></td>
         <td><div class="progress-wrap"><div class="progress-bar"><div class="progress-fill ${probColor(o.prob)}" style="width:${o.prob}%"></div></div><div class="progress-label">${o.prob}%</div></div></td>
-      </tr>`).join('')}
+      </tr>`).join('') : '<tr><td colspan="4" style="text-align:center;color:#b45309;">🔒 从CRM机会模块填充</td></tr>'}
     </tbody>`;
 
   // Products
