@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>采购决策人图谱 · Hach China</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0F1A; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #080D18; }
+    ::-webkit-scrollbar-thumb { background: #1A2E45; border-radius: 3px; }
+    button { font-family: inherit; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState } = React;
+
+// ── Read account name from URL param ?account=xxx ──────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+const accountName = urlParams.get('account') || '市政水务客户';
+
+// ── Stakeholder data ───────────────────────────────────────────────────────
+const stakeholders = [
+  // ── 战略层 ──
+  {
+    id: "GM",
+    layer: "strategic",
+    layerLabel: "战略层",
+    title_cn: "总经理 / 董事长",
+    title_en: "General Manager / Chairman",
+    dept: "集团总部",
+    influence: "决策者",
+    influenceEn: "Decision Maker",
+    icon: "👑",
+    color: "#C8922A",
+    concerns: [
+      "集团年度资本支出优先级与预算平衡",
+      "国资委监管合规与环保督察零风险",
+      "供应商战略合作与央企合规采购要求",
+      "ROI与资产生命周期管理",
+    ],
+    painPoints: [
+      "环保督察风险敞口：在线监测数据不合规导致行政处罚",
+      "资产老化：仪器停机导致排放超标，面临罚款和舆论压力",
+      "政策窗口：'两新'设备更新补贴申报机制不熟悉",
+    ],
+    hachValue: [
+      "Hach仪器具备HJ系列国家认证，联网数据合规，直接降低督察风险",
+      "提供集团级框架合同与设备全生命周期服务，降低管理复杂度",
+      "协助梳理设备更新补贴政策申报路径，优化实际采购成本",
+    ],
+    channel: ["高层战略拜访（集团层面）", "政策解读专题报告", "行业峰会白皮书合著"],
+    decisionWeight: 95,
+  },
+  {
+    id: "VP_ENV",
+    layer: "strategic",
+    layerLabel: "战略层",
+    title_cn: "分管副总经理（生产/技术/安全）",
+    title_en: "Deputy GM – Production / Technology / HSE",
+    dept: "集团总部",
+    influence: "决策者",
+    influenceEn: "Decision Maker",
+    icon: "🏛",
+    color: "#C8922A",
+    concerns: [
+      "年度生产安全与排放达标KPI",
+      "技改项目立项审批与资金分配",
+      "跨子公司技术标准统一",
+      "智慧水厂与数字化升级战略落地",
+    ],
+    painPoints: [
+      "多地项目仪器品牌杂乱，运维成本高、数据口径不统一",
+      "新标准（GB 5749-2022等）执行压力大，技术升级路径不清晰",
+      "智慧化改造缺乏高质量传感器数据基础",
+    ],
+    hachValue: [
+      "推动Hach成为集团统一仪器平台，降低运维复杂度和备件库存成本",
+      "Hach WIMS数据平台为AI行动计划提供高质量传感器数据基础",
+      "提供新标准合规路线图，减少技术层面决策不确定性",
+    ],
+    channel: ["技术战略研讨会（集团级）", "智慧水厂参观考察（标杆项目）", "行业协会联合课题"],
+    decisionWeight: 88,
+  },
+
+  // ── 技术层 ──
+  {
+    id: "CHIEF_ENG",
+    layer: "technical",
+    layerLabel: "技术层",
+    title_cn: "总工程师 / 首席技术官",
+    title_en: "Chief Engineer / CTO",
+    dept: "技术研发中心",
+    influence: "影响者",
+    influenceEn: "Influencer",
+    icon: "🔬",
+    color: "#1E6B9E",
+    concerns: [
+      "仪器测量精度与长期稳定性",
+      "技术标准制定与品牌入围资格审定",
+      "与智慧水务平台的数据接口兼容性",
+      "国内外品牌技术对比评估",
+    ],
+    painPoints: [
+      "部分在线仪器漂移频繁，需频繁标定，占用大量技术人员时间",
+      "不同品牌仪器协议不统一，数据集成困难",
+      "总磷/总氮等关键指标仪器精度不足，影响工艺优化",
+    ],
+    hachValue: [
+      "Hach sc系列控制器统一协议，实现多参数仪器数据集成",
+      "业界领先的低漂移传感器技术（如LDO光学溶解氧），减少标定频次",
+      "提供技术白皮书、应用报告，支持品牌入围技术论证",
+    ],
+    channel: ["技术研讨会 / 新品发布会", "样机试用与数据对比测试", "联合发表行业论文"],
+    decisionWeight: 82,
+  },
+  {
+    id: "ENV_MGR",
+    layer: "technical",
+    layerLabel: "技术层",
+    title_cn: "环保与水质管理部长",
+    title_en: "Environmental & Water Quality Manager",
+    dept: "环保/水务技术部",
+    influence: "影响者",
+    influenceEn: "Influencer",
+    icon: "💧",
+    color: "#1E6B9E",
+    concerns: [
+      "出水水质日常达标（COD、氨氮、总磷、总氮）",
+      "在线监测数据与生态环境局联网稳定性",
+      "快速响应突发水质异常事件",
+      "合规记录的完整性与可追溯性",
+    ],
+    painPoints: [
+      "在线仪器故障时联网数据中断，面临监管部门核查风险",
+      "仪器维护周期短，试剂消耗成本高",
+      "水质异常预警滞后，无法实现预防性处置",
+    ],
+    hachValue: [
+      "Hach双通道冗余设计减少数据中断风险，满足联网稳定性要求",
+      "长寿命试剂包降低耗材频率，降低运营成本",
+      "Hach智慧预警系统提前识别水质异常趋势",
+    ],
+    channel: ["合规政策解读沙龙", "同行水务企业成功案例分享", "驻场技术支持演示"],
+    decisionWeight: 75,
+  },
+  {
+    id: "IT_SMART",
+    layer: "technical",
+    layerLabel: "技术层",
+    title_cn: "智慧水务 / 数字化负责人",
+    title_en: "Smart Water / Digitalization Manager",
+    dept: "信息化/数字化部门",
+    influence: "影响者",
+    influenceEn: "Influencer",
+    icon: "🖥",
+    color: "#1E6B9E",
+    concerns: [
+      "仪器数据与SCADA/DCS/云平台的集成可行性",
+      "通信协议标准化（Modbus、HART、OPC-UA）",
+      "数据安全与国产化适配要求",
+      "AI模型训练所需数据质量与频率",
+    ],
+    painPoints: [
+      "老旧仪器仅支持模拟量输出，无法接入数字化平台",
+      "多品牌仪器API接口不统一，二次开发成本高",
+      "数据采样频率低，无法支撑机器学习模型训练",
+    ],
+    hachValue: [
+      "Hach sc1000/sc200支持多种数字通信协议，开放API接口",
+      "高频数据采集能力，为AI行动计划提供训练数据基础",
+      "提供中国本地化数据安全方案",
+    ],
+    channel: ["技术集成研讨会", "POC概念验证项目合作", "数字化行业峰会"],
+    decisionWeight: 68,
+  },
+
+  // ── 采购层 ──
+  {
+    id: "PROC_DIR",
+    layer: "procurement",
+    layerLabel: "采购层",
+    title_cn: "采购中心负责人 / 招标办主任",
+    title_en: "Procurement Center Director / Tendering Office Head",
+    dept: "集团采购管理中心",
+    influence: "把关者",
+    influenceEn: "Gatekeeper",
+    icon: "📋",
+    color: "#2E7D52",
+    concerns: [
+      "供应商资质合规（营业执照、认证、税务）",
+      "价格竞争力与成本降低目标（集采节约率KPI）",
+      "招标程序合法性（政府采购法、国企监管）",
+      "战略供应商准入资格与年度评级",
+    ],
+    painPoints: [
+      "仪器类品类集采标准化难度高，品牌繁多难以统一",
+      "小批量采购效率低，框架协议覆盖不足",
+      "供应商售后响应合同约束弱，索赔困难",
+    ],
+    hachValue: [
+      "支持集团框架协议模式，简化100+项目公司分散采购",
+      "提供透明价格体系与年度服务合同，满足国企采购合规要求",
+      "Hach中国区完善的合规资质文件包，加速入围审核",
+    ],
+    channel: ["采购合规政策培训", "框架协议条款谈判会", "供应商资质预审会"],
+    decisionWeight: 70,
+  },
+  {
+    id: "FINANCE",
+    layer: "procurement",
+    layerLabel: "采购层",
+    title_cn: "财务总监 / 预算管理负责人",
+    title_en: "CFO / Budget Management Officer",
+    dept: "财务部",
+    influence: "把关者",
+    influenceEn: "Gatekeeper",
+    icon: "💼",
+    color: "#2E7D52",
+    concerns: [
+      "资本支出预算审批与年度资金计划",
+      "设备更新政策（两新）补贴申请与资金回收",
+      "全生命周期成本（LCC）而非仅采购价",
+      "汇率风险（进口设备采购）",
+    ],
+    painPoints: [
+      "设备更新政策补贴申报流程复杂，申请成功率低",
+      "仪器耗材年度费用难以预测，预算编制困难",
+      "进口仪器价格波动大，预算执行偏差风险",
+    ],
+    hachValue: [
+      "协助整理'两新'政策补贴申报材料，提升申请成功率",
+      "提供耗材年度订购套餐，固化成本便于预算编制",
+      "人民币计价合同选项，规避汇率风险",
+    ],
+    channel: ["财务专项政策解读会", "LCC全生命周期成本分析报告", "CFO一对一商务会谈"],
+    decisionWeight: 65,
+  },
+
+  // ── 使用层 ──
+  {
+    id: "PLANT_MGR",
+    layer: "operations",
+    layerLabel: "使用层",
+    title_cn: "水厂厂长 / 项目公司总经理",
+    title_en: "Plant Manager / Project Company GM",
+    dept: "各地项目公司",
+    influence: "使用者+影响者",
+    influenceEn: "User + Influencer",
+    icon: "🏭",
+    color: "#6B3FA0",
+    concerns: [
+      "水厂安全稳定运行（24×7零停机目标）",
+      "年度运营成本（电耗、药耗、维修费）控制",
+      "监管部门现场检查应对能力",
+      "向集团汇报的月度运营KPI达成",
+    ],
+    painPoints: [
+      "仪器故障响应慢，本地缺乏快速备件支持",
+      "精准曝气/加药控制因仪器精度不足导致药耗偏高",
+      "运维人员技能不足，复杂仪器维护困难",
+    ],
+    hachValue: [
+      "Hach全国服务网络，承诺4-8小时响应，减少停机损失",
+      "精准DO/氨氮仪器支持精准曝气，节电10-15%",
+      "提供本地运维培训，降低对厂商依赖",
+    ],
+    channel: ["水厂现场演示与试运行", "运维人员技术培训", "同类水厂参观交流"],
+    decisionWeight: 55,
+  },
+  {
+    id: "INSTRUMENT",
+    layer: "operations",
+    layerLabel: "使用层",
+    title_cn: "仪表工程师 / 自控专工",
+    title_en: "Instrument Engineer / Automation Specialist",
+    dept: "水厂运营部门",
+    influence: "使用者",
+    influenceEn: "User",
+    icon: "🔧",
+    color: "#6B3FA0",
+    concerns: [
+      "日常校准标定操作难易程度",
+      "故障判断与自主维修能力",
+      "试剂更换频率与操作安全性",
+      "仪器显示界面与操作逻辑友好性",
+    ],
+    painPoints: [
+      "某些在线仪器维护操作复杂，需要专业工具和较长停机时间",
+      "国外品牌中文操作手册和技术支持响应差",
+      "试剂有效期短、管理混乱，导致测量失效",
+    ],
+    hachValue: [
+      "Hach仪器中文操作界面，中文操作手册与24小时技术热线",
+      "免工具快速清洁维护设计（如Hach传感器自清洁功能）",
+      "本地技术工程师上门培训，提升操作人员信心",
+    ],
+    channel: ["现场操作培训工作坊", "技术支持热线建立关系", "微信技术交流群运营"],
+    decisionWeight: 35,
+  },
+  {
+    id: "QA",
+    layer: "operations",
+    layerLabel: "使用层",
+    title_cn: "水质化验员 / 实验室主任",
+    title_en: "Water Quality Analyst / Lab Director",
+    dept: "水质检测实验室",
+    influence: "使用者+把关者",
+    influenceEn: "User + Gatekeeper",
+    icon: "🧪",
+    color: "#6B3FA0",
+    concerns: [
+      "检测方法符合国家标准（GB/HJ方法标准）",
+      "实验室仪器与在线仪器数据的比对一致性",
+      "检测报告数据的可追溯性与合规性",
+      "实验室认证（CMA/CNAS）维护要求",
+    ],
+    painPoints: [
+      "在线仪器与实验室手工检测数据差异大，排查困难",
+      "GB 5749-2022新增指标缺乏对应检测设备",
+      "实验室仪器老化，无法满足新标准方法要求",
+    ],
+    hachValue: [
+      "Hach DR系列分光光度计与在线仪器同源方法，保证数据一致性",
+      "提供GB 5749-2022全指标检测方案清单",
+      "LIMS实验室数据管理系统支持CMA/CNAS认证数据规范",
+    ],
+    channel: ["实验室新标准培训（GB 5749-2022专项）", "免费样品检测与方法验证", "CMA/CNAS认证辅导"],
+    decisionWeight: 42,
+  },
+];
+
+const layerConfig = {
+  strategic:   { label: "战略层", labelEn: "Strategic Layer",   bg: "rgba(200,146,42,0.08)",  border: "#C8922A", icon: "◆" },
+  technical:   { label: "技术层", labelEn: "Technical Layer",   bg: "rgba(30,107,158,0.08)",  border: "#1E6B9E", icon: "◈" },
+  procurement: { label: "采购层", labelEn: "Procurement Layer", bg: "rgba(46,125,82,0.08)",   border: "#2E7D52", icon: "◉" },
+  operations:  { label: "使用层", labelEn: "Operations Layer",  bg: "rgba(107,63,160,0.08)",  border: "#6B3FA0", icon: "◌" },
+};
+
+const influenceTag = {
+  "决策者":       { bg: "#C8922A22", color: "#C8922A", border: "#C8922A55" },
+  "影响者":       { bg: "#1E6B9E22", color: "#1E6B9E", border: "#1E6B9E55" },
+  "把关者":       { bg: "#2E7D5222", color: "#2E7D52", border: "#2E7D5255" },
+  "使用者":       { bg: "#6B3FA022", color: "#6B3FA0", border: "#6B3FA055" },
+  "使用者+影响者":{ bg: "#7B5EA722", color: "#7B5EA7", border: "#7B5EA755" },
+  "使用者+把关者":{ bg: "#2E6B7022", color: "#2E6B70", border: "#2E6B7055" },
+};
+
+const layers = ["strategic", "technical", "procurement", "operations"];
+
+function StakeholderMap() {
+  const [selected, setSelected]     = useState(null);
+  const [activeLayer, setActiveLayer] = useState(null);
+  const [activeTab, setActiveTab]   = useState("concerns");
+
+  const filteredStakeholders = activeLayer
+    ? stakeholders.filter(s => s.layer === activeLayer)
+    : stakeholders;
+
+  const sel = stakeholders.find(s => s.id === selected);
+
+  const tabs = [
+    { key: "concerns",   label: "核心关切", icon: "◎" },
+    { key: "painPoints", label: "痛点",     icon: "⚡" },
+    { key: "hachValue",  label: "Hach价值", icon: "✦" },
+    { key: "channel",    label: "接触渠道", icon: "➤" },
+  ];
+
+  return (
+    <div style={{
+      minHeight: "100vh",
+      background: "#0A0F1A",
+      color: "#E8EDF5",
+      fontFamily: "'Noto Serif SC', 'STSong', Georgia, serif",
+    }}>
+
+      {/* ── HEADER ── */}
+      <div style={{
+        background: "linear-gradient(135deg, #0D1B2E 0%, #0A1628 50%, #0D1E35 100%)",
+        borderBottom: "1px solid #1A2E45",
+        padding: "24px 32px 20px",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        <div style={{ position:"absolute", top:0, right:"15%", width:1, height:"100%", background:"linear-gradient(to bottom, transparent, #C8922A33, transparent)" }} />
+        <div style={{ position:"absolute", top:0, right:"35%", width:1, height:"100%", background:"linear-gradient(to bottom, transparent, #1E6B9E22, transparent)" }} />
+
+        <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", flexWrap:"wrap", gap:12 }}>
+          <div>
+            <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:6 }}>
+              <div style={{ width:3, height:28, background:"linear-gradient(to bottom, #C8922A, #1E6B9E)", borderRadius:2 }} />
+              <span style={{ fontSize:11, letterSpacing:4, color:"#C8922A", textTransform:"uppercase", fontFamily:"monospace" }}>
+                HACH CHINA · ACCOUNT INTELLIGENCE
+              </span>
+              <a href="javascript:history.back()" style={{ marginLeft:12, fontSize:11, color:"#3A4E60", textDecoration:"none", padding:"2px 10px", border:"1px solid #1A2E45", borderRadius:4 }}>← 返回</a>
+            </div>
+            <h1 style={{
+              margin:0, fontSize:22, fontWeight:700, letterSpacing:1,
+              background:"linear-gradient(90deg, #E8EDF5, #C8B99A)",
+              WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent"
+            }}>
+              {accountName} — 水质仪器采购决策人图谱
+            </h1>
+            <div style={{ marginTop:5, fontSize:12, color:"#7A8EA8", letterSpacing:0.5 }}>
+              Stakeholder Intelligence Map · 通用市政水务 / 大型工业客户 · {stakeholders.length} 个关键角色
+            </div>
+          </div>
+          <div style={{ display:"flex", gap:16, flexWrap:"wrap" }}>
+            {[
+              { label:"决策者", color:"#C8922A", count: stakeholders.filter(s=>s.influence==="决策者").length },
+              { label:"影响者", color:"#1E6B9E", count: stakeholders.filter(s=>s.influence.includes("影响")).length },
+              { label:"把关者", color:"#2E7D52", count: stakeholders.filter(s=>s.influence.includes("把关")).length },
+              { label:"使用者", color:"#6B3FA0", count: stakeholders.filter(s=>s.influence.includes("使用")).length },
+            ].map(item => (
+              <div key={item.label} style={{ textAlign:"center" }}>
+                <div style={{ fontSize:20, fontWeight:700, color:item.color }}>{item.count}</div>
+                <div style={{ fontSize:10, color:"#5A6E85", letterSpacing:1 }}>{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display:"flex", height:"calc(100vh - 108px)" }}>
+
+        {/* ── LEFT: Layer filters + cards ── */}
+        <div style={{
+          width:320, flexShrink:0,
+          background:"#080D18",
+          borderRight:"1px solid #141F30",
+          overflowY:"auto",
+          padding:"16px 0",
+        }}>
+          <div style={{ padding:"0 14px 14px", borderBottom:"1px solid #141F30" }}>
+            <div style={{ fontSize:10, color:"#4A5E72", letterSpacing:3, marginBottom:8, textTransform:"uppercase" }}>按层级筛选</div>
+            <div style={{ display:"flex", gap:5, flexWrap:"wrap" }}>
+              <button onClick={() => setActiveLayer(null)} style={{
+                padding:"3px 10px", borderRadius:20, fontSize:11, cursor:"pointer",
+                border:`1px solid ${activeLayer===null?"#C8922A":"#1A2E45"}`,
+                background: activeLayer===null?"#C8922A22":"transparent",
+                color: activeLayer===null?"#C8922A":"#5A6E85", transition:"all 0.2s",
+              }}>全部</button>
+              {layers.map(l => (
+                <button key={l} onClick={() => setActiveLayer(activeLayer===l?null:l)} style={{
+                  padding:"3px 10px", borderRadius:20, fontSize:11, cursor:"pointer",
+                  border:`1px solid ${activeLayer===l?layerConfig[l].border:"#1A2E45"}`,
+                  background: activeLayer===l?layerConfig[l].bg:"transparent",
+                  color: activeLayer===l?layerConfig[l].border:"#5A6E85", transition:"all 0.2s",
+                }}>{layerConfig[l].label}</button>
+              ))}
+            </div>
+          </div>
+
+          {layers.map(layer => {
+            const group = filteredStakeholders.filter(s => s.layer === layer);
+            if (group.length === 0) return null;
+            const cfg = layerConfig[layer];
+            return (
+              <div key={layer}>
+                <div style={{ padding:"10px 14px 5px", display:"flex", alignItems:"center", gap:8 }}>
+                  <span style={{ color:cfg.border, fontSize:14 }}>{cfg.icon}</span>
+                  <span style={{ fontSize:10, color:cfg.border, letterSpacing:3, textTransform:"uppercase" }}>{cfg.label}</span>
+                  <span style={{ fontSize:10, color:"#3A4E60" }}>· {cfg.labelEn}</span>
+                </div>
+                {group.map(s => {
+                  const isSelected = selected === s.id;
+                  const itag = influenceTag[s.influence] || influenceTag["影响者"];
+                  return (
+                    <div key={s.id} onClick={() => { setSelected(s.id); setActiveTab("concerns"); }} style={{
+                      margin:"3px 10px", padding:"10px 12px", borderRadius:8, cursor:"pointer",
+                      border:`1px solid ${isSelected?s.color:"#141F30"}`,
+                      background: isSelected?`${s.color}14`:"rgba(255,255,255,0.02)",
+                      transition:"all 0.2s", position:"relative", overflow:"hidden",
+                    }}>
+                      {isSelected && <div style={{ position:"absolute", left:0, top:0, bottom:0, width:3, background:s.color, borderRadius:"2px 0 0 2px" }} />}
+                      <div style={{ display:"flex", alignItems:"flex-start", gap:8 }}>
+                        <span style={{ fontSize:18, lineHeight:1 }}>{s.icon}</span>
+                        <div style={{ flex:1, minWidth:0 }}>
+                          <div style={{ fontSize:12, fontWeight:600, color:isSelected?"#E8EDF5":"#B0BEC5", marginBottom:2 }}>{s.title_cn}</div>
+                          <div style={{ fontSize:10, color:"#4A5E72", marginBottom:5 }}>{s.title_en}</div>
+                          <div style={{ display:"flex", alignItems:"center", gap:5 }}>
+                            <span style={{ fontSize:10, padding:"1px 7px", borderRadius:10, background:itag.bg, color:itag.color, border:`1px solid ${itag.border}` }}>{s.influence}</span>
+                            <div style={{ flex:1, height:3, background:"#1A2E45", borderRadius:2 }}>
+                              <div style={{ height:"100%", borderRadius:2, width:`${s.decisionWeight}%`, background:`linear-gradient(90deg, ${s.color}88, ${s.color})` }} />
+                            </div>
+                            <span style={{ fontSize:9, color:"#3A4E60" }}>{s.decisionWeight}%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* ── RIGHT: Detail panel ── */}
+        <div style={{ flex:1, overflowY:"auto", padding:"20px 24px" }}>
+          {!sel ? (
+            <div style={{
+              display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
+              height:"100%", minHeight:360, gap:14, color:"#3A4E60",
+            }}>
+              <div style={{ fontSize:44 }}>◎</div>
+              <div style={{ fontSize:14, letterSpacing:2 }}>请从左侧选择一个角色查看详细情报</div>
+              <div style={{ fontSize:11, color:"#2A3E50" }}>Select a stakeholder to view intelligence details</div>
+            </div>
+          ) : (
+            <div>
+              {/* Detail header */}
+              <div style={{
+                background:"linear-gradient(135deg, #0D1B2E, #0A1628)",
+                border:`1px solid ${sel.color}44`, borderRadius:12,
+                padding:"20px 24px", marginBottom:16,
+                position:"relative", overflow:"hidden",
+              }}>
+                <div style={{ position:"absolute", right:-20, top:-20, width:100, height:100, background:`radial-gradient(circle, ${sel.color}20, transparent 70%)` }} />
+                <div style={{ display:"flex", alignItems:"flex-start", gap:14 }}>
+                  <div style={{
+                    width:52, height:52, borderRadius:12, flexShrink:0,
+                    background:`${sel.color}18`, border:`1px solid ${sel.color}44`,
+                    display:"flex", alignItems:"center", justifyContent:"center", fontSize:24,
+                  }}>{sel.icon}</div>
+                  <div style={{ flex:1 }}>
+                    <div style={{ display:"flex", alignItems:"center", gap:10, flexWrap:"wrap", marginBottom:3 }}>
+                      <h2 style={{ margin:0, fontSize:18, color:"#E8EDF5" }}>{sel.title_cn}</h2>
+                      <span style={{ fontSize:11, padding:"2px 8px", borderRadius:20, background:`${sel.color}22`, color:sel.color, border:`1px solid ${sel.color}44` }}>
+                        {layerConfig[sel.layer].label}
+                      </span>
+                    </div>
+                    <div style={{ fontSize:11, color:"#7A8EA8", marginBottom:10 }}>
+                      {sel.title_en} &nbsp;·&nbsp; {sel.dept}
+                    </div>
+                    <div style={{ display:"flex", alignItems:"center", gap:12, flexWrap:"wrap" }}>
+                      {(() => {
+                        const itag = influenceTag[sel.influence] || influenceTag["影响者"];
+                        return <span style={{ fontSize:12, padding:"3px 12px", borderRadius:20, background:itag.bg, color:itag.color, border:`1px solid ${itag.border}`, fontWeight:600 }}>{sel.influence}</span>;
+                      })()}
+                      <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+                        <span style={{ fontSize:11, color:"#4A5E72" }}>采购影响力</span>
+                        <div style={{ width:90, height:6, background:"#1A2E45", borderRadius:3 }}>
+                          <div style={{ height:"100%", borderRadius:3, width:`${sel.decisionWeight}%`, background:`linear-gradient(90deg, ${sel.color}66, ${sel.color})` }} />
+                        </div>
+                        <span style={{ fontSize:12, color:sel.color, fontWeight:600 }}>{sel.decisionWeight}%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tabs */}
+              <div style={{ display:"flex", gap:4, marginBottom:14, flexWrap:"wrap" }}>
+                {tabs.map(tab => (
+                  <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
+                    padding:"7px 14px", borderRadius:8, fontSize:12, cursor:"pointer",
+                    border:`1px solid ${activeTab===tab.key?sel.color:"#1A2E45"}`,
+                    background: activeTab===tab.key?`${sel.color}18`:"transparent",
+                    color: activeTab===tab.key?sel.color:"#5A6E85",
+                    transition:"all 0.2s", display:"flex", alignItems:"center", gap:6,
+                  }}>
+                    <span>{tab.icon}</span>{tab.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tab content */}
+              <div style={{ background:"#0D1525", border:"1px solid #1A2E45", borderRadius:10, padding:"18px 20px" }}>
+                {activeTab === "concerns" && (
+                  <div>
+                    <div style={{ fontSize:11, color:"#4A5E72", letterSpacing:3, marginBottom:12, textTransform:"uppercase" }}>◎ 核心关切 / 评估标准</div>
+                    {sel.concerns.map((item, i) => (
+                      <div key={i} style={{ display:"flex", gap:10, marginBottom:8, padding:"10px 12px", borderRadius:8, background:"#080D18", border:"1px solid #141F30" }}>
+                        <div style={{ width:20, height:20, borderRadius:5, flexShrink:0, background:`${sel.color}22`, color:sel.color, display:"flex", alignItems:"center", justifyContent:"center", fontSize:10, fontWeight:700 }}>{i+1}</div>
+                        <div style={{ fontSize:13, color:"#B8C8D8", lineHeight:1.6 }}>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeTab === "painPoints" && (
+                  <div>
+                    <div style={{ fontSize:11, color:"#4A5E72", letterSpacing:3, marginBottom:12, textTransform:"uppercase" }}>⚡ 关键痛点</div>
+                    {sel.painPoints.map((item, i) => (
+                      <div key={i} style={{ display:"flex", gap:10, marginBottom:8, padding:"10px 12px", borderRadius:8, background:"#0A0810", border:"1px solid #2A1428" }}>
+                        <div style={{ color:"#E05555", fontSize:14, flexShrink:0, marginTop:2 }}>⚡</div>
+                        <div style={{ fontSize:13, color:"#B8C8D8", lineHeight:1.6 }}>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeTab === "hachValue" && (
+                  <div>
+                    <div style={{ fontSize:11, color:"#4A5E72", letterSpacing:3, marginBottom:12, textTransform:"uppercase" }}>✦ Hach 产品解决价值</div>
+                    {sel.hachValue.map((item, i) => (
+                      <div key={i} style={{ display:"flex", gap:10, marginBottom:8, padding:"10px 12px", borderRadius:8, background:"#080E14", border:`1px solid ${sel.color}33` }}>
+                        <div style={{ color:sel.color, fontSize:14, flexShrink:0, marginTop:2 }}>✦</div>
+                        <div style={{ fontSize:13, color:"#C8D8E8", lineHeight:1.6 }}>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {activeTab === "channel" && (
+                  <div>
+                    <div style={{ fontSize:11, color:"#4A5E72", letterSpacing:3, marginBottom:12, textTransform:"uppercase" }}>➤ 最佳接触渠道</div>
+                    {sel.channel.map((item, i) => (
+                      <div key={i} style={{ display:"flex", gap:10, marginBottom:8, padding:"10px 14px", borderRadius:8, background:"#08120E", border:"1px solid #2E7D5244", alignItems:"center" }}>
+                        <div style={{ width:26, height:26, borderRadius:"50%", flexShrink:0, background:"#2E7D5222", color:"#2E7D52", display:"flex", alignItems:"center", justifyContent:"center", fontSize:11, fontWeight:700 }}>{i+1}</div>
+                        <div style={{ fontSize:13, color:"#B8C8D8", lineHeight:1.6 }}>{item}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── FOOTER ── */}
+      <div style={{
+        background:"#080D18", borderTop:"1px solid #141F30",
+        padding:"10px 24px", display:"flex", gap:16, alignItems:"center", flexWrap:"wrap",
+      }}>
+        <span style={{ fontSize:10, color:"#3A4E60", letterSpacing:2, textTransform:"uppercase" }}>采购影响力角色说明</span>
+        {[
+          { label:"决策者 Decision Maker", color:"#C8922A", desc:"最终批准权" },
+          { label:"影响者 Influencer",     color:"#1E6B9E", desc:"技术评估推荐" },
+          { label:"把关者 Gatekeeper",     color:"#2E7D52", desc:"流程合规控制" },
+          { label:"使用者 User",           color:"#6B3FA0", desc:"实际操作反馈" },
+        ].map(item => (
+          <div key={item.label} style={{ display:"flex", alignItems:"center", gap:5 }}>
+            <div style={{ width:7, height:7, borderRadius:"50%", background:item.color }} />
+            <span style={{ fontSize:10, color:"#5A6E85" }}>{item.label}</span>
+            <span style={{ fontSize:10, color:"#2A3E50" }}>· {item.desc}</span>
+          </div>
+        ))}
+        <span style={{ marginLeft:"auto", fontSize:10, color:"#2A3E50" }}>Hach China · IMS Marketing Intelligence</span>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<StakeholderMap />);
+</script>
+</body>
+</html>
